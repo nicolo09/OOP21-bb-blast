@@ -4,6 +4,11 @@ import java.util.Collection;
 
 import bbblast.utils.Settings;
 
+/**
+ * 
+ * The Interface of the Model.
+ * 
+ */
 public interface Model {
 	
 	/**
@@ -53,7 +58,7 @@ public interface Model {
 	Settings loadSettings();
 
 	/**
-	 * writes on a file the current Setting.
+	 * writes on a file the current Settings.
 	 * @param s the current Settings
 	 */
 	void writeSettings(Settings s);
