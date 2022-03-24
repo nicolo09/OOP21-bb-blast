@@ -1,4 +1,7 @@
 package bbblast.view;
+
+import bbblast.controller.Controller;
+
 /**
  * 
  * Represents main view of the game.
