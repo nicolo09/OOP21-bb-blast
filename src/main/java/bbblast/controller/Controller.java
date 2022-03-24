@@ -2,6 +2,11 @@ package bbblast.controller;
 
 import java.util.Collection;
 
+import bbblast.model.Bubble;
+import bbblast.model.Model;
+import bbblast.utils.Settings;
+import bbblast.view.View;
+
 /***
  * The Controller
  */

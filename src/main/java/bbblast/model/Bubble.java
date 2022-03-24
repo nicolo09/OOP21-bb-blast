@@ -2,7 +2,7 @@ package bbblast.model;
 
 public interface Bubble {
 	
-	Positions getCoords();
+	Position getCoords();
 	
 	COLOR getColor();
 

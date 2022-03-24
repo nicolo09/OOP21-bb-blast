@@ -2,6 +2,8 @@ package bbblast.model;
 
 import java.util.Collection;
 
+import bbblast.utils.Settings;
+
 public interface Model {
 	
 	void update();

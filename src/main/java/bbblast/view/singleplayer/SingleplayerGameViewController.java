@@ -1,5 +1,9 @@
 package bbblast.view.singleplayer;
 
+import java.util.Collection;
+
+import bbblast.model.Bubble;
+
 /**
  * The interface of the SinglePlayer Game Controller.
  */
