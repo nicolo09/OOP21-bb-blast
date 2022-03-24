@@ -7,7 +7,7 @@ package bbblast.view;
 public interface View {
     /**
      * Set the controller associated with this view.
-     * @param c
+     * @param controller
      */
     void setController(Controller controller);
     /**
