@@ -4,6 +4,6 @@ public interface Bubble {
 	
 	Positions getCoords();
 	
-	Color getColor();
+	COLOR getColor();
 
 }
