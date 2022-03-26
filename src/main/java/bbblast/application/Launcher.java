@@ -1,5 +1,7 @@
 package bbblast.application;
 
+import javafx.application.Application;
+
 /**
  * 
  * Starting class for application.
@@ -15,8 +17,7 @@ public final class Launcher {
      * @param args
      */
     public static void main(final String[] args) {
-        // TODO Auto-generated method stub
-
+        Application.launch(ViewControllerAssemblerImpl.class, args);
     }
 
 }
