@@ -1,7 +1,7 @@
 package bbblast.view.singleplayer;
 
 /**The SinglePlayerGame view.*/
-public interface SinglePlayerGameView {
+public interface SingleplayerGameView {
 
     /**
      * starts the music.
