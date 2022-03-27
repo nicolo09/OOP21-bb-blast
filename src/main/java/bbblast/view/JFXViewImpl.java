@@ -34,6 +34,18 @@ public class JFXViewImpl implements View {
     }
     
     @Override
+    public void startMultiplayerGame() {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @Override
+    public void startOptionsMenu() {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @Override
     public void gameOver() {
         // TODO Auto-generated method stub
 
@@ -41,7 +53,7 @@ public class JFXViewImpl implements View {
 
     @Override
     public void show() {
-        final MainMenuViewController mainMenuController = null;
+        final MainMenuViewController mainMenuController = new MainMenuViewControllerImpl(this);
         final MainMenuView mainMenuView = new MainMenuViewImpl();
         mainMenuView.setController(mainMenuController);
         final Scene mainMenuScene = mainMenuView.getScene();
@@ -55,5 +67,6 @@ public class JFXViewImpl implements View {
         stage.setMinWidth(scene.getWidth());
         stage.setMinHeight(scene.getHeight());
     }
+
 
 }

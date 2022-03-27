@@ -18,6 +18,14 @@ public interface View {
      */
     void startSinglePlayerGame();
     /**
+     * Starts a multiplayer game.
+     */
+    void startMultiplayerGame();
+    /**
+     * Shows an option menu
+     */
+    void startOptionsMenu();
+    /**
      * Shows a game over screen.
      */
     void gameOver();
