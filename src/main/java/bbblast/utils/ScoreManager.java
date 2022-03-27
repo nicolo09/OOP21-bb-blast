@@ -4,7 +4,7 @@ import java.util.Collection;
 
 /**
  * 
- * The interface which models a Score manager
+ * The interface which models a Score manager.
  *
  */
 public interface ScoreManager {
