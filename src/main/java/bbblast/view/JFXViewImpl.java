@@ -3,9 +3,12 @@ package bbblast.view;
 import bbblast.controller.Controller;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
+import bbblast.view.menu.MainMenuViewImpl;
 import bbblast.view.singleplayer.SingleplayerGameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class JFXViewImpl implements View {
@@ -26,11 +29,10 @@ public class JFXViewImpl implements View {
     public void startSinglePlayerGame() {
         final SingleplayerGameView gameView = null;
         final SingleplayerGameViewController gameViewController = null;
-        gameView
         this.controller.startSinglePlayerGame();
         this.stage.setScene(null);
     }
-
+    
     @Override
     public void gameOver() {
         // TODO Auto-generated method stub
@@ -40,9 +42,18 @@ public class JFXViewImpl implements View {
     @Override
     public void show() {
         final MainMenuViewController mainMenuController = null;
-        final Scene mainMenuScene = null;
-        stage.setScene(mainMenuScene);
+        final MainMenuView mainMenuView = new MainMenuViewImpl();
+        mainMenuView.setController(mainMenuController);
+        final Scene mainMenuScene = mainMenuView.getScene();
+
+        this.adjustStage(mainMenuScene);
         stage.show();
+    }
+    
+    private void adjustStage(final Scene scene) {
+        stage.setScene(scene);
+        stage.setMinWidth(scene.getWidth());
+        stage.setMinHeight(scene.getHeight());
     }
 
 }
