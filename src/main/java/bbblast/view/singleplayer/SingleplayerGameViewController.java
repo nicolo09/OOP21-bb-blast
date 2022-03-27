@@ -17,7 +17,7 @@ public interface SingleplayerGameViewController {
     /**
      * @param a the Angle at which the cannon shoots at.
      */
-    void cannonShoot(Angle a);
+    void cannonShoot(int a);
 
     /**
      * @return the score.
