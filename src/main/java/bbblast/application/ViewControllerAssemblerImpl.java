@@ -2,6 +2,7 @@ package bbblast.application;
 
 import bbblast.controller.Controller;
 import bbblast.model.Model;
+import bbblast.view.JFXViewImpl;
 import bbblast.view.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -11,7 +12,7 @@ public class ViewControllerAssemblerImpl extends Application{
     @Override
     public void start(final Stage primaryStage) throws Exception {
         //TODO Instantiate MVC components
-        final View view = null;
+        final View view = new JFXViewImpl(primaryStage);
         final Controller controller = null;
         final Model model = null;
         

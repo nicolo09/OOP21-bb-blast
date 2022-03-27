@@ -3,6 +3,7 @@ package bbblast.view;
 import bbblast.controller.Controller;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
+import bbblast.view.menu.MainMenuViewControllerImpl;
 import bbblast.view.menu.MainMenuViewImpl;
 import bbblast.view.singleplayer.SingleplayerGameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
