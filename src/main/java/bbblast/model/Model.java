@@ -2,6 +2,7 @@ package bbblast.model;
 
 import java.util.Collection;
 
+import bbblast.utils.Score;
 import bbblast.utils.Settings;
 
 /**
@@ -62,5 +63,17 @@ public interface Model {
 	 * @param s the current Settings
 	 */
 	void writeSettings(Settings s);
+	
+	/**
+	 * reads from a file the saved Scores.
+	 * @return a collection of Scores from the previous games 
+	 */
+	Collection<Score> loadScores();
+	
+	/**
+	 * writes on a file the current score.
+	 * @param s the current Score
+	 */
+	void writeScore(Score s);
 	
 }
