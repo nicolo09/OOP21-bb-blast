@@ -45,7 +45,7 @@ public interface Controller {
     /**
      * moves the cannon.
      */
-    void moveCannon();
+    void moveCannon(int angle);
 
     /**
      * shoots the cannon.
