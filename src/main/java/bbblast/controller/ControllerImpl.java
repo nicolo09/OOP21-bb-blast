@@ -2,6 +2,8 @@ package bbblast.controller;
 
 import java.util.Collection;
 
+import bbblast.controller.gameloop.GameLoop;
+import bbblast.controller.gameloop.GameLoopImpl;
 import bbblast.model.Bubble;
 import bbblast.model.Model;
 import bbblast.utils.Settings;
@@ -13,10 +15,6 @@ public class ControllerImpl implements Controller {
     private Model mainModel;
     private GameLoop loop = null;
     
-    public ControllerImpl(){
-        
-    }
-
     @Override
     public void setView(final View v) {
         this.mainView = v;
@@ -39,16 +37,29 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void startSinglePlayerGame() {
+        //View setup
+        mainView.startSinglePlayerGame();
+        //Model setup
         
+        //GameLoop setup
+        loop = new GameLoopImpl();
+        loop.registerUpdatable(mainModel);
+        loop.registerUpdatable(mainView);
+        loop.startLoop();
     }
 
+    @Override
+    public void pauseGame() {
+        loop.pauseLoop();
+    }
+    
     @Override
     public Collection<Bubble> getBubbles() {
         return mainModel.getBubbles();
     }
 
     @Override
-    public void moveCannon(int angle) {
+    public void moveCannon(final int angle) {
         mainModel.moveCannon(angle);
     }
 
@@ -56,5 +67,6 @@ public class ControllerImpl implements Controller {
     public void shootCannon() {
         mainModel.shootCannon();
     }
+
 
 }

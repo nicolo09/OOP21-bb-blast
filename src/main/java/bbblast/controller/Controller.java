@@ -36,6 +36,11 @@ public interface Controller {
      * Starts the SinglePlayer Game.
      */
     void startSinglePlayerGame();
+    
+    /**
+     * Pauses the game.
+     */
+    void pauseGame();
 
     /**
      * @return the collection of bubbles in the game.
