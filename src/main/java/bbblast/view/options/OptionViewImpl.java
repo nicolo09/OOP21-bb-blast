@@ -2,6 +2,7 @@ package bbblast.view.options;
 
 import bbblast.view.View;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,8 +27,11 @@ public class OptionViewImpl implements OptionView {
     private OptionViewController controller;
     final private Scene scene;
     
-    public OptionViewImpl(final View mainView) {
+    public OptionViewImpl(final View mainView, OptionViewController controller) {
+        this.controller = controller;
+        
         final VBox root = new VBox();
+        root.setPadding(new Insets(10, 10, 10, 10));
 
         final Label lbl = new Label();
         lbl.setText("Options");
@@ -37,7 +41,7 @@ public class OptionViewImpl implements OptionView {
         final GridPane grid = new GridPane();
         final Label masterVolumeLabel = new Label("Master Volume");
         GridPane.setConstraints(masterVolumeLabel, 0, 0, 1, 1, HPos.CENTER, VPos.BASELINE);
-        final Slider masterVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, controller.getMasterVolume());
+        final Slider masterVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, this.controller.getMasterVolume());
         beautifySlider(masterVolumeSlider);
         grid.add(masterVolumeLabel, 0, 0);
         grid.add(masterVolumeSlider, 1, 0);
@@ -45,7 +49,7 @@ public class OptionViewImpl implements OptionView {
         // Music volume
         final Label musicVolumeLabel = new Label("Music Volume");
         GridPane.setConstraints(musicVolumeLabel, 0, 1, 1, 1, HPos.CENTER, VPos.BASELINE);
-        final Slider musicVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, controller.getMusicVolume());
+        final Slider musicVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, this.controller.getMusicVolume());
         beautifySlider(musicVolumeSlider);
         grid.add(musicVolumeLabel, 0, 1);
         grid.add(musicVolumeSlider, 1, 1);
@@ -53,7 +57,7 @@ public class OptionViewImpl implements OptionView {
         // Effects volume
         final Label effectsVolumeLabel = new Label("Effects Volume");
         GridPane.setConstraints(effectsVolumeLabel, 0, 2, 1, 1, HPos.CENTER, VPos.BASELINE);
-        final Slider effectsVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, controller.getEffectsVolume());
+        final Slider effectsVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, this.controller.getEffectsVolume());
         beautifySlider(effectsVolumeSlider);
         grid.add(effectsVolumeLabel, 0, 2);
         grid.add(effectsVolumeSlider, 1, 2);

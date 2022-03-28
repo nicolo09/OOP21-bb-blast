@@ -1,6 +1,4 @@
-package bbblast.view;
-
-import bbblast.view.options.OptionViewController;
+package bbblast.view.options;
 
 public class OptionViewControllerImpl implements OptionViewController {
 
