@@ -15,6 +15,10 @@ public interface View extends Updatable {
      */
     void setController(Controller controller);
     /**
+     * Goes to the main menu.
+     */
+    void goToMainMenu();
+    /**
      * Starts a singleplayer game.
      */
     void startSinglePlayerGame();
