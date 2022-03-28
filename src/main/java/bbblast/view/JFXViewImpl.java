@@ -69,5 +69,11 @@ public class JFXViewImpl implements View {
         stage.setMinHeight(scene.getHeight());
     }
 
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

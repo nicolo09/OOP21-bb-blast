@@ -1,13 +1,14 @@
 package bbblast.view;
 
 import bbblast.controller.Controller;
+import bbblast.controller.gameloop.Updatable;
 
 /**
  * 
  * Represents main view of the game.
  *
  */
-public interface View {
+public interface View extends Updatable {
     /**
      * Set the controller associated with this view.
      * @param controller

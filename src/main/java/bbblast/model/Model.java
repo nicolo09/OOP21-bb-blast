@@ -2,6 +2,8 @@ package bbblast.model;
 
 import java.util.Collection;
 
+import bbblast.controller.Controller;
+import bbblast.controller.gameloop.Updatable;
 import bbblast.utils.Score;
 import bbblast.utils.Settings;
 
@@ -10,7 +12,7 @@ import bbblast.utils.Settings;
  * The Interface of the Model.
  * 
  */
-public interface Model {
+public interface Model extends Updatable {
 	
 	/**
 	 * updates the game values. 
@@ -24,8 +26,9 @@ public interface Model {
 	
 	/**
 	 * moves the cannon.
+	 * @param angle 
 	 */
-	void moveCannon();
+	void moveCannon(int angle);
 
 	/**
 	 * makes the cannon shoot.
@@ -75,5 +78,7 @@ public interface Model {
 	 * @param s the current Score
 	 */
 	void writeScore(Score s);
+
+    void setController(Controller controller);
 	
 }
