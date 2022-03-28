@@ -5,6 +5,9 @@ import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
 import bbblast.view.menu.MainMenuViewImpl;
+import bbblast.view.options.OptionView;
+import bbblast.view.options.OptionViewController;
+import bbblast.view.options.OptionViewImpl;
 import bbblast.view.singleplayer.SingleplayerGameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
 import javafx.scene.Node;
@@ -42,8 +45,12 @@ public class JFXViewImpl implements View {
     
     @Override
     public void startOptionsMenu() {
-        // TODO Auto-generated method stub
-        
+        final OptionView optionView = new OptionViewImpl(this);
+        final OptionViewController optionViewController = new OptionViewControllerImpl();
+        optionView.setController(optionViewController);
+        final Scene optionScene = optionView.getScene();
+        this.adjustStage(optionScene);
+        stage.show();
     }
     
     @Override
@@ -54,13 +61,7 @@ public class JFXViewImpl implements View {
 
     @Override
     public void show() {
-        final MainMenuViewController mainMenuController = new MainMenuViewControllerImpl(this);
-        final MainMenuView mainMenuView = new MainMenuViewImpl();
-        mainMenuView.setController(mainMenuController);
-        final Scene mainMenuScene = mainMenuView.getScene();
-
-        this.adjustStage(mainMenuScene);
-        stage.show();
+        this.goToMainMenu();
     }
     
     private void adjustStage(final Scene scene) {
@@ -73,6 +74,16 @@ public class JFXViewImpl implements View {
     public void update() {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public void goToMainMenu() {
+        final MainMenuViewController mainMenuController = new MainMenuViewControllerImpl(this);
+        final MainMenuView mainMenuView = new MainMenuViewImpl();
+        mainMenuView.setController(mainMenuController);
+        final Scene mainMenuScene = mainMenuView.getScene();
+        this.adjustStage(mainMenuScene);
+        stage.show();
     }
 
 
