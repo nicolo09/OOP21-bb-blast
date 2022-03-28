@@ -7,9 +7,11 @@ import bbblast.view.menu.MainMenuViewControllerImpl;
 import bbblast.view.menu.MainMenuViewImpl;
 import bbblast.view.options.OptionView;
 import bbblast.view.options.OptionViewController;
+import bbblast.view.options.OptionViewControllerImpl;
 import bbblast.view.options.OptionViewImpl;
 import bbblast.view.singleplayer.SingleplayerGameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
+import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -45,12 +47,13 @@ public class JFXViewImpl implements View {
     
     @Override
     public void startOptionsMenu() {
-        final OptionView optionView = new OptionViewImpl(this);
         final OptionViewController optionViewController = new OptionViewControllerImpl();
-        optionView.setController(optionViewController);
+        final OptionView optionView = new OptionViewImpl(this, optionViewController);
         final Scene optionScene = optionView.getScene();
-        this.adjustStage(optionScene);
-        stage.show();
+        Platform.runLater(() -> {
+            this.adjustStage(optionScene);
+            stage.show();
+        });
     }
     
     @Override
@@ -67,7 +70,9 @@ public class JFXViewImpl implements View {
     private void adjustStage(final Scene scene) {
         stage.setScene(scene);
         stage.setMinWidth(scene.getWidth());
+        stage.setWidth(scene.getWidth());
         stage.setMinHeight(scene.getHeight());
+        stage.setHeight(scene.getHeight());
     }
 
     @Override
