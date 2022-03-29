@@ -26,10 +26,10 @@ public class OptionViewImpl implements OptionView {
     private static final int SLIDERSBLOCKINCREMENT = 10;
     private OptionViewController controller;
     final private Scene scene;
-    
+
     public OptionViewImpl(final View mainView, OptionViewController controller) {
         this.controller = controller;
-        
+
         final VBox root = new VBox();
         root.setPadding(new Insets(10, 10, 10, 10));
 
@@ -57,7 +57,8 @@ public class OptionViewImpl implements OptionView {
         // Effects volume
         final Label effectsVolumeLabel = new Label("Effects Volume");
         GridPane.setConstraints(effectsVolumeLabel, 0, 2, 1, 1, HPos.CENTER, VPos.BASELINE);
-        final Slider effectsVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME, this.controller.getEffectsVolume());
+        final Slider effectsVolumeSlider = new Slider(MINIMUM_VOLUME, MAXIMUM_VOLUME,
+                this.controller.getEffectsVolume());
         beautifySlider(effectsVolumeSlider);
         grid.add(effectsVolumeLabel, 0, 2);
         grid.add(effectsVolumeSlider, 1, 2);
@@ -75,7 +76,8 @@ public class OptionViewImpl implements OptionView {
         final HBox bottomButtonsLine = new HBox();
         final Button btnSaveAndExit = new Button("Save");
         btnSaveAndExit.setOnMouseClicked(e -> {
-            //TODO save settings
+            controller.saveSettings(masterVolumeSlider.getValue(), musicVolumeSlider.getValue(),
+                    effectsVolumeSlider.getValue());
             mainView.goToMainMenu();
         });
         final Button btnDiscardAndExit = new Button("Discard");
@@ -85,9 +87,9 @@ public class OptionViewImpl implements OptionView {
         bottomButtonsLine.getChildren().addAll(btnSaveAndExit, btnDiscardAndExit);
 
         root.getChildren().add(bottomButtonsLine);
-        this.scene = new Scene(root,MINWIDTH,MINHEIGHT);
+        this.scene = new Scene(root, MINWIDTH, MINHEIGHT);
     }
-    
+
     @Override
     public void setController(final OptionViewController controller) {
         this.controller = controller;
@@ -97,7 +99,7 @@ public class OptionViewImpl implements OptionView {
     public Scene getScene() {
         return this.scene;
     }
-    
+
     private void beautifySlider(final Slider s) {
         s.setShowTickLabels(true);
         s.setShowTickMarks(true);

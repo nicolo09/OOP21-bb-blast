@@ -21,15 +21,15 @@ public class OptionViewControllerImpl implements OptionViewController {
     }
 
     @Override
-    public void saveSettings() {
+    public void exitDiscarding() {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void exitDiscarding() {
+    public void saveSettings(final double masterVolume, final double musicVolume, final double effectsVolume) {
         // TODO Auto-generated method stub
-
+        
     }
 
 }
