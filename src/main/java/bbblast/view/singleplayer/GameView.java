@@ -1,7 +1,7 @@
 package bbblast.view.singleplayer;
 
-/**The SinglePlayerGame view.*/
-public interface SingleplayerGameView {
+/** The Game view. */
+public interface GameView {
 
     /**
      * starts the music.
@@ -18,11 +18,13 @@ public interface SingleplayerGameView {
      */
     void playSoundEffect(Sound e);
 
-    /** shows the view.
+    /**
+     * shows the view.
      */
     void show();
 
-    /** updates the view.
-      */
+    /**
+     * updates the view.
+     */
     void update();
 }
