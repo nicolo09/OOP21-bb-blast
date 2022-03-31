@@ -22,11 +22,11 @@ public class JFXViewImpl implements View {
     private Controller controller;
     private final Stage stage;
     private GameView gameView;
-    
-    public JFXViewImpl(final Stage stage){
+
+    public JFXViewImpl(final Stage stage) {
         this.stage = stage;
     }
-    
+
     @Override
     public void setController(final Controller controller) {
         this.controller = controller;
@@ -39,13 +39,13 @@ public class JFXViewImpl implements View {
         this.controller.startSinglePlayerGame();
         this.stage.setScene(null);
     }
-    
+
     @Override
     public void startMultiplayerGame() {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
     @Override
     public void startOptionsMenu() {
         final OptionViewController optionViewController = new OptionViewControllerImpl();
@@ -56,11 +56,12 @@ public class JFXViewImpl implements View {
             stage.show();
         });
     }
-    
+
     @Override
     public void gameOver() {
         final GameOverView gameOverView = new GameOverViewImpl(this);
-        final GameOverViewController gameOverController = new GameOverViewControllerImpl(() -> this.controller.getScore());
+        final GameOverViewController gameOverController = new GameOverViewControllerImpl(
+                () -> this.controller.getScore(), (name) -> this.controller.saveScore(name));
         gameOverView.setController(gameOverController);
     }
 
@@ -68,7 +69,7 @@ public class JFXViewImpl implements View {
     public void show() {
         this.goToMainMenu();
     }
-    
+
     private void adjustStage(final Scene scene) {
         stage.setScene(scene);
         stage.setMinWidth(scene.getWidth());
@@ -80,7 +81,7 @@ public class JFXViewImpl implements View {
     @Override
     public void update() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -92,6 +93,5 @@ public class JFXViewImpl implements View {
         this.adjustStage(mainMenuScene);
         stage.show();
     }
-
 
 }

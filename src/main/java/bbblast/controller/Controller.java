@@ -49,6 +49,12 @@ public interface Controller {
     int getScore();
 
     /**
+     * Saves a score in the leaderboard.
+     * @param name the player's name
+     */
+    void saveScore(String name);
+
+    /**
      * @return the collection of bubbles in the game.
      */
     Collection<Bubble> getBubbles();

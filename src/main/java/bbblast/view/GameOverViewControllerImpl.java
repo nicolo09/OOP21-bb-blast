@@ -1,13 +1,16 @@
 package bbblast.view;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class GameOverViewControllerImpl implements GameOverViewController {
 
     private final Supplier<Integer> scoreGetter;
+    private final Consumer<String> scoreSaver;
     
-    public GameOverViewControllerImpl(final Supplier<Integer> scoreGetter) {
+    public GameOverViewControllerImpl(final Supplier<Integer> scoreGetter, final Consumer<String> scoreSaver) {
         this.scoreGetter = scoreGetter;
+        this.scoreSaver = scoreSaver;
     }
     
     @Override
@@ -17,7 +20,7 @@ public class GameOverViewControllerImpl implements GameOverViewController {
 
     @Override
     public void saveScore(final String name) {
-        // TODO Auto-generated method stub
+        scoreSaver.accept(name);
     }
 
 }
