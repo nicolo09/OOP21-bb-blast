@@ -41,6 +41,12 @@ public interface Controller {
      * Pauses the game.
      */
     void pauseGame();
+    
+    /**
+     * 
+     * @return the score
+     */
+    int getScore();
 
     /**
      * @return the collection of bubbles in the game.
