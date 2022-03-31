@@ -9,7 +9,7 @@ import bbblast.view.options.OptionView;
 import bbblast.view.options.OptionViewController;
 import bbblast.view.options.OptionViewControllerImpl;
 import bbblast.view.options.OptionViewImpl;
-import bbblast.view.singleplayer.SingleplayerGameView;
+import bbblast.view.singleplayer.GameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -21,6 +21,7 @@ public class JFXViewImpl implements View {
 
     private Controller controller;
     private final Stage stage;
+    private GameView gameView;
     
     public JFXViewImpl(final Stage stage){
         this.stage = stage;
@@ -33,7 +34,7 @@ public class JFXViewImpl implements View {
 
     @Override
     public void startSinglePlayerGame() {
-        final SingleplayerGameView gameView = null;
+        gameView = null;
         final SingleplayerGameViewController gameViewController = null;
         this.controller.startSinglePlayerGame();
         this.stage.setScene(null);
@@ -58,8 +59,9 @@ public class JFXViewImpl implements View {
     
     @Override
     public void gameOver() {
-        // TODO Auto-generated method stub
-
+        final GameOverView gameOverView = new GameOverViewImpl(this);
+        final GameOverViewController gameOverController = new GameOverViewControllerImpl(() -> this.controller.getScore());
+        gameOverView.setController(gameOverController);
     }
 
     @Override
