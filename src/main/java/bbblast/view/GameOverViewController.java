@@ -2,7 +2,7 @@ package bbblast.view;
 
 public interface GameOverViewController {
 
-    String getScore();
+    int getScore();
 
     void saveScore(String name);
 
