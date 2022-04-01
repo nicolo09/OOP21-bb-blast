@@ -13,7 +13,7 @@ public class BubbleImpl implements Bubble {
      * @param b a bubble object. This constructor creates a new bubble with the same
      *          characteristics as b.
      */
-    public BubbleImpl(final BubbleImpl b) {
+    public BubbleImpl(final Bubble b) {
         this(b.getCoords(), b.getColor());
     }
 
