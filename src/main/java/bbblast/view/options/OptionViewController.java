@@ -8,7 +8,7 @@ public interface OptionViewController {
     
     int getEffectsVolume();
     
-    void saveSettings();
+    void saveSettings(double masterVolume, double musicVolume, double effectsVolume);
     
     void exitDiscarding();
 
