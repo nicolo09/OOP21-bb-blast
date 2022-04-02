@@ -1,5 +1,7 @@
 package bbblast.model;
 
+import java.util.Objects;
+
 /**
  * The class that implements the bubble interface, used to rappresent a 2D
  * bubble.
@@ -50,6 +52,32 @@ public class BubbleImpl implements Bubble {
     @Override
     public String toString() {
         return "Bubble " + this.color.toString() + ", " + this.pos.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(color);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BubbleImpl other = (BubbleImpl) obj;
+        return color == other.color && pos.equals(other.pos);
     }
 
 }
