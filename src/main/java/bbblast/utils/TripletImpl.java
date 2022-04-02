@@ -51,7 +51,6 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z> {
         return Objects.hash(x, y, z);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
