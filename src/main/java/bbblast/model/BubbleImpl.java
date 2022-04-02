@@ -44,4 +44,12 @@ public class BubbleImpl implements Bubble {
         return new Position(this.pos.getX(), this.pos.getY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Bubble " + this.color.toString() + ", " + this.pos.toString();
+    }
+
 }
