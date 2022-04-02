@@ -1,18 +1,27 @@
 package bbblast.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import bbblast.utils.Triplet;
+import bbblast.utils.TripletImpl;
+import bbblast.utils.TripletUtility;
 
+/**
+ * The implementation of BubblesGrid.
+ */
 public class BubblesGridImpl implements BubblesGrid {
 
     private final Map<Triplet<Integer, Integer, Integer>, Bubble> grid;
+    private final List<Triplet<Integer, Integer, Integer>> directions = List.of(new TripletImpl<>(1, 0, -1),
+            new TripletImpl<>(1, -1, 0), new TripletImpl<>(0, -1, 1), new TripletImpl<>(-1, 0, 1),
+            new TripletImpl<>(-1, 1, 0), new TripletImpl<>(0, 1, -1));
 
     /**
-     * This constructor creates an empty BubbleGrid.
+     * This constructor creates an empty BubblesGrid.
      */
     public BubblesGridImpl() {
         this.grid = new HashMap<>();
@@ -20,13 +29,15 @@ public class BubblesGridImpl implements BubblesGrid {
 
     /**
      * This constructor creates a BubbleGrid with every bubble contained in the
-     * list.
+     * collection.
+     * 
+     * @param collection from which to read the Bubbles to load in the BubblesGrid
+     * 
      */
-    public BubblesGridImpl(final List<Bubble> list) {
+    public BubblesGridImpl(final Collection<Bubble> collection) {
         this();
-        for (final var elem : list) {
-            //TODO: decide if method addBubble should be Overridable or not
-            this.addBubble(elem.getCoords());
+        for (final var elem : collection) {
+            this.grid.put(this.convertCoords(elem.getCoords()), new BubbleImpl(elem));
         }
     }
 
@@ -39,28 +50,23 @@ public class BubblesGridImpl implements BubblesGrid {
     }
 
     /**
-     * {@inheritDoc} Cannot be called on an empty BubbleGrid.
+     * {@inheritDoc} Returns 0 with an empty BubblesGrid.
      */
     @Override
     public int getLastRowY() {
-        final var lastBB = getBubbles().stream().findFirst().get();
-        // This object is null only if the grid is empty
-        // TODO: Decide how to implement the empty grid in this method
-
-        for (final var bubble : this.grid.values()) {
-            if (lastBB.getCoords().getY() > bubble.getCoords().getY()) {
-                lastBB = new BubbleImpl(bubble);
-            }
+        if (!this.grid.isEmpty()) {
+            return this.grid.get(this.grid.entrySet().stream().map(e -> e.getKey())
+                    .sorted((t1, t2) -> t1.getY() - t2.getY()).findFirst().get()).getCoords().getY();
         }
-        return lastBB.getCoords().getY();
+        return 0;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void addBubble(final Position p) {
-        // TODO: Implement this method, but it needs the bubble, not only the position
+    public void addBubble(final Bubble b) {
+        this.grid.put(this.convertCoords(b.getCoords()), new BubbleImpl(b));
 
     }
 
@@ -76,6 +82,43 @@ public class BubblesGridImpl implements BubblesGrid {
                 iterator.remove();
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Collection<Bubble> getSameColorNeighbors(final Bubble b) {
+
+        final List<Bubble> list = new ArrayList<>();
+
+        if (!this.grid.isEmpty() && this.grid.containsValue(b) && !list.contains(b)) {
+            // We have visited the bubble
+            list.add(new BubbleImpl(b));
+            final var tripletB = this.grid.entrySet().stream().filter(e -> e.getValue().equals(b)).findFirst().get()
+                    .getKey();
+
+            for (final var dir : this.directions) {
+                final var tripletNeighbor = TripletUtility.add(tripletB, dir);
+                if (this.grid.containsKey(tripletNeighbor)
+                        && this.grid.get(tripletNeighbor).getColor().equals(b.getColor())) {
+
+                    // We visit the neighbor bubbles recursively
+                    list.addAll(this.getSameColorNeighbors(this.grid.get(tripletNeighbor)));
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * @param p the 2D position to convert.
+     * @return Triplet, the 3D converted position
+     */
+    private Triplet<Integer, Integer, Integer> convertCoords(final Position p) {
+        final int q = p.getY() - (p.getX() - (p.getX() % 2)) / 2;
+        final int r = p.getX();
+        return new TripletImpl<Integer, Integer, Integer>(q, r, -q - r);
     }
 
 }
