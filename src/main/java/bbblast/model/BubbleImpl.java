@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 public class BubbleImpl implements Bubble {
 
-    private final Position pos;
+    private final PositionImpl pos;
     private final COLOR color;
 
     /**
@@ -25,7 +25,7 @@ public class BubbleImpl implements Bubble {
      *          with the characteristics provided.
      */
     public BubbleImpl(final Position p, final COLOR c) {
-        this.pos = new Position(p.getX(), p.getY());
+        this.pos = new PositionImpl(p.getX(), p.getY());
         this.color = c;
 
     }
@@ -43,7 +43,7 @@ public class BubbleImpl implements Bubble {
      */
     @Override
     public Position getCoords() {
-        return new Position(this.pos.getX(), this.pos.getY());
+        return new PositionImpl(this.pos.getX(), this.pos.getY());
     }
 
     /**
