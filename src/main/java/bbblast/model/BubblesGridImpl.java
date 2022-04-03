@@ -121,4 +121,15 @@ public class BubblesGridImpl implements BubblesGrid {
         return new TripletImpl<Integer, Integer, Integer>(q, r, -q - r);
     }
 
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "BubblesGridImpl [grid=" + grid + ", directions=" + directions + "]";
+    }
+    
+    
+
 }
