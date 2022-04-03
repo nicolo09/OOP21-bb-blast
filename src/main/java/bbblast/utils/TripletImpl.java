@@ -26,6 +26,10 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z> {
         this.z = z;
     }
 
+    public TripletImpl(final Triplet<X, Y, Z> t) {
+        this(t.getX(), t.getY(), t.getZ());
+    }
+
     @Override
     public X getX() {
         return this.x;
