@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import bbblast.utils.Triplet;
 import bbblast.utils.TripletImpl;
@@ -121,15 +122,38 @@ public class BubblesGridImpl implements BubblesGrid {
         return new TripletImpl<Integer, Integer, Integer>(q, r, -q - r);
     }
 
-    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(grid);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BubblesGridImpl other = (BubblesGridImpl) obj;
+        return this.getBubbles().containsAll(other.getBubbles()) && other.getBubbles().containsAll(this.getBubbles());
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "BubblesGridImpl [grid=" + grid +"]";
+        return "BubblesGridImpl [grid=" + grid + "]";
     }
-    
-    
 
 }
