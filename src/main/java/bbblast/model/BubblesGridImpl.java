@@ -8,7 +8,7 @@ import java.util.Map;
 
 import bbblast.utils.Triplet;
 import bbblast.utils.TripletImpl;
-import bbblast.utils.TripletUtility;
+import bbblast.utils.TripletIntegerUtility;
 
 /**
  * The implementation of BubblesGrid.
@@ -99,7 +99,7 @@ public class BubblesGridImpl implements BubblesGrid {
                     .getKey();
 
             for (final var dir : this.directions) {
-                final var tripletNeighbor = TripletUtility.add(tripletB, dir);
+                final var tripletNeighbor = TripletIntegerUtility.add(tripletB, dir);
                 if (this.grid.containsKey(tripletNeighbor)
                         && this.grid.get(tripletNeighbor).getColor().equals(b.getColor())) {
 
