@@ -20,7 +20,7 @@ public interface BubblesGrid {
     int getLastRowY();
 
     /**
-     * adds the Bubble in the specified position.
+     * adds the Bubble, if it isn't already part of the BubblesGrid.
      * 
      * @param b the new Bubble
      */
