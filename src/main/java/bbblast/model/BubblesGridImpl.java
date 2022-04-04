@@ -127,7 +127,7 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public String toString() {
-        return "BubblesGridImpl [grid=" + grid + ", directions=" + directions + "]";
+        return "BubblesGridImpl [grid=" + grid +"]";
     }
     
     
