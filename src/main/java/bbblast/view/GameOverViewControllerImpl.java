@@ -1,21 +1,21 @@
 package bbblast.view;
 
+import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class GameOverViewControllerImpl implements GameOverViewController {
 
-    private final Supplier<Integer> scoreGetter;
+    private final Map<Integer, Integer> scores;
     private final Consumer<String> scoreSaver;
     
-    public GameOverViewControllerImpl(final Supplier<Integer> scoreGetter, final Consumer<String> scoreSaver) {
-        this.scoreGetter = scoreGetter;
+    public GameOverViewControllerImpl(final Map<Integer, Integer> scores, final Consumer<String> scoreSaver) {
+        this.scores = scores;
         this.scoreSaver = scoreSaver;
     }
     
     @Override
     public int getScore() {
-        return scoreGetter.get();
+        return this.scores.values().stream().max(Integer::compare).get();
     }
 
     @Override

@@ -27,7 +27,7 @@ public class GameOverViewImpl implements GameOverView {
     public void showEndDialog() {
         final Alert dialog = new Alert(AlertType.CONFIRMATION);
         dialog.setTitle("Game over");
-        dialog.setHeaderText("Il tuo punteggio è stato: " + controller.getScore());
+        dialog.setHeaderText("Il punteggio è stato: " + controller.getScore());
         dialog.setContentText("Vuoi salvarlo?");
         
         final ButtonType saveButton = new ButtonType("Salva");
@@ -45,7 +45,7 @@ public class GameOverViewImpl implements GameOverView {
     private void showSaveScoreDialog() {
         final TextInputDialog nameDialog = new TextInputDialog("");
         nameDialog.setTitle("Insert name: ");
-        nameDialog.setHeaderText("Salvataggio score");
+        nameDialog.setHeaderText("Salvataggio punteggio");
         nameDialog.setContentText("Inserisci il tuo nome:");
 
         nameDialog.showAndWait().ifPresent(name -> controller.saveScore(name));
