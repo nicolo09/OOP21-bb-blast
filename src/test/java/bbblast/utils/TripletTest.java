@@ -31,6 +31,7 @@ public class TripletTest {
         a++;
         b--;
         c = c + 3;
+        //Changes to local values don't impact the triplet
         assertFalse(t1.getX().equals(a));
         assertFalse(t1.getY().equals(b));
         assertFalse(t1.getZ().equals(c));
