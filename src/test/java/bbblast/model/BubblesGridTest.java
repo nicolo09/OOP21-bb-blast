@@ -16,6 +16,8 @@ public class BubblesGridTest {
     private final Bubble b2 = new BubbleImpl(new PositionImpl(1, 0), COLOR.ORANGE);
     private final Bubble b3 = new BubbleImpl(new PositionImpl(0, 1), COLOR.YELLOW);
     private final Bubble b4 = new BubbleImpl(new PositionImpl(1, 1), COLOR.GREEN);
+    private final Bubble b5 = new BubbleImpl(new PositionImpl(3, 4), COLOR.BLUE);
+    private final Bubble b6 = new BubbleImpl(new PositionImpl(4, 4), COLOR.PURPLE);
 
     @Test
     public void testBubblesGridPersistance() {
@@ -27,7 +29,7 @@ public class BubblesGridTest {
         assertFalse(g1.equals(g3));
         final var coll = g3.getBubbles();
         assertFalse(coll.isEmpty());
-        assertTrue(coll.containsAll(List.of(b1, b2, b3)));
+        assertTrue(coll.containsAll(List.of(b1, b2, b3, b6)));
         assertEquals(coll, g3.getBubbles());
         // Two grids with the same collection of bubbles are equals
         final BubblesGrid g4 = new BubblesGridImpl(coll);
@@ -37,7 +39,7 @@ public class BubblesGridTest {
         assertFalse(coll.equals(g3.getBubbles()));
         assertFalse(coll.equals(g4.getBubbles()));
         assertEquals(g1.toString(), "BubblesGridImpl [grid=[]]");
-        // TODO: toString in grid with bubbles
+        // TODO: toString in grid with bubbles, after Position gets implemented
     }
 
     @Test
@@ -63,13 +65,13 @@ public class BubblesGridTest {
         list.add(b3);
         assertEquals(g2.getBubbles().size(), 2);
     }
-    
+
     @Test
     public void testBubblesGridRemove() {
-        final BubblesGrid g1 = new BubblesGridImpl(List.of(b1,b2,b3,b4));
+        final BubblesGrid g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
         assertEquals(g1.getBubbles().size(), 4);
-        g1.removeBubble(new PositionImpl (4,4));
-        //This bubble wasn't present in the grid, so no changes have happened
+        g1.removeBubble(new PositionImpl(4, 4));
+        // This bubble wasn't present in the grid, so no changes have happened
         assertEquals(g1.getBubbles().size(), 4);
         g1.removeBubble(b1.getCoords());
         assertEquals(g1.getBubbles().size(), 3);
@@ -77,7 +79,7 @@ public class BubblesGridTest {
         g1.removeBubble(b3.getCoords());
         g1.removeBubble(b4.getCoords());
         assertEquals(g1.getBubbles().size(), 0);
-        //The grid is empty
+        // The grid is empty
 
         final var list = new ArrayList<Bubble>();
         list.add(b1);
@@ -88,8 +90,30 @@ public class BubblesGridTest {
         list.remove(b3);
         assertEquals(g2.getBubbles().size(), 2);
     }
-    
-    // TODO: LastRow test
 
-    // TODO: getSameColorNeighbors test
+    @Test
+    public void testBubblesGridLastRowY() {
+        final BubblesGrid g1 = new BubblesGridImpl(List.of(b1, b3, b5));
+        assertEquals(g1.getLastRowY(), b5.getCoords().getY());
+        g1.removeBubble(b3.getCoords());
+        assertEquals(g1.getLastRowY(), b5.getCoords().getY());
+        g1.removeBubble(b5.getCoords());
+        assertEquals(g1.getLastRowY(), b1.getCoords().getY());
+        g1.removeBubble(b1.getCoords());
+        assertEquals(g1.getLastRowY(), 0);
+    }
+
+    @Test
+    public void testBubblesSameColorNeighbors() {
+        final Bubble b7 = new BubbleImpl(new PositionImpl(1, 0), COLOR.RED);
+        final Bubble b8 = new BubbleImpl(new PositionImpl(2, 0), COLOR.RED);
+        final BubblesGrid g1 = new BubblesGridImpl(List.of());
+        assertEquals(g1.getSameColorNeighbors(b1), List.of());
+        assertEquals(g1.getBubbles().size(), 0);
+        final BubblesGrid g2 = new BubblesGridImpl(List.of(b1, b2, b7, b8));
+        assertEquals(g2.getSameColorNeighbors(b1), List.of(b1, b7, b8));
+        assertEquals(g2.getSameColorNeighbors(b2), List.of(b2));
+        g2.removeBubble(b7.getCoords());
+        assertEquals(g2.getSameColorNeighbors(b1), List.of(b1));
+    }
 }
