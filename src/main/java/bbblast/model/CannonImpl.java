@@ -3,6 +3,9 @@ package bbblast.model;
 import java.util.Collection;
 import java.util.Random;
 
+import bbblast.utils.Position;
+import bbblast.utils.PositionImpl;
+
 /**
  * 
  * This class implements a Cannon.
@@ -28,11 +31,13 @@ public class CannonImpl implements Cannon {
     }
 
     /***
-     * {@inheritDoc}
+     * {@inheritDoc} The angle has to be between 5 and 175 degrees.
      */
     @Override
     public void move(final int angle) {
-        this.angle = this.angle + angle;
+        if (angle >= 5 && angle <= 175) {
+            this.angle = angle;
+        }
     }
 
     /***
@@ -62,12 +67,14 @@ public class CannonImpl implements Cannon {
 
     /***
      * This method generates the actual bubble.
+     * 
      * @return the bubble generated
      */
     private Bubble generateBubble() {
         if (!colorsBubbles.isEmpty()) {
             final COLOR c = colorsBubbles.stream().skip(randomGenerator.nextInt(colorsBubbles.size())).findFirst()
                     .get();
+            // TODO: Will this stream potentially skip all the colors?
             return new BubbleImpl(new PositionImpl(startingPosition), c);
         }
         return new BubbleImpl(new PositionImpl(startingPosition), COLOR.RED);
