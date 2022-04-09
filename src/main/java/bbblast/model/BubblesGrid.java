@@ -2,6 +2,8 @@ package bbblast.model;
 
 import java.util.Collection;
 
+import bbblast.utils.Position;
+
 /**
  * 
  * The Interface which models a grid of Bubbles.
