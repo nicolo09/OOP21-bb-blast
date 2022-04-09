@@ -2,6 +2,9 @@ package bbblast.model;
 
 import java.util.Objects;
 
+import bbblast.utils.Position;
+import bbblast.utils.PositionImpl;
+
 /**
  * The class that implements the bubble interface, used to rappresent a 2D
  * bubble.
