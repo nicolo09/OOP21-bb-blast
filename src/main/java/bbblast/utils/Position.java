@@ -1,7 +1,7 @@
 package bbblast.utils;
 /**
  * 
- * The interface which models a Position
+ * The interface which models a Position.
  *
  */
 public interface Position {
