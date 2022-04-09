@@ -1,5 +1,7 @@
 package bbblast.utils;
 
+import java.util.Objects;
+
 /**
  * 
  * Position Implementation.
@@ -61,5 +63,41 @@ public class PositionImpl implements Position {
 	public Position getCopy() {
 		return new PositionImpl(this.x, this.y);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(x, y);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final PositionImpl other = (PositionImpl) obj;
+		return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x)
+				&& Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return "PositionImpl [x=" + x + ", y=" + y + "]";
+	}
+	
 
 }
