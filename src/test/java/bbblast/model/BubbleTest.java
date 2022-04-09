@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
+import bbblast.utils.Position;
+import bbblast.utils.PositionImpl;
+
 public class BubbleTest {
 
     @Test
@@ -26,9 +29,9 @@ public class BubbleTest {
         final Bubble b = new BubbleImpl(p, COLOR.YELLOW);
         assertEquals(b.getCoords(), p);
         assertEquals(b.toString(), "Bubble " + b.getColor().toString() + ", " + b.getCoords().toString());
-        p = new Position(4, 3);
+        p = new PositionImpl(4, 3);
         assertFalse(b.getCoords().equals(p));
-        assertFalse(b.toString(), "Bubble " + b.getColor().toString() + ", " + new PositionImpl(3, 4).toString());
+        assertEquals(b.toString(), "Bubble " + b.getColor().toString() + ", " + new PositionImpl(3, 4).toString());
     }
 
 }
