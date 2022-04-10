@@ -102,6 +102,10 @@ public class BubblesGridImpl implements BubblesGrid {
         return List.copyOf(this.neighborsList);
     }
 
+    /**
+     * This function is the recursive method that fills neighborsList with all the neighbors of b
+     * @param b the bubble from where to start the search
+     */
     private void getSameColorNeighborsRecursive(final Bubble b) {
         if (this.grid.containsValue(b) && !this.neighborsList.contains(b)) {
             // We have visited the bubble
@@ -126,10 +130,6 @@ public class BubblesGridImpl implements BubblesGrid {
      * @return Triplet, the 3D converted position
      */
     private Triplet<Integer, Integer, Integer> convertCoords(final Position p) {
-        // final int b = -(int) Math.round(2 / 3 * p.getY() / this.edge);
-        // final int r = (int) Math.round(Math.sqrt(3) / 3 * p.getX() + p.getY() / 3 /
-        // this.edge);
-        // return new TripletImpl<Integer, Integer, Integer>(r, b, -r - b);
         return new TripletImpl<Integer, Integer, Integer>((int) Math.round(p.getX()), (int) Math.round(p.getY()),
                 -(int) Math.round(p.getX()) - (int) Math.round(p.getY()));
     }
