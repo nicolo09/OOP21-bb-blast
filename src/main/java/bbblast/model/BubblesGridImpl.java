@@ -10,6 +10,7 @@ import java.util.Objects;
 import bbblast.utils.Triplet;
 import bbblast.utils.TripletImpl;
 import bbblast.utils.TripletIntegerUtility;
+import bbblast.utils.Position;
 
 /**
  * The implementation of BubblesGrid.
@@ -20,9 +21,10 @@ public class BubblesGridImpl implements BubblesGrid {
     private final List<Triplet<Integer, Integer, Integer>> directions = List.of(new TripletImpl<>(1, 0, -1),
             new TripletImpl<>(1, -1, 0), new TripletImpl<>(0, -1, 1), new TripletImpl<>(-1, 0, 1),
             new TripletImpl<>(-1, 1, 0), new TripletImpl<>(0, 1, -1));
+    private final List<Bubble> neighborsList = new ArrayList<>();
 
     /**
-     * This constructor creates an empty BubblesGrid.
+     * This constructor creates an empty BubblesGrid, with bubble size 1.
      */
     public BubblesGridImpl() {
         this.grid = new HashMap<>();
@@ -32,7 +34,7 @@ public class BubblesGridImpl implements BubblesGrid {
      * This constructor creates a BubbleGrid with every bubble contained in the
      * collection.
      * 
-     * @param collection from which to read the Bubbles to load in the BubblesGrid
+     * @param collection from which to read the Bubbles to load in the BubblesGrid.
      * 
      */
     public BubblesGridImpl(final Collection<Bubble> collection) {
@@ -54,10 +56,10 @@ public class BubblesGridImpl implements BubblesGrid {
      * {@inheritDoc} Returns 0 with an empty BubblesGrid.
      */
     @Override
-    public int getLastRowY() {
+    public double getLastRowY() {
         if (!this.grid.isEmpty()) {
             return this.grid.get(this.grid.entrySet().stream().map(e -> e.getKey())
-                    .sorted((t1, t2) -> t1.getY() - t2.getY()).findFirst().get()).getCoords().getY();
+                    .sorted((t1, t2) -> t2.getY() - t1.getY()).findFirst().get()).getCoords().getY();
         }
         return 0;
     }
@@ -92,12 +94,18 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public Collection<Bubble> getSameColorNeighbors(final Bubble b) {
+        this.neighborsList.clear();
+        if (!this.grid.isEmpty() && this.grid.containsValue(b)) {
+            this.getSameColorNeighborsRecursive(b);
+        }
 
-        final List<Bubble> list = new ArrayList<>();
+        return List.copyOf(this.neighborsList);
+    }
 
-        if (!this.grid.isEmpty() && this.grid.containsValue(b) && !list.contains(b)) {
+    private void getSameColorNeighborsRecursive(final Bubble b) {
+        if (this.grid.containsValue(b) && !this.neighborsList.contains(b)) {
             // We have visited the bubble
-            list.add(new BubbleImpl(b));
+            this.neighborsList.add(new BubbleImpl(b));
             final var tripletB = this.grid.entrySet().stream().filter(e -> e.getValue().equals(b)).findFirst().get()
                     .getKey();
 
@@ -107,11 +115,10 @@ public class BubblesGridImpl implements BubblesGrid {
                         && this.grid.get(tripletNeighbor).getColor().equals(b.getColor())) {
 
                     // We visit the neighbor bubbles recursively
-                    list.addAll(this.getSameColorNeighbors(this.grid.get(tripletNeighbor)));
+                    this.getSameColorNeighborsRecursive(this.grid.get(tripletNeighbor));
                 }
             }
         }
-        return list;
     }
 
     /**
@@ -119,9 +126,12 @@ public class BubblesGridImpl implements BubblesGrid {
      * @return Triplet, the 3D converted position
      */
     private Triplet<Integer, Integer, Integer> convertCoords(final Position p) {
-        final int q = p.getY() - (p.getX() - (p.getX() % 2)) / 2;
-        final int r = p.getX();
-        return new TripletImpl<Integer, Integer, Integer>(q, r, -q - r);
+        // final int b = -(int) Math.round(2 / 3 * p.getY() / this.edge);
+        // final int r = (int) Math.round(Math.sqrt(3) / 3 * p.getX() + p.getY() / 3 /
+        // this.edge);
+        // return new TripletImpl<Integer, Integer, Integer>(r, b, -r - b);
+        return new TripletImpl<Integer, Integer, Integer>((int) Math.round(p.getX()), (int) Math.round(p.getY()),
+                -(int) Math.round(p.getX()) - (int) Math.round(p.getY()));
     }
 
     /**
