@@ -48,11 +48,14 @@ public class BubblesGridTest {
         final BubblesGrid g1 = new BubblesGridImpl();
         assertEquals(g1.toString(), "BubblesGridImpl [grid={}]");
         g1.addBubble(b1);
-        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=0, z=0]="+b1.toString()+"}]");
+        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=0, z=0]=" + b1.toString() + "}]");
         g1.removeBubble(b1.getCoords());
         assertEquals(g1.toString(), "BubblesGridImpl [grid={}]");
         g1.addBubble(b2);
-        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=1, y=0, z=-1]="+b2.toString()+"}]");
+        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=1, y=0, z=-1]=" + b2.toString() + "}]");
+        g1.addBubble(b3);
+        g1.removeBubble(b2.getCoords());
+        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=1, z=-1]=" + b3.toString() + "}]");
 
     }
 
