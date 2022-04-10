@@ -36,6 +36,12 @@ public interface BubblesGrid {
     void removeBubble(Position p);
 
     /**
+     * @param b the bubble to test if it can be attached to the grid.
+     * @return true if bubble can be attached.
+     */
+    boolean isBubbleAttachable(Bubble b);
+
+    /**
      * @param b the Bubble to search its neighbors.
      * @return the collection of same color neighbors as b.
      */
