@@ -41,8 +41,19 @@ public class BubblesGridTest {
         coll.add(b6);
         assertFalse(coll.equals(g3.getBubbles()));
         assertFalse(coll.equals(g4.getBubbles()));
+    }
+
+    @Test
+    public void testBubblesGridtoString() {
+        final BubblesGrid g1 = new BubblesGridImpl();
         assertEquals(g1.toString(), "BubblesGridImpl [grid={}]");
-        // TODO: toString in grid with bubbles, after Position gets implemented
+        g1.addBubble(b1);
+        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=0, z=0]="+b1.toString()+"}]");
+        g1.removeBubble(b1.getCoords());
+        assertEquals(g1.toString(), "BubblesGridImpl [grid={}]");
+        g1.addBubble(b2);
+        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=1, y=0, z=-1]="+b2.toString()+"}]");
+
     }
 
     @Test
