@@ -19,7 +19,7 @@ public interface BubblesGrid {
     /**
      * @return the Y coordinate of the lowest row
      */
-    int getLastRowY();
+    double getLastRowY();
 
     /**
      * adds the Bubble, if it isn't already part of the BubblesGrid.
