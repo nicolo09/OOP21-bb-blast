@@ -69,7 +69,7 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public void addBubble(final Bubble b) {
-        if (!this.grid.containsValue(b)) {
+        if (!this.grid.containsValue(b) && this.isBubbleAttachable(b)) {
             this.grid.put(this.convertCoords(b.getCoords()), new BubbleImpl(b));
         }
 
