@@ -90,6 +90,31 @@ public class BubblesGridImpl implements BubblesGrid {
     }
 
     /**
+     * {@inheritDoc} The bubbles can connect to the grid either if there is a
+     * neighbor bubble already present or if they connect to the top.
+     */
+    @Override
+    public boolean isBubbleAttachable(final Bubble b) {
+        if (!this.grid.containsValue(b)) {
+            final var tripletB = this.convertCoords(b.getCoords());
+            if (!this.grid.isEmpty()) {
+                for (final var dir : this.directions) {
+                    final var tripletNeighbor = TripletIntegerUtility.add(tripletB, dir);
+                    if (this.grid.containsKey(tripletNeighbor)) {
+                        return true;
+                    }
+                }
+            } else {
+                if (tripletB.getY() == 0) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -103,7 +128,9 @@ public class BubblesGridImpl implements BubblesGrid {
     }
 
     /**
-     * This function is the recursive method that fills neighborsList with all the neighbors of b
+     * This function is the recursive method that fills neighborsList with all the
+     * neighbors of b.
+     * 
      * @param b the bubble from where to start the search
      */
     private void getSameColorNeighborsRecursive(final Bubble b) {
