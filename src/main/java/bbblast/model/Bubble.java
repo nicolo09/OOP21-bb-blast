@@ -19,4 +19,10 @@ public interface Bubble {
      */
     COLOR getColor();
 
+    /**
+     * @param p the position to add so that the Bubble is in position (x + px, y +
+     *          py).
+     */
+    void moveBy(Position p);
+
 }

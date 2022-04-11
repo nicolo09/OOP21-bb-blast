@@ -53,6 +53,14 @@ public class BubbleImpl implements Bubble {
      * {@inheritDoc}
      */
     @Override
+    public void moveBy(final Position p) {
+        this.pos.translate(p.getX(), p.getY());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
         return "Bubble " + this.color.toString() + ", " + this.pos.toString();
     }
