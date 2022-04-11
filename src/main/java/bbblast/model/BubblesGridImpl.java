@@ -116,18 +116,20 @@ public class BubblesGridImpl implements BubblesGrid {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc} Only works with positive numbers
      */
     @Override
     public void moveBubblesDown(final int rows) {
-        final Map<Triplet<Integer, Integer, Integer>, Bubble> gridTemporary = new HashMap<>();
-        for (final var entry : this.grid.entrySet()) {
-            final Bubble b = entry.getValue();
-            b.moveBy(new PositionImpl(0, rows));
-            gridTemporary.put(this.convertCoords(b.getCoords()), b);
+        if (rows > 0) {
+            final Map<Triplet<Integer, Integer, Integer>, Bubble> gridTemporary = new HashMap<>();
+            for (final var entry : this.grid.entrySet()) {
+                final Bubble b = entry.getValue();
+                b.moveBy(new PositionImpl(0, rows));
+                gridTemporary.put(this.convertCoords(b.getCoords()), b);
+            }
+            this.grid.clear();
+            this.grid.putAll(gridTemporary);
         }
-        this.grid.clear();
-        this.grid.putAll(gridTemporary);
     }
 
     /**
