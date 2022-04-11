@@ -163,6 +163,8 @@ public class BubblesGridTest {
         final BubblesGrid g2 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
         g2.moveBubblesDown(0);
         assertEquals(g2, new BubblesGridImpl(List.of(b1, b2, b3, b4)));
+        g2.moveBubblesDown(-4);
+        assertEquals(g2, new BubblesGridImpl(List.of(b1, b2, b3, b4)));
         g2.moveBubblesDown(2);
         final Bubble b1t = new BubbleImpl(b1);
         final Bubble b2t = new BubbleImpl(b2);
