@@ -34,4 +34,21 @@ public class BubbleTest {
         assertEquals(b.toString(), "Bubble " + b.getColor().toString() + ", " + new PositionImpl(3, 4).toString());
     }
 
+    @Test
+    public void testBubbleMoveBy() {
+        Position p = new PositionImpl(1, 2);
+        final Bubble b = new BubbleImpl(p, COLOR.PURPLE);
+        assertEquals(b.getCoords(), p);
+        p.translate(2, 2);
+        // Bubble has a protective copy and can only be modified by Bubble methods
+        assertFalse(b.getCoords().equals(p));
+        p = b.getCoords();
+        p.translate(3, 3);
+        assertEquals(p, new PositionImpl(1 + 3, 2 + 3));
+        assertFalse(p.equals(b.getCoords()));
+        b.moveBy(new PositionImpl(4, 4));
+        assertEquals(b.getCoords(), new PositionImpl(5, 6));
+
+    }
+
 }
