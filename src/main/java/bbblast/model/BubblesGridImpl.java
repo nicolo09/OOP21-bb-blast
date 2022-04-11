@@ -11,6 +11,7 @@ import bbblast.utils.Triplet;
 import bbblast.utils.TripletImpl;
 import bbblast.utils.TripletIntegerUtility;
 import bbblast.utils.Position;
+import bbblast.utils.PositionImpl;
 
 /**
  * The implementation of BubblesGrid.
@@ -112,6 +113,21 @@ public class BubblesGridImpl implements BubblesGrid {
 
         }
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void moveBubblesDown(final int rows) {
+        final Map<Triplet<Integer, Integer, Integer>, Bubble> gridTemporary = new HashMap<>();
+        for (final var entry : this.grid.entrySet()) {
+            final Bubble b = entry.getValue();
+            b.moveBy(new PositionImpl(0, rows));
+            gridTemporary.put(this.convertCoords(b.getCoords()), b);
+        }
+        this.grid.clear();
+        this.grid.putAll(gridTemporary);
     }
 
     /**

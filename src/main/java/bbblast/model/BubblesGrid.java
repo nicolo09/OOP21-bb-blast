@@ -47,4 +47,9 @@ public interface BubblesGrid {
      */
     Collection<Bubble> getSameColorNeighbors(Bubble b);
 
+    /**
+     * @param rows the number of rows down the bubbles are translated.
+     */
+    void moveBubblesDown(int rows);
+
 }
