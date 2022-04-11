@@ -153,4 +153,27 @@ public class BubblesGridTest {
         g1.addBubble(b4);
 
     }
+
+    @Test
+    public void testMoveBubblesDown() {
+        final BubblesGridImpl g1 = new BubblesGridImpl();
+        assertTrue(g1.getBubbles().isEmpty());
+        g1.moveBubblesDown(1);
+        assertTrue(g1.getBubbles().isEmpty());
+        final BubblesGrid g2 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
+        g2.moveBubblesDown(0);
+        assertEquals(g2, new BubblesGridImpl(List.of(b1, b2, b3, b4)));
+        g2.moveBubblesDown(2);
+        final Bubble b1t = new BubbleImpl(b1);
+        final Bubble b2t = new BubbleImpl(b2);
+        final Bubble b3t = new BubbleImpl(b3);
+        final Bubble b4t = new BubbleImpl(b4);
+        b1t.moveBy(new PositionImpl(0, 2));
+        b2t.moveBy(new PositionImpl(0, 2));
+        b3t.moveBy(new PositionImpl(0, 2));
+        b4t.moveBy(new PositionImpl(0, 2));
+
+        assertEquals(g2, new BubblesGridImpl(List.of(b1t, b2t, b3t, b4t)));
+
+    }
 }
