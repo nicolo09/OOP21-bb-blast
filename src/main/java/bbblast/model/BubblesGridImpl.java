@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import bbblast.utils.Triplet;
 import bbblast.utils.TripletImpl;
@@ -129,6 +130,37 @@ public class BubblesGridImpl implements BubblesGrid {
             }
             this.grid.clear();
             this.grid.putAll(gridTemporary);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Collection<Bubble> checkForUnconnectedBubbles() {
+        // The neighborsList hosts all the bubbles that are reachable by a bubble
+        // connected to the top
+        this.neighborsList.clear();
+        if (!this.grid.isEmpty()) {
+            for (final var elem : this.grid.entrySet().stream().map(e -> e.getKey()).filter(k -> k.getY() == 0)
+                    .collect(Collectors.toList())) {
+                checkForUnconnectedBubblesRecursive(elem);
+            }
+        }
+        // neighborsList contains now all the connected bubbles.
+        final Map<Triplet<Integer, Integer, Integer>, Bubble> difference = new HashMap<>(this.grid);
+        difference.entrySet().removeIf(e -> this.neighborsList.contains(e.getValue()));
+        return List.copyOf(difference.values());
+    }
+
+    private void checkForUnconnectedBubblesRecursive(final Triplet<Integer, Integer, Integer> b) {
+        this.neighborsList.add(this.grid.get(b));
+        for (final var dir : this.directions) {
+            final var bVisiting = TripletIntegerUtility.add(dir, b);
+            if (this.grid.containsKey(bVisiting) && !this.neighborsList.contains(this.grid.get(bVisiting))) {
+                // If the bubble is present in the grid but isn't already visited
+                checkForUnconnectedBubblesRecursive(bVisiting);
+            }
         }
     }
 

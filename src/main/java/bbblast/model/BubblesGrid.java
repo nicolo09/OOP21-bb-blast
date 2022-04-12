@@ -52,4 +52,10 @@ public interface BubblesGrid {
      */
     void moveBubblesDown(int rows);
 
+    /**
+     * @return the collection of unconnected bubbles, meaning bubbles that aren't
+     *         connected to the top of the grid nor their neighbors are.
+     */
+    Collection<Bubble> checkForUnconnectedBubbles();
+
 }
