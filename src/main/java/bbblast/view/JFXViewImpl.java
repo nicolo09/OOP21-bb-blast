@@ -53,7 +53,7 @@ public class JFXViewImpl implements View {
         final OptionView optionView = new OptionViewImpl(this, optionViewController);
         final Scene optionScene = optionView.getScene();
         Platform.runLater(() -> {
-            this.adjustStage(optionScene);
+            this.adjustStageAndSetScene(optionScene);
             stage.show();
         });
     }
@@ -62,8 +62,9 @@ public class JFXViewImpl implements View {
     public void gameOver(final GameOver gameOverEvent) {
         final GameOverView gameOverView = new GameOverViewImpl(this);
         final GameOverViewController gameOverController = new GameOverViewControllerImpl(
-                gameOverEvent.scores(), (score) -> this.controller.saveScore(score));
+                gameOverEvent.getScores(), (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
+        
     }
 
     @Override
@@ -71,7 +72,7 @@ public class JFXViewImpl implements View {
         this.goToMainMenu();
     }
 
-    private void adjustStage(final Scene scene) {
+    private void adjustStageAndSetScene(final Scene scene) {
         stage.setScene(scene);
         stage.setMinWidth(scene.getWidth());
         stage.setWidth(scene.getWidth());
@@ -91,7 +92,7 @@ public class JFXViewImpl implements View {
         final MainMenuView mainMenuView = new MainMenuViewImpl();
         mainMenuView.setController(mainMenuController);
         final Scene mainMenuScene = mainMenuView.getScene();
-        this.adjustStage(mainMenuScene);
+        this.adjustStageAndSetScene(mainMenuScene);
         stage.show();
     }
 
