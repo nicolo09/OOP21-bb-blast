@@ -209,6 +209,30 @@ public class BubblesGridTest {
     }
 
     @Test
+    public void testRemoveBubblesCascading() {
+        // An empty Grid has no unconnected bubbles
+        BubblesGridImpl g1 = new BubblesGridImpl();
+        final var origGrid = g1.getBubbles();
+        g1.removeBubblesCascading(b1.getCoords());
+        final var finalGrid = g1.getBubbles();
+        assertTrue(finalGrid.containsAll(origGrid));
+        // This grid has all connected bubbles
+        g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
+        g1.removeBubblesCascading(b2.getCoords());
+        assertTrue(g1.getBubbles().containsAll(List.of(b1, b3, b4)));
+        // This grid has some unconnected bubbles
+        g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4, b5));
+        g1.removeBubblesCascading(b3.getCoords());
+        assertTrue(g1.getBubbles().containsAll(List.of(b1, b2, b4)));
+        // After moving down the whole grid all the bubbles are unconnected
+        g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
+        g1.moveBubblesDown(1);
+        g1.removeBubblesCascading(b1.getCoords());
+        assertTrue(g1.getBubbles().isEmpty());
+
+    }
+
+    @Test
     public void testRemoveUnconnectedBubbles() {
         // An empty Grid has no unconnected bubbles
         BubblesGridImpl g1 = new BubblesGridImpl();
