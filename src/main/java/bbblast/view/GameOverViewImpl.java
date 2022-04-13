@@ -16,13 +16,13 @@ public class GameOverViewImpl implements GameOverView {
     public GameOverViewImpl(final View mainView) {
         this.mainView = mainView;
     }
-    
+
     @Override
     public Scene getScene() {
         //TODO return scene identical to gameview but with grey bubbles and no action listeners
         return null;
     }
-    
+
     @Override
     public void showEndDialog() {
         final Alert dialog = new Alert(AlertType.CONFIRMATION);

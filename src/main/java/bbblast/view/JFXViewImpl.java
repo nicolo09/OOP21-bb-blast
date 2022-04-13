@@ -1,6 +1,7 @@
 package bbblast.view;
 
 import bbblast.controller.Controller;
+import bbblast.controller.GameOver;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
@@ -58,10 +59,10 @@ public class JFXViewImpl implements View {
     }
 
     @Override
-    public void gameOver() {
+    public void gameOver(final GameOver gameOverEvent) {
         final GameOverView gameOverView = new GameOverViewImpl(this);
         final GameOverViewController gameOverController = new GameOverViewControllerImpl(
-                () -> this.controller.getScore(), (name) -> this.controller.saveScore(name));
+                gameOverEvent.scores(), (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
     }
 

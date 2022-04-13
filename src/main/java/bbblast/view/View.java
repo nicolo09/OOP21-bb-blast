@@ -1,6 +1,7 @@
 package bbblast.view;
 
 import bbblast.controller.Controller;
+import bbblast.controller.GameOver;
 import bbblast.controller.gameloop.Updatable;
 
 /**
@@ -33,7 +34,7 @@ public interface View extends Updatable {
     /**
      * Shows a game over screen.
      */
-    void gameOver();
+    void gameOver(GameOver gameOverEvent);
     /**
      * Shows this view.
      */
