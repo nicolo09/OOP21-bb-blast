@@ -6,28 +6,22 @@ import java.util.Map;
 public class GameOverImpl implements GameOver {
 
     private final LocalDateTime timestamp;
+    private final Map<Integer, Integer> scores;
     
-    public GameOverImpl() {
+    public GameOverImpl(final Map<Integer, Integer> scores) {
         this.timestamp = LocalDateTime.now();
+        this.scores = Map.copyOf(scores);
         
     }
     
     @Override
-    public GAME getGameType() {
-        // TODO Auto-generated method stub
-        return null;
+    public Map<Integer, Integer> getScores() {
+        return Map.copyOf(this.scores);
     }
 
     @Override
-    public Map<Integer, Integer> scores() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public LocalDateTime timestamp() {
-        // TODO Auto-generated method stub
-        return null;
+    public LocalDateTime getTimestamp() {
+        return this.timestamp;
     }
 
 }
