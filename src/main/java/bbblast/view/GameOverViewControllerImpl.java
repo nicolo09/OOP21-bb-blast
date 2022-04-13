@@ -3,12 +3,14 @@ package bbblast.view;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import bbblast.utils.Score;
+
 public class GameOverViewControllerImpl implements GameOverViewController {
 
     private final Map<Integer, Integer> scores;
-    private final Consumer<String> scoreSaver;
+    private final Consumer<Score> scoreSaver;
     
-    public GameOverViewControllerImpl(final Map<Integer, Integer> scores, final Consumer<String> scoreSaver) {
+    public GameOverViewControllerImpl(final Map<Integer, Integer> scores, final Consumer<Score> scoreSaver) {
         this.scores = scores;
         this.scoreSaver = scoreSaver;
     }
@@ -20,7 +22,8 @@ public class GameOverViewControllerImpl implements GameOverViewController {
 
     @Override
     public void saveScore(final String name) {
-        scoreSaver.accept(name);
+        //TODO: Create score and save it
+        //scoreSaver.accept(name);
     }
 
 }

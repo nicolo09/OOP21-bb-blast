@@ -6,7 +6,7 @@ public interface GameOverView {
 
     void setController(GameOverViewController gameOverController);
     
-    Scene getScene();
-
     void showEndDialog();
+
+    Scene getScene();
 }

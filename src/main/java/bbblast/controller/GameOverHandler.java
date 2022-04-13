@@ -2,7 +2,7 @@ package bbblast.controller;
 
 public interface GameOverHandler {
     
-    void checkGameOver();
+    boolean checkGameOver();
     
     void handleGameOver(GameOver gameOver);
 

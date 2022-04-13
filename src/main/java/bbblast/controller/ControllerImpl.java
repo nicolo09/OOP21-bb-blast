@@ -6,6 +6,7 @@ import bbblast.controller.gameloop.GameLoop;
 import bbblast.controller.gameloop.GameLoopImpl;
 import bbblast.model.Bubble;
 import bbblast.model.Model;
+import bbblast.utils.Score;
 import bbblast.utils.Settings;
 import bbblast.view.View;
 
@@ -66,6 +67,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void shootCannon() {
         mainModel.shootCannon();
+    }
+
+    @Override
+    public int getScore() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void saveScore(final Score score) {
+        // TODO Auto-generated method stub
+        
     }
 
 
