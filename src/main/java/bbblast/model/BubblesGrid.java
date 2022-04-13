@@ -64,4 +64,9 @@ public interface BubblesGrid {
      */
     void removeBubblesCascading(Position p);
 
+    /**
+     * Deletes all the unconnected bubbles.
+     */
+    void removeUnconnectedBubbles();
+
 }

@@ -170,6 +170,14 @@ public class BubblesGridImpl implements BubblesGrid {
     @Override
     public void removeBubblesCascading(final Position p) {
         this.removeBubble(p);
+        this.removeUnconnectedBubbles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeUnconnectedBubbles() {
         final var coll = this.checkForUnconnectedBubbles();
         this.grid.entrySet().removeIf(e -> coll.contains(e.getValue()));
     }
