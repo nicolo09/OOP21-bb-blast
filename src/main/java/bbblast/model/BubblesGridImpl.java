@@ -168,6 +168,16 @@ public class BubblesGridImpl implements BubblesGrid {
      * {@inheritDoc}
      */
     @Override
+    public void removeBubblesCascading(final Position p) {
+        this.removeBubble(p);
+        final var coll = this.checkForUnconnectedBubbles();
+        this.grid.entrySet().removeIf(e -> coll.contains(e.getValue()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Collection<Bubble> getSameColorNeighbors(final Bubble b) {
         this.neighborsList.clear();
         if (!this.grid.isEmpty() && this.grid.containsValue(b)) {
