@@ -207,4 +207,36 @@ public class BubblesGridTest {
         assertEquals(g2, new BubblesGridImpl(List.of(b1t, b2t, b3t, b4t)));
 
     }
+
+    @Test
+    public void testRemoveUnconnectedBubbles() {
+        // An empty Grid has no unconnected bubbles
+        BubblesGridImpl g1 = new BubblesGridImpl();
+        var origGrid = g1.getBubbles();
+        g1.removeUnconnectedBubbles();
+        var finalGrid = g1.getBubbles();
+        assertTrue(finalGrid.containsAll(origGrid));
+        // This grid has all connected bubbles
+        g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
+        origGrid = g1.getBubbles();
+        g1.removeUnconnectedBubbles();
+        finalGrid = g1.getBubbles();
+        assertTrue(finalGrid.containsAll(origGrid));
+        // This grid has some unconnected bubbles
+        g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4, b5));
+        origGrid = g1.getBubbles();
+        g1.removeUnconnectedBubbles();
+        finalGrid = g1.getBubbles();
+        assertFalse(finalGrid.containsAll(origGrid));
+        assertFalse(finalGrid.contains(b5));
+        // After moving down the whole grid all the bubbles are unconnected
+        g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4));
+        g1.moveBubblesDown(1);
+        origGrid = g1.getBubbles();
+        g1.removeUnconnectedBubbles();
+        finalGrid = g1.getBubbles();
+        assertFalse(finalGrid.containsAll(origGrid));
+        assertTrue(finalGrid.isEmpty());
+
+    }
 }
