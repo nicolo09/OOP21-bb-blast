@@ -17,13 +17,16 @@ public class GameOverViewControllerImpl implements GameOverViewController {
     
     @Override
     public int getScore() {
-        return this.scores.values().stream().max(Integer::compare).get();
+        return this.getMaximumScore();
     }
 
     @Override
     public void saveScore(final String name) {
-        //TODO: Create score and save it
-        //scoreSaver.accept(name);
+        scoreSaver.accept(new ScoreImpl(name, this.getMaximumScore()));
+    }
+    
+    private int getMaximumScore() {
+        return this.scores.values().stream().max(Integer::compare).get();
     }
 
 }
