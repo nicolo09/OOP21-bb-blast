@@ -22,7 +22,6 @@ public class JFXViewImpl implements View {
 
     private Controller controller;
     private final Stage stage;
-    private GameView gameView;
 
     public JFXViewImpl(final Stage stage) {
         this.stage = stage;
@@ -35,10 +34,14 @@ public class JFXViewImpl implements View {
 
     @Override
     public void startSinglePlayerGame() {
-        gameView = null;
+        final GameView gameView = null;
         final SingleplayerGameViewController gameViewController = null;
         this.controller.startSinglePlayerGame();
-        this.stage.setScene(null);
+        Platform.runLater(() -> {
+            //TODO Create singleplayer view
+            this.adjustStageAndSetScene(null);
+            stage.show();
+        });
     }
 
     @Override
@@ -64,7 +67,10 @@ public class JFXViewImpl implements View {
         final GameOverViewController gameOverController = new GameOverViewControllerImpl(
                 gameOverEvent.getScores(), (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
-        
+        Platform.runLater(() -> {
+            this.adjustStageAndSetScene(gameOverView.getScene());
+            stage.show();
+        });
     }
 
     @Override
