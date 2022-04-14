@@ -1,6 +1,7 @@
 package bbblast.model;
 
 import java.util.Collection;
+import java.util.Map;
 
 import bbblast.controller.Controller;
 import bbblast.controller.gameloop.Updatable;
@@ -41,9 +42,9 @@ public interface Model extends Updatable {
 	int getCannonAngle();
 
 	/**
-	 * @return the score of the current game
+	 * @return a map with player-score as entries
 	 */
-	int getScore();
+	Map<Integer, Integer> getScores();
 
 	/**
 	 * @return true if the BubblesGrid reaches the bottom, false otherwise

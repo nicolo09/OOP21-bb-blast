@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import bbblast.model.Bubble;
 import bbblast.model.Model;
+import bbblast.utils.Score;
 import bbblast.utils.Settings;
 import bbblast.view.View;
 
@@ -41,6 +42,18 @@ public interface Controller {
      * Pauses the game.
      */
     void pauseGame();
+    
+    /**
+     * 
+     * @return the score
+     */
+    int getScore();
+
+    /**
+     * Saves a score in the leaderboard.
+     * @param name the player's name
+     */
+    void saveScore(Score score);
 
     /**
      * @return the collection of bubbles in the game.

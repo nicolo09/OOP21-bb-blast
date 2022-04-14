@@ -4,8 +4,10 @@ import java.util.Collection;
 
 import bbblast.controller.gameloop.GameLoop;
 import bbblast.controller.gameloop.GameLoopImpl;
+import bbblast.controller.gameloop.Updatable;
 import bbblast.model.Bubble;
 import bbblast.model.Model;
+import bbblast.utils.Score;
 import bbblast.utils.Settings;
 import bbblast.view.View;
 
@@ -41,10 +43,13 @@ public class ControllerImpl implements Controller {
         mainView.startSinglePlayerGame();
         //Model setup
         
+        //Gameover Handler
+        final Updatable gameOverHandler = new GameOverHandlerPolling(this.mainModel, this.mainView);
         //GameLoop setup
         loop = new GameLoopImpl();
         loop.registerUpdatable(mainModel);
         loop.registerUpdatable(mainView);
+        loop.registerUpdatable(gameOverHandler);
         loop.startLoop();
     }
 
@@ -66,6 +71,18 @@ public class ControllerImpl implements Controller {
     @Override
     public void shootCannon() {
         mainModel.shootCannon();
+    }
+
+    @Override
+    public int getScore() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void saveScore(final Score score) {
+        // TODO Auto-generated method stub
+        
     }
 
 
