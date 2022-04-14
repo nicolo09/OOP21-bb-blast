@@ -17,10 +17,10 @@ public class TripletUtilityTest {
         final Triplet<Integer, Integer, Integer> t6 = TripletIntegerUtility.add(t1, t3);
         final Triplet<Integer, Integer, Integer> t7 = TripletIntegerUtility.add(t2, t4);
         final Triplet<Integer, Integer, Integer> t8 = TripletIntegerUtility.add(t2, t3);
-        assertEquals(t5, new TripletImpl<>(0, 0, 0));
-        assertEquals(t6, new TripletImpl<>(4, 4, 3));
-        assertEquals(t7, new TripletImpl<>(-4, -2, -5));
-        assertEquals(t8, new TripletImpl<>(2, 0, -3));
+        assertEquals(t5, new TripletImpl<>(0, 0, 0), "The result is the sum of the components");
+        assertEquals(t6, new TripletImpl<>(4, 4, 3), "The result is the sum of the components");
+        assertEquals(t7, new TripletImpl<>(-4, -2, -5), "The result is the sum of the components");
+        assertEquals(t8, new TripletImpl<>(2, 0, -3), "The result is the sum of the components");
 
     }
 }
