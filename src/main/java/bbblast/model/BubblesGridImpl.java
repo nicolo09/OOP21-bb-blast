@@ -225,8 +225,9 @@ public class BubblesGridImpl implements BubblesGrid {
      * @return Triplet, the 3D converted position
      */
     private Triplet<Integer, Integer, Integer> convertCoords(final Position p) {
-        return new TripletImpl<Integer, Integer, Integer>((int) Math.round(p.getX()), (int) Math.round(p.getY()),
-                -(int) Math.round(p.getX()) - (int) Math.round(p.getY()));
+        return new TripletImpl<Integer, Integer, Integer>(Math.toIntExact(Math.round(p.getX())),
+                Math.toIntExact(Math.round(p.getY())),
+                -Math.toIntExact(Math.round(p.getX())) - Math.toIntExact(Math.round(p.getY())));
     }
 
     /**
