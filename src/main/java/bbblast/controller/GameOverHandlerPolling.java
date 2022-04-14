@@ -45,7 +45,7 @@ public class GameOverHandlerPolling implements GameOverHandler, Updatable {
     @Override
     public void update() {
         if (this.checkGameOver()) {
-            handleGameOver(new GameOverImpl());
+            handleGameOver(new GameOverImpl(gameModel.getScores()));
         }
     }
 
