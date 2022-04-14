@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import bbblast.controller.gameloop.GameLoop;
 import bbblast.controller.gameloop.GameLoopImpl;
+import bbblast.controller.gameloop.Updatable;
 import bbblast.model.Bubble;
 import bbblast.model.Model;
 import bbblast.utils.Score;
@@ -42,10 +43,13 @@ public class ControllerImpl implements Controller {
         mainView.startSinglePlayerGame();
         //Model setup
         
+        //Gameover Handler
+        final Updatable gameOverHandler = new GameOverHandlerPolling(this.mainModel, this.mainView);
         //GameLoop setup
         loop = new GameLoopImpl();
         loop.registerUpdatable(mainModel);
         loop.registerUpdatable(mainView);
+        loop.registerUpdatable(gameOverHandler);
         loop.startLoop();
     }
 
