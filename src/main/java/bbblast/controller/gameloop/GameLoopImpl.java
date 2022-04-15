@@ -77,4 +77,9 @@ public class GameLoopImpl extends Thread implements GameLoop {
         return !this.isStopped() && !this.isPaused();
     }
 
+    @Override
+    public int getFPS() {
+        return FPS;
+    }
+
 }

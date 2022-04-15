@@ -85,5 +85,10 @@ public class ControllerImpl implements Controller {
         
     }
 
+    @Override
+    public int getFPS() {
+        return this.loop.getFPS();
+    }
+
 
 }

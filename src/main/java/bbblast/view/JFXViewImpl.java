@@ -13,9 +13,7 @@ import bbblast.view.options.OptionViewImpl;
 import bbblast.view.singleplayer.GameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
 import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class JFXViewImpl implements View {
