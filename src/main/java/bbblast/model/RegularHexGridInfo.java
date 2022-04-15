@@ -52,11 +52,7 @@ public class RegularHexGridInfo implements GridInfo {
      */
     @Override
     public double getPointsHeight() {
-        return this.bubbleHeight * this.getSingleBubbleHeight();
+        return (double)3/4 * (2*(this.ratio/Math.sqrt(3))*(this.bubbleHeight-1))+2*(this.ratio/Math.sqrt(3));
     }
 
-    //(4*apotema) / radice(3)
-    private double getSingleBubbleHeight() {
-        return 2*this.ratio / Math.sqrt(3);
-    }
 }
