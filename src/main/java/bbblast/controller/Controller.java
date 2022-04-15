@@ -70,4 +70,8 @@ public interface Controller {
      */
     void shootCannon();
 
+    /**
+     * @return the FPS target game is running at
+     */
+    int getFPS();
 }

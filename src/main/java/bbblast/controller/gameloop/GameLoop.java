@@ -48,4 +48,10 @@ public interface GameLoop {
      */
     boolean isRunning();
 
+    /**
+     * 
+     * @return the FPS number game is meant to run at
+     */
+    int getFPS();
+
 }
