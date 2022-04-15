@@ -74,13 +74,13 @@ public class BubblesGridImpl implements BubblesGrid {
         }
         return 0;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean endReached() {
-        return this.getLastRowY()>=this.info.getBubbleHeight();
+        return this.getLastRowY() >= this.info.getBubbleHeight();
     }
 
     /**
@@ -88,7 +88,7 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public void addBubble(final Bubble b) {
-        if (!this.grid.containsValue(b) && this.isBubbleAttachable(b)) {
+        if (!this.grid.containsKey(this.convertCoords(b.getCoords())) && this.isBubbleAttachable(b)) {
 
             final Triplet<Integer, Integer, Integer> triplet = this.convertCoords(b.getCoords());
             final Position roundedPosition = this.roundCoords(triplet);
@@ -291,7 +291,8 @@ public class BubblesGridImpl implements BubblesGrid {
             return false;
         }
         final BubblesGridImpl other = (BubblesGridImpl) obj;
-        return this.getBubbles().containsAll(other.getBubbles()) && other.getBubbles().containsAll(this.getBubbles());
+        return this.getBubbles().containsAll(other.getBubbles()) && other.getBubbles().containsAll(this.getBubbles())
+                && this.info.equals(other.info);
     }
 
     /**
