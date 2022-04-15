@@ -74,7 +74,7 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public void writeSettings(Settings s) {
+    public void writeSettings(final Settings s) {
         // TODO Auto-generated method stub
 
     }
