@@ -12,14 +12,19 @@ import bbblast.utils.Position;
 public interface BubblesGrid {
 
     /**
-     * @return the collection of Bubbles inside the grid
+     * @return the collection of Bubbles inside the grid.
      */
     Collection<Bubble> getBubbles();
 
     /**
-     * @return the Y coordinate of the lowest row
+     * @return the Y coordinate of the lowest row.
      */
     double getLastRowY();
+
+    /**
+     * @return true if the lowest bubble is at the end of the grid.
+     */
+    boolean endReached();
 
     /**
      * adds the Bubble, if it isn't already part of the BubblesGrid.
@@ -31,7 +36,7 @@ public interface BubblesGrid {
     /**
      * removes the Bubble in the specified position.
      * 
-     * @param p the position of the Bubble to remove
+     * @param p the position of the Bubble to remove.
      */
     void removeBubble(Position p);
 
@@ -60,7 +65,7 @@ public interface BubblesGrid {
 
     /**
      * @param the position of the bubble to delete. Removes all the bubbles that are
-     *            floating after deletion
+     *            floating after deletion.
      */
     void removeBubblesCascading(Position p);
 
