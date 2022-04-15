@@ -74,6 +74,14 @@ public class BubblesGridImpl implements BubblesGrid {
         }
         return 0;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean endReached() {
+        return this.getLastRowY()>=this.info.getBubbleHeight();
+    }
 
     /**
      * {@inheritDoc}
@@ -81,7 +89,10 @@ public class BubblesGridImpl implements BubblesGrid {
     @Override
     public void addBubble(final Bubble b) {
         if (!this.grid.containsValue(b) && this.isBubbleAttachable(b)) {
-            this.grid.put(this.convertCoords(b.getCoords()), new BubbleImpl(b));
+
+            final Triplet<Integer, Integer, Integer> triplet = this.convertCoords(b.getCoords());
+            final Position roundedPosition = this.roundCoords(triplet);
+            this.grid.put(this.convertCoords(b.getCoords()), new BubbleImpl(roundedPosition, b.getColor()));
         }
 
     }
@@ -108,16 +119,21 @@ public class BubblesGridImpl implements BubblesGrid {
     public boolean isBubbleAttachable(final Bubble b) {
         if (!this.grid.containsValue(b)) {
             final var tripletB = this.convertCoords(b.getCoords());
-            if (!this.grid.isEmpty()) {
-                for (final var dir : this.directions) {
-                    final var tripletNeighbor = TripletIntegerUtility.add(tripletB, dir);
-                    if (this.grid.containsKey(tripletNeighbor)) {
+            final Position roundedPosition = this.roundCoords(tripletB);
+            // The rounded position is inside the grid
+            if (roundedPosition.getX() < this.info.getPointsWidth()
+                    && roundedPosition.getY() < this.info.getPointsHeight()) {
+                if (!this.grid.isEmpty()) {
+                    for (final var dir : this.directions) {
+                        final var tripletNeighbor = TripletIntegerUtility.add(tripletB, dir);
+                        if (this.grid.containsKey(tripletNeighbor)) {
+                            return true;
+                        }
+                    }
+                } else {
+                    if (tripletB.getY() == 0) {
                         return true;
                     }
-                }
-            } else {
-                if (tripletB.getY() == 0) {
-                    return true;
                 }
             }
 
