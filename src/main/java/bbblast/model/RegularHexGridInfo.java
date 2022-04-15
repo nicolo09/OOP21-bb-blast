@@ -1,5 +1,7 @@
 package bbblast.model;
 
+import java.util.Objects;
+
 /**
  * 
  * A GridInfo made to generate a hex grid of regular hexagons
@@ -54,5 +56,31 @@ public class RegularHexGridInfo implements GridInfo {
     public double getPointsHeight() {
         return (double)3/4 * (2*(this.ratio/Math.sqrt(3))*(this.bubbleHeight-1))+2*(this.ratio/Math.sqrt(3));
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bubbleHeight, bubbleWidth, ratio);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        final RegularHexGridInfo other = (RegularHexGridInfo) obj;
+        return this.bubbleHeight == other.bubbleHeight && this.bubbleWidth == other.bubbleWidth
+                && Double.compare(this.ratio, other.ratio) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "RegularHexGridInfo [bubbleWidth=" + this.bubbleWidth + ", bubbleHeight=" + this.bubbleHeight
+                + ", ratio=" + this.ratio + "]";
+    }
+    
+    
 
 }
