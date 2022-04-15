@@ -102,11 +102,13 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public void removeBubble(final Position p) {
+        final var t = this.convertCoords(p);
         final var iterator = this.grid.entrySet().iterator();
         while (iterator.hasNext()) {
             final var entry = iterator.next();
-            if (entry.getValue().getCoords().equals(p)) {
+            if (entry.getKey().equals(t)) {
                 iterator.remove();
+                return;
             }
         }
     }
@@ -123,16 +125,15 @@ public class BubblesGridImpl implements BubblesGrid {
             // The rounded position is inside the grid
             if (roundedPosition.getX() < this.info.getPointsWidth()
                     && roundedPosition.getY() < this.info.getPointsHeight()) {
+                if (tripletB.getY() == 0) {
+                    return true;
+                }
                 if (!this.grid.isEmpty()) {
                     for (final var dir : this.directions) {
                         final var tripletNeighbor = TripletIntegerUtility.add(tripletB, dir);
                         if (this.grid.containsKey(tripletNeighbor)) {
                             return true;
                         }
-                    }
-                } else {
-                    if (tripletB.getY() == 0) {
-                        return true;
                     }
                 }
             }
@@ -150,7 +151,7 @@ public class BubblesGridImpl implements BubblesGrid {
             final Map<Triplet<Integer, Integer, Integer>, Bubble> gridTemporary = new HashMap<>();
             for (final var entry : this.grid.entrySet()) {
                 final Bubble b = entry.getValue();
-                b.moveBy(new PositionImpl(0, rows));
+                b.moveBy(new PositionImpl(0, rows*this.size*2));
                 gridTemporary.put(this.convertCoords(b.getCoords()), b);
             }
             this.grid.clear();
@@ -213,8 +214,9 @@ public class BubblesGridImpl implements BubblesGrid {
     @Override
     public Collection<Bubble> getSameColorNeighbors(final Bubble b) {
         this.neighborsList.clear();
-        if (!this.grid.isEmpty() && this.grid.containsValue(b)) {
-            this.getSameColorNeighborsRecursive(b);
+        final var bConv = this.convertCoords(b.getCoords());
+        if (!this.grid.isEmpty() && this.grid.containsKey(bConv)) {
+            this.getSameColorNeighborsRecursive(bConv);
         }
 
         return List.copyOf(this.neighborsList);
@@ -226,20 +228,18 @@ public class BubblesGridImpl implements BubblesGrid {
      * 
      * @param b the bubble from where to start the search
      */
-    private void getSameColorNeighborsRecursive(final Bubble b) {
-        if (this.grid.containsValue(b) && !this.neighborsList.contains(b)) {
+    private void getSameColorNeighborsRecursive(final Triplet<Integer, Integer, Integer> t) {
+        if (this.grid.containsKey(t) && !this.neighborsList.contains(this.grid.get(t))) {
             // We have visited the bubble
-            this.neighborsList.add(new BubbleImpl(b));
-            final var tripletB = this.grid.entrySet().stream().filter(e -> e.getValue().equals(b)).findFirst().get()
-                    .getKey();
+            this.neighborsList.add(new BubbleImpl(this.grid.get(t)));
 
             for (final var dir : this.directions) {
-                final var tripletNeighbor = TripletIntegerUtility.add(tripletB, dir);
+                final var tripletNeighbor = TripletIntegerUtility.add(t, dir);
                 if (this.grid.containsKey(tripletNeighbor)
-                        && this.grid.get(tripletNeighbor).getColor().equals(b.getColor())) {
+                        && this.grid.get(tripletNeighbor).getColor().equals(this.grid.get(t).getColor())) {
 
                     // We visit the neighbor bubbles recursively
-                    this.getSameColorNeighborsRecursive(this.grid.get(tripletNeighbor));
+                    this.getSameColorNeighborsRecursive(tripletNeighbor);
                 }
             }
         }
