@@ -24,25 +24,34 @@ public class BubblesGridImpl implements BubblesGrid {
             new TripletImpl<>(1, -1, 0), new TripletImpl<>(0, -1, 1), new TripletImpl<>(-1, 0, 1),
             new TripletImpl<>(-1, 1, 0), new TripletImpl<>(0, 1, -1));
     private final List<Bubble> neighborsList = new ArrayList<>();
+    private final GridInfo info;
+    private final double size;
 
     /**
-     * This constructor creates an empty BubblesGrid, with bubble size 1.
+     * @param info the GridInfo that defines the dimentions of the grid. This
+     *             constructor creates an empty BubblesGrid.
      */
-    public BubblesGridImpl() {
+    public BubblesGridImpl(final GridInfo info) {
+        this.info = info;
         this.grid = new HashMap<>();
+        this.size = this.info.getPointsHeight() / this.info.getBubbleHeight() / 2.0;
     }
 
     /**
      * This constructor creates a BubbleGrid with every bubble contained in the
-     * collection.
+     * collection. Could return a grid with unconnected bubbles, if the collection
+     * contains them.
      * 
      * @param collection from which to read the Bubbles to load in the BubblesGrid.
+     * @param info       the GridInfo that defines the dimentions of the grid.
      * 
      */
-    public BubblesGridImpl(final Collection<Bubble> collection) {
-        this();
+    public BubblesGridImpl(final Collection<Bubble> collection, final GridInfo info) {
+        this(info);
         for (final var elem : collection) {
-            this.grid.put(this.convertCoords(elem.getCoords()), new BubbleImpl(elem));
+            final Triplet<Integer, Integer, Integer> triplet = this.convertCoords(elem.getCoords());
+            final Position roundedPosition = this.roundCoords(triplet);
+            this.grid.put(triplet, new BubbleImpl(roundedPosition, elem.getColor()));
         }
     }
 
@@ -225,9 +234,22 @@ public class BubblesGridImpl implements BubblesGrid {
      * @return Triplet, the 3D converted position
      */
     private Triplet<Integer, Integer, Integer> convertCoords(final Position p) {
-        return new TripletImpl<Integer, Integer, Integer>(Math.toIntExact(Math.round(p.getX())),
-                Math.toIntExact(Math.round(p.getY())),
-                -Math.toIntExact(Math.round(p.getX())) - Math.toIntExact(Math.round(p.getY())));
+
+        final var q = Math.round((Math.sqrt(3.0) / 3.0 * p.getX() - 1.0 / 3.0 * p.getY()) / this.size);
+        final var r = Math.round((2.0 / 3.0 * p.getY()) / this.size);
+        return new TripletImpl<Integer, Integer, Integer>(Math.toIntExact(q), Math.toIntExact(r),
+                Math.toIntExact(-q - r));
+    }
+
+    /**
+     * @param triplet the 3D position to convert.
+     * @return Position, the 2D converted position, the point in the middle of the
+     *         bubble
+     */
+    private Position roundCoords(final Triplet<Integer, Integer, Integer> triplet) {
+        final double x = this.size * (Math.sqrt(3.0) / 3.0 * triplet.getX() + Math.sqrt(3.0) / 2.0 * triplet.getY());
+        final double y = this.size * (2.0 / 3.0 * triplet.getY());
+        return new PositionImpl(x, y);
     }
 
     /**
