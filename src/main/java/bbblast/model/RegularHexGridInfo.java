@@ -15,7 +15,7 @@ public class RegularHexGridInfo implements GridInfo {
      * 
      * @param bubbleWidth grid's width in bubbles
      * @param bubbleHeight grid's height in bubbles
-     * @param pointBubbleRatio width of a bubble in points (2*apothem in a hex grid)
+     * @param pointBubbleRatio width of a bubble in points (equivalent to 2*apothem in a hex grid)
      */
     public RegularHexGridInfo(final int bubbleWidth, final int bubbleHeight, final double pointBubbleRatio) {
         this.bubbleWidth = bubbleWidth;
@@ -23,21 +23,33 @@ public class RegularHexGridInfo implements GridInfo {
         this.ratio = pointBubbleRatio;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getBubbleWidth() {
         return this.bubbleWidth;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getBubbleHeight() {
         return this.bubbleHeight;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getPointsWidth() {
         return this.bubbleWidth * this.ratio;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getPointsHeight() {
         return this.bubbleHeight * this.getSingleBubbleHeight();
