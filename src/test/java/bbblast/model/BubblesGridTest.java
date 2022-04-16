@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 
 public class BubblesGridTest {
