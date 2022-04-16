@@ -62,6 +62,14 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	public void swapSpeedX() {
 		this.speed.setCoords( - getSpeedX(), getSpeedY());
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Bubble getStationaryCopy() {
+		return new BubbleImpl(this.getCoords(), this.getColor());
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -70,6 +78,8 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	public String toString() {
 		return "Moving" + super.toString() + ", " + this.speed.toString();
 	}
+
+
 	
 
 }
