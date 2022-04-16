@@ -22,6 +22,7 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 		this.speed = new PositionImpl(0, 0);
 	}
 	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -62,6 +63,13 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 		this.speed.setCoords( - getSpeedX(), getSpeedY());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return "Moving" + super.toString() + ", " + this.speed.toString();
+	}
 	
 
 }
