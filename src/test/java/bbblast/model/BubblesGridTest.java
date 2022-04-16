@@ -54,15 +54,9 @@ public class BubblesGridTest {
         g1.addBubble(b1);
         assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=0, z=0]=" + b1.toString() + "}]",
                 "The representation of a bubble");
-//        g1.removeBubble(b1.getCoords());
-//        assertEquals(g1.toString(), "BubblesGridImpl [grid={}]", "The representation of an empty grid");
-//        g1.addBubble(b2);
-//        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=1, y=0, z=-1]=" + b2.toString() + "}]",
-//                "The representation of a bubble");
-//        g1.addBubble(b3);
-//        g1.removeBubble(b2.getCoords());
-//        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=1, z=-1]=" + b3.toString() + "}]",
-//                "The representation of a bubble");
+        g1.removeBubble(b1.getCoords());
+        g1.addBubble(b2);
+        assertNotEquals(g1.toString(), "BubblesGridImpl []", "A grid with a bubble is not empty");
 
     }
 
@@ -271,7 +265,8 @@ public class BubblesGridTest {
         assertFalse(g1.endReached(), "The grid is empty");
         final BubblesGridImpl g2 = new BubblesGridImpl(List.of(b1), gridInfo);
         assertFalse(g2.endReached(), "The grid hasn't got a bubble at the bottom");
-        final BubblesGridImpl g3 = new BubblesGridImpl(List.of(new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight()), COLOR.YELLOW)), gridInfo);
+        final BubblesGridImpl g3 = new BubblesGridImpl(
+                List.of(new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight()), COLOR.YELLOW)), gridInfo);
         System.out.println(g3.toString());
         assertTrue(g3.endReached(), "The grid has a bubble at the bottom");
         g3.removeUnconnectedBubbles();
