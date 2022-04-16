@@ -80,7 +80,12 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public boolean endReached() {
-        return this.getLastRowY() >= this.info.getBubbleHeight();
+
+        if (!this.grid.isEmpty()) {
+            return this.grid.entrySet().stream().map(e -> e.getKey()).sorted((t1, t2) -> t2.getY() - t1.getY())
+                    .findFirst().get().getY() >= this.info.getBubbleHeight();
+        }
+        return false;
     }
 
     /**
@@ -122,8 +127,7 @@ public class BubblesGridImpl implements BubblesGrid {
         if (!this.grid.containsValue(b)) {
             final var tripletB = this.convertCoords(b.getCoords());
             // The bubble is inside the grid
-            if (tripletB.getX() < this.info.getBubbleWidth()
-                    && tripletB.getY() < this.info.getBubbleHeight()) {
+            if (tripletB.getX() < this.info.getBubbleWidth() && tripletB.getY() < this.info.getBubbleHeight()) {
                 if (tripletB.getY() == 0) {
                     return true;
                 }

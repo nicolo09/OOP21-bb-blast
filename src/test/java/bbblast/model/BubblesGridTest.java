@@ -264,4 +264,17 @@ public class BubblesGridTest {
         assertTrue(g4.checkForUnconnectedBubbles().isEmpty(), "This grid is now empty");
 
     }
+
+    @Test
+    public void testEndReached() {
+        final BubblesGridImpl g1 = new BubblesGridImpl(List.of(), gridInfo);
+        assertFalse(g1.endReached(), "The grid is empty");
+        final BubblesGridImpl g2 = new BubblesGridImpl(List.of(b1), gridInfo);
+        assertFalse(g2.endReached(), "The grid hasn't got a bubble at the bottom");
+        final BubblesGridImpl g3 = new BubblesGridImpl(List.of(new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight()), COLOR.YELLOW)), gridInfo);
+        System.out.println(g3.toString());
+        assertTrue(g3.endReached(), "The grid has a bubble at the bottom");
+        g3.removeUnconnectedBubbles();
+        assertFalse(g3.endReached(), "The grid hasn't got a bubble at the bottom");
+    }
 }
