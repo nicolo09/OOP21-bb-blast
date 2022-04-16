@@ -150,9 +150,10 @@ public class BubblesGridImpl implements BubblesGrid {
         if (rows > 0) {
             final Map<Triplet<Integer, Integer, Integer>, Bubble> gridTemporary = new HashMap<>();
             for (final var entry : this.grid.entrySet()) {
-                final Bubble b = entry.getValue();
-                b.moveBy(new PositionImpl(0, rows*this.size*2));
-                gridTemporary.put(this.convertCoords(b.getCoords()), b);
+                final int x = Math.toIntExact(Math.round(-0.5 * rows)) + entry.getKey().getX();
+                final int y = Math.toIntExact(Math.round(1.0 * rows)) + entry.getKey().getY();
+                final Triplet<Integer, Integer, Integer> tri = new TripletImpl<Integer, Integer, Integer>(x, y, -x - y);
+                gridTemporary.put(tri, new BubbleImpl(roundCoords(tri), entry.getValue().getColor()));
             }
             this.grid.clear();
             this.grid.putAll(gridTemporary);
