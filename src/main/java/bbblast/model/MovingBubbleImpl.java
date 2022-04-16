@@ -68,7 +68,7 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	 */
 	@Override
 	public Bubble getStationaryCopy() {
-		return new BubbleImpl(this.getCoords(), this.getColor());
+		return new BubbleImpl(this);
 	}
 
 	/**
