@@ -43,6 +43,8 @@ public class BubblesGridTest {
                 "Changes in the collection don't impact the grid, unless via grid methods");
         assertFalse(coll.equals(g4.getBubbles()),
                 "Changes in the collection don't impact the grid, unless via grid methods");
+        assertFalse(g1.equals(new BubblesGridImpl(new RegularHexGridInfo(10, 20, 1))),
+                "Two grids with different gridInfo are not equals");
     }
 
     @Test
@@ -159,6 +161,10 @@ public class BubblesGridTest {
         g1.addBubble(b2);
         assertTrue(g1.isBubbleAttachable(b4), "This bubble connects to an existing bubble");
         g1.addBubble(b4);
+        final Bubble bdx = new BubbleImpl(new PositionImpl(gridInfo.getPointsWidth() + 0.1, 0), COLOR.GREEN);
+        assertFalse(g1.isBubbleAttachable(bdx), "This bubble is out of bounds");
+        final Bubble bdown = new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight() + 0.1), COLOR.GREEN);
+        assertFalse(g1.isBubbleAttachable(bdown), "This bubble is out of bounds");
 
     }
 

@@ -121,10 +121,9 @@ public class BubblesGridImpl implements BubblesGrid {
     public boolean isBubbleAttachable(final Bubble b) {
         if (!this.grid.containsValue(b)) {
             final var tripletB = this.convertCoords(b.getCoords());
-            final Position roundedPosition = this.roundCoords(tripletB);
-            // The rounded position is inside the grid
-            if (roundedPosition.getX() < this.info.getPointsWidth()
-                    && roundedPosition.getY() < this.info.getPointsHeight()) {
+            // The bubble is inside the grid
+            if (tripletB.getX() < this.info.getBubbleWidth()
+                    && tripletB.getY() < this.info.getBubbleHeight()) {
                 if (tripletB.getY() == 0) {
                     return true;
                 }
