@@ -34,5 +34,10 @@ public interface MovingBubble extends Bubble {
 	 * Changes the actual x speed with its opposite.
 	 */
 	void swapSpeedX();
+	
+	/**
+	 * @return a Bubble copy of this MovingBubble
+	 */
+	Bubble getStationaryCopy();
 
 }
