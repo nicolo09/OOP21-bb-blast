@@ -1,8 +1,5 @@
 package bbblast.model;
 
-import java.util.Collection;
-import java.util.Random;
-
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 
@@ -14,20 +11,20 @@ import bbblast.utils.PositionImpl;
 public class CannonImpl implements Cannon {
 
     private int angle = 90;
+    private Bubble loadedBubble;
+    // TODO: make this bubble a MovingBubble
     private final Position startingPosition;
-    private final Collection<COLOR> colorsBubbles;
-    private final Random randomGenerator;
+    private final BubbleGenerator bbGenerator;
+    // TODO: make this a real generator, maybe passed as a parameter by constructor
 
     /**
-     * @param colorsBubbles is a collection of COLOR, the cannon will only generate
-     *                      bubbles of those colors.
-     * @param p             the position at which bubbles will inially spawn.
+     * @param p the position at which bubbles will inially spawn.
      * 
      */
-    public CannonImpl(final Collection<COLOR> colorsBubbles, final Position p) {
-        this.colorsBubbles = colorsBubbles;
-        this.startingPosition = new PositionImpl(p);
-        this.randomGenerator = new Random();
+    public CannonImpl(final Position p) {
+        this.startingPosition = new PositionImpl(p.getX(), p.getY());
+        this.bbGenerator = new BubbleGenerator();
+        this.loadedBubble = bbGenerator.next(this.startingPosition);
     }
 
     /***
@@ -44,9 +41,17 @@ public class CannonImpl implements Cannon {
      * {@inheritDoc}
      */
     @Override
-    public void shoot() {
-        this.generateBubble();
-        // TODO: Add angle
+    public Bubble getCurrentlyLoadedBubble() {
+        return loadedBubble;
+    }
+
+    /***
+     * {@inheritDoc}
+     */
+    @Override
+    public Bubble shoot() {
+        // TODO: Add speed, make moving bubble
+        return loadedBubble;
     }
 
     /***
@@ -55,6 +60,8 @@ public class CannonImpl implements Cannon {
     @Override
     public void exchange() {
         // TODO Optional feature
+        // TODO: Decide what to do, does the currently loaded bubble become the second
+        // one or is it stored in a Tetris-like reservoir
     }
 
     /***
@@ -63,21 +70,6 @@ public class CannonImpl implements Cannon {
     @Override
     public int getAngle() {
         return this.angle;
-    }
-
-    /***
-     * This method generates the actual bubble.
-     * 
-     * @return the bubble generated
-     */
-    private Bubble generateBubble() {
-        if (!colorsBubbles.isEmpty()) {
-            final COLOR c = colorsBubbles.stream().skip(randomGenerator.nextInt(colorsBubbles.size())).findFirst()
-                    .get();
-            // TODO: Will this stream potentially skip all the colors?
-            return new BubbleImpl(new PositionImpl(startingPosition), c);
-        }
-        return new BubbleImpl(new PositionImpl(startingPosition), COLOR.RED);
     }
 
 }
