@@ -64,7 +64,7 @@ public class CannonImpl implements Cannon {
      */
     @Override
     public Bubble getCurrentlyLoadedBubble() {
-        return loadedBubble.getStationaryCopy();
+        return new MovingBubble(loadedBubble);
     }
 
     /***
