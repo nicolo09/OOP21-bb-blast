@@ -37,7 +37,7 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	 */
 	@Override
 	public void setSpeed(final Position speed) {
-		this.speed = new PositionImpl(speed.getX(), speed.getY());
+		this.speed.setCoords(speed.getX(), speed.getY());
 	}
 	
 	/**
