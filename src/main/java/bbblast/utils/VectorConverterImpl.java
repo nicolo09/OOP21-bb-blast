@@ -40,7 +40,7 @@ public class VectorConverterImpl implements VectorConverter {
     @Override
     public Position getComponents() {
         final double x = module * Math.cos(Math.toRadians(angle)) / fps;
-        final double y = -module * Math.sin(Math.toRadians(angle)) / fps;
+        final double y = module * Math.sin(Math.toRadians(angle)) / fps;
 
         return new PositionImpl(x, y);
     }
