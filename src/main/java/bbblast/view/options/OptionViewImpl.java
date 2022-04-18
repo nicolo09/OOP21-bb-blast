@@ -27,7 +27,7 @@ public class OptionViewImpl implements OptionView {
     private OptionViewController controller;
     final private Scene scene;
 
-    public OptionViewImpl(final View mainView, OptionViewController controller) {
+    public OptionViewImpl(final View mainView, final OptionViewController controller) {
         this.controller = controller;
 
         final VBox root = new VBox();
