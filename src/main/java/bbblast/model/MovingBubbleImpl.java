@@ -17,8 +17,17 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	 * @param p the position of this Bubble 
 	 * @param c the color of this Bubble
 	 */
-	public MovingBubbleImpl(final Position p,final COLOR c) {
+	public MovingBubbleImpl(final Position p, final COLOR c) {
 		super(p, c);
+		this.speed = new PositionImpl(0, 0);
+	}
+	
+	/**
+	 * Generates a new MovingBubble, from an existing Bubble, which has a velocity of 0.
+	 * @param b the bubble that has to be converted to MovingBubble
+	 */
+	public MovingBubbleImpl(final Bubble b) {
+		super(b);
 		this.speed = new PositionImpl(0, 0);
 	}
 	
