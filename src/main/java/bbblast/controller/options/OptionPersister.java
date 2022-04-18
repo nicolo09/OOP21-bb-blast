@@ -1,4 +1,6 @@
-package bbblast.utils;
+package bbblast.controller.options;
+
+import bbblast.utils.Settings;
 
 /**
  * Interface that model the Option Persister.
