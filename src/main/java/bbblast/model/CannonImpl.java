@@ -14,7 +14,7 @@ import bbblast.utils.VectorConverterImpl;
  */
 public class CannonImpl implements Cannon {
 
-    private int angle = 90;
+    private int angle = START_ANGLE;
     private MovingBubble loadedBubble;
     private final Position startingPosition;
     private final BubbleGenerator bbGenerator;
@@ -28,6 +28,10 @@ public class CannonImpl implements Cannon {
      * This value is the maximum angle the cannon can reach.
      */
     public static final int MAX_ANGLE = 175;
+    /**
+     * This value is the cannon starts at.
+     */
+    public static final int START_ANGLE = 90;
 
     /**
      * @param p           the position at which bubbles will inially spawn.
