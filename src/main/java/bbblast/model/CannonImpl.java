@@ -15,32 +15,42 @@ import bbblast.utils.VectorConverterImpl;
 public class CannonImpl implements Cannon {
 
     private int angle = 90;
-    private Bubble loadedBubble;
-    // TODO: make this bubble a MovingBubble
+    private MovingBubble loadedBubble;
     private final Position startingPosition;
     private final BubbleGenerator bbGenerator;
-    // TODO: make this a real generator, maybe passed as a parameter by constructor
     private final VectorConverter vectorConv;
 
     /**
-     * @param p the position at which bubbles will inially spawn.
+     * This value is the minimum angle the cannon can reach.
+     */
+    public static final int MIN_ANGLE = 5;
+    /**
+     * This value is the maximum angle the cannon can reach.
+     */
+    public static final int MAX_ANGLE = 175;
+
+    /**
+     * @param p           the position at which bubbles will inially spawn.
+     * @param fps         the frames per second.
+     * @param bbGenerator the bubbleGenerator that decides the color of the bubbles.
+     * @param speed       the speed at which the bubble is shot.
      * 
      */
-    public CannonImpl(final Position p, final int FPS, final int speed) {
+    public CannonImpl(final Position p, final int fps, final int speed, final BubbleGenerator bbGenerator) {
+        // TODO: decide if speed and FPS are parameters of the constructor
         this.startingPosition = new PositionImpl(p.getX(), p.getY());
-        this.bbGenerator = new BubbleGenerator();
-        this.loadedBubble = bbGenerator.next(this.startingPosition);
-
-        this.vectorConv = new VectorConverterImpl(FPS);
+        this.bbGenerator = bbGenerator;
+        this.loadedBubble = new MovingBubbleImpl(this.startingPosition, this.bbGenerator.generate());
+        this.vectorConv = new VectorConverterImpl(fps);
         this.vectorConv.setModule(speed);
     }
 
     /***
-     * {@inheritDoc} The angle has to be between 5 and 175 degrees.
+     * {@inheritDoc} The angle has to be between MIN_ANGLE and MAX_ANGLE degrees.
      */
     @Override
     public void move(final int angle) {
-        if (angle >= 5 && angle <= 175) {
+        if (angle >= MIN_ANGLE && angle <= MAX_ANGLE) {
             this.angle = angle;
         }
     }
@@ -50,7 +60,7 @@ public class CannonImpl implements Cannon {
      */
     @Override
     public Bubble getCurrentlyLoadedBubble() {
-        return loadedBubble;
+        return loadedBubble.getStationaryCopy();
     }
 
     /***
@@ -58,10 +68,11 @@ public class CannonImpl implements Cannon {
      */
     @Override
     public Bubble shoot() {
-        // TODO: Add speed, make moving bubble
         this.vectorConv.setAngle(this.angle);
-        // this.vectorConv.getComponents(); this creates the speed components
-        return loadedBubble;
+        this.loadedBubble.setSpeed(this.vectorConv.getComponents());
+        final var bb2Shoot = this.loadedBubble;
+        this.loadedBubble = new MovingBubble(this.startingPosition, this.bbGenerator.generate());
+        return bb2Shoot;
     }
 
     /***
@@ -82,11 +93,17 @@ public class CannonImpl implements Cannon {
         return this.angle;
     }
 
+    /***
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(angle, loadedBubble, startingPosition);
     }
 
+    /***
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -103,11 +120,12 @@ public class CannonImpl implements Cannon {
                 && startingPosition.equals(other.startingPosition);
     }
 
+    /***
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "CannonImpl [angle=" + angle + ", loadedBubble=" + loadedBubble + "]";
     }
-    
-    
 
 }
