@@ -1,7 +1,11 @@
 package bbblast.model;
 
+import java.util.Objects;
+
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
+import bbblast.utils.VectorConverter;
+import bbblast.utils.VectorConverterImpl;
 
 /**
  * 
@@ -16,15 +20,19 @@ public class CannonImpl implements Cannon {
     private final Position startingPosition;
     private final BubbleGenerator bbGenerator;
     // TODO: make this a real generator, maybe passed as a parameter by constructor
+    private final VectorConverter vectorConv;
 
     /**
      * @param p the position at which bubbles will inially spawn.
      * 
      */
-    public CannonImpl(final Position p) {
+    public CannonImpl(final Position p, final int FPS, final int speed) {
         this.startingPosition = new PositionImpl(p.getX(), p.getY());
         this.bbGenerator = new BubbleGenerator();
         this.loadedBubble = bbGenerator.next(this.startingPosition);
+
+        this.vectorConv = new VectorConverterImpl(FPS);
+        this.vectorConv.setModule(speed);
     }
 
     /***
@@ -51,6 +59,8 @@ public class CannonImpl implements Cannon {
     @Override
     public Bubble shoot() {
         // TODO: Add speed, make moving bubble
+        this.vectorConv.setAngle(this.angle);
+        // this.vectorConv.getComponents(); this creates the speed components
         return loadedBubble;
     }
 
@@ -71,5 +81,33 @@ public class CannonImpl implements Cannon {
     public int getAngle() {
         return this.angle;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(angle, loadedBubble, startingPosition);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CannonImpl other = (CannonImpl) obj;
+        return angle == other.angle && loadedBubble.equals(other.loadedBubble)
+                && startingPosition.equals(other.startingPosition);
+    }
+
+    @Override
+    public String toString() {
+        return "CannonImpl [angle=" + angle + ", loadedBubble=" + loadedBubble + "]";
+    }
+    
+    
 
 }
