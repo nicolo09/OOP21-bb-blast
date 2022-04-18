@@ -5,12 +5,12 @@ import bbblast.utils.PositionImpl;
 
 /**
  * 
- * The class which models a Bubble that can move on a 2D surface
+ * The class which models a Bubble that can move on a 2D surface.
  *
  */
 public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 
-	private Position speed;
+	private final Position speed;
 
 	/**
 	 * Generates a new moving Bubble which has a velocity of 0.
@@ -27,8 +27,7 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	 * @param b the bubble that has to be converted to MovingBubble
 	 */
 	public MovingBubbleImpl(final Bubble b) {
-		super(b);
-		this.speed = new PositionImpl(0, 0);
+		this(b.getCoords(), b.getColor());
 	}
 	
 
@@ -69,7 +68,7 @@ public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
 	 */
 	@Override
 	public void swapSpeedX() {
-		this.speed.setCoords( - getSpeedX(), getSpeedY());
+		this.speed.setCoords(-getSpeedX(), getSpeedY());
 	}
 	
 	/**
