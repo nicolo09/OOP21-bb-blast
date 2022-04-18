@@ -17,6 +17,7 @@ public class MovingBubbleTest {
 		final MovingBubble m1 = new MovingBubbleImpl(new PositionImpl(0, 0), COLOR.BLUE);
 		final MovingBubble m2 = new MovingBubbleImpl(new PositionImpl(0, 0), COLOR.RED);
 		final MovingBubble m3 = new MovingBubbleImpl(new PositionImpl(0, 0), COLOR.RED);
+		final MovingBubble m4 = new MovingBubbleImpl(b); 
 		final Bubble copy = m1.getStationaryCopy();
 		m3.setSpeed(new PositionImpl(1, 1));
 
@@ -24,6 +25,7 @@ public class MovingBubbleTest {
 		assertFalse(b.equals(m1), "Two different types of bubbles are not the same");
 		assertFalse(m1.equals(m2), "Two bubbles with same position same speed but different color are not equals");
 		assertEquals(m2, m3, "Two bubble with same position and color but different speed are equals");
+		assertTrue(m4.getCoords().equals(b.getCoords()) && m4.getColor().equals(b.getColor()), "A MovingBubble generated from a Bubble has the same characteristic");
 	}
 
 	@Test
@@ -51,12 +53,12 @@ public class MovingBubbleTest {
 	public void testMovingBubbleMovement() {
 		final MovingBubble m = new MovingBubbleImpl(new PositionImpl(0, 0), COLOR.PURPLE);
 		m.setSpeed(new PositionImpl(1, 1));
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			m.move();
 		}
-		assertEquals(m.getCoords(), new PositionImpl(10, 10),"The bubble moved of 10 points on both x and y axis");
+		assertEquals(m.getCoords(), new PositionImpl(10, 10), "The bubble moved of 10 points on both x and y axis");
 		m.swapSpeedX();
-		for(int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			m.move();
 		}
 		assertEquals(m.getCoords().getX(), 0, "The bubble changed its x direction and moved 10 times");
