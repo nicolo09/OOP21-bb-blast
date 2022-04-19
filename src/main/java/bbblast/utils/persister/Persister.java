@@ -1,21 +1,16 @@
-package bbblast.controller.options;
-
-import bbblast.utils.Settings;
+package bbblast.utils.persister;
 
 /**
- * Interface that model the Option Persister.
+ * Interface that represents an object that can save and load a file.
  */
-public interface OptionPersister {
+public interface Persister <T> {
+        
     /**
-     * save the current settings.
-     * @param s the current settings
+     * loads an object.
+     * @return the object
      */
-    void save(Settings s);
-    
-    /**
-     * read the settings from a file.
-     * @return the settings
-     */
-    
-    Settings load();
+    T load();
+
+    void save(T objectToSave);
+
 }
