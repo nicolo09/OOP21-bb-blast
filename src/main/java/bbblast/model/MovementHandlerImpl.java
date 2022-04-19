@@ -47,15 +47,24 @@ public class MovementHandlerImpl implements MovementHandler {
 		if(this.shot.getSpeedY() > 0) {
 			return false;
 		}
-		boolean fixed = false;
+		boolean fixedX = false;
+		boolean fixedY = false;
 		final var nextPos = getNextPos(shot);
 		if (nextPos.getX() < shotRadius || nextPos.getX() > infos.getPointsWidth() - shotRadius) {
 			fixMovement(shot, nextPos);
-			fixed = true;
+			fixedX = true;
+		}
+		if(nextPos.getY() < shotRadius) {
+			this.shot.moveBy(new PositionImpl(0, -shot.getCoords().getY() + shotRadius));
+			fixedY = true;
 		}
 
-		if (!fixed) {
-			this.shot.move();
+		if(fixedX && !fixedY) {
+			shot.moveBy(new PositionImpl(0, shot.getSpeedY()));
+		} else if(!fixedX && fixedY) {
+			shot.moveBy(new PositionImpl(shot.getSpeedX(), 0));
+		} else if(!fixedX && !fixedY){
+			shot.move();
 		}
 
 		return true;
