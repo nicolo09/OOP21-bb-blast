@@ -67,18 +67,6 @@ public class ModelImpl implements Model {
 
     }
 
-    @Override
-    public Settings loadSettings() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void writeSettings(final Settings s) {
-        // TODO Auto-generated method stub
-
-    }
-
     //TODO: Taglia fa gli scores
     @Override
     public Collection<Score> loadScores() {

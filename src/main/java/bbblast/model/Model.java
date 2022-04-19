@@ -57,18 +57,6 @@ public interface Model extends Updatable {
 	void switchBubble();
 
 	/**
-	 * reads from a file the Settings to load.
-	 * @return the Settings to apply to the game
-	 */
-	Settings loadSettings();
-
-	/**
-	 * writes on a file the current Settings.
-	 * @param s the current Settings
-	 */
-	void writeSettings(Settings s);
-	
-	/**
 	 * reads from a file the saved Scores.
 	 * @return a collection of Scores from the previous games 
 	 */
