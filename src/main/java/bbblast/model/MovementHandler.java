@@ -1,7 +1,11 @@
 package bbblast.model;
 
+/**
+ * 
+ * The interface which models a MovementHandler that handles the movements on a 2D surface.
+ *
+ */
 public interface MovementHandler {
-
 	/**
 	 * This method tries to move the latest MovingBubble that has been shot.
 	 * @return true if it could move the shot by its speed in a legal position,
@@ -10,7 +14,7 @@ public interface MovementHandler {
 	boolean handle();
 	
 	/**
-	 * Sets the new MovingBubble to check
+	 * Sets the new MovingBubble to check.
 	 * @param shot the MovingBubble that has to be handled
 	 */
 	void setShot(MovingBubble shot);
