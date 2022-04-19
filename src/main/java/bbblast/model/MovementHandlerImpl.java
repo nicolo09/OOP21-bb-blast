@@ -11,8 +11,9 @@ public class MovementHandlerImpl implements MovementHandler {
 
 	private final BubblesGrid grid;
 	private final GridInfo infos;
-	private MovingBubble shot;
 	private final double shotRadius;
+	private boolean isShotSet;
+	private MovingBubble shot;
 
 	/**
 	 * Creates a new MovementHandler.
@@ -22,6 +23,7 @@ public class MovementHandlerImpl implements MovementHandler {
 	public MovementHandlerImpl(final BubblesGrid grid, final GridInfo infos) {
 		this.grid = grid;
 		this.infos = infos;
+		this.isShotSet = false;
 		this.shotRadius = infos.getPointsWidth() / infos.getBubbleWidth() / 2;
 	}
 
@@ -31,19 +33,20 @@ public class MovementHandlerImpl implements MovementHandler {
 	@Override
 	public boolean handle() {
 		// the MovementHandler can't handle a non existing MovingBubble
-		if (shot == null) {
+		if (!isShotSet) {
 			return false;
 		}
 		// if it's attachable it adds the shot to the grid and deletes it
 		if (grid.isBubbleAttachable(this.shot.getStationaryCopy())) {
 			grid.addBubble(shot.getStationaryCopy());
 			this.shot = null;
+			this.isShotSet = false;
 			return false;
 		}
 
 		boolean fixed = false;
 		final var nextPos = getNextPos(shot);
-		if (nextPos.getX() < 0 + shotRadius || nextPos.getX() > infos.getPointsWidth() - shotRadius) {
+		if (nextPos.getX() < shotRadius || nextPos.getX() > infos.getPointsWidth() - shotRadius) {
 			fixMovement(shot, nextPos);
 			fixed = true;
 		}
@@ -55,11 +58,13 @@ public class MovementHandlerImpl implements MovementHandler {
 		return true;
 	}
 
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setShot(final MovingBubble shot) {
+		this.isShotSet = true;
 		this.shot = shot;
 	}
 
@@ -82,4 +87,10 @@ public class MovementHandlerImpl implements MovementHandler {
 		shot.swapSpeedX();
 	}
 
+	@Override
+	public String toString() {
+		return isShotSet ? "MovementHandlerImpl [shot=" + shot + "]" : "MovementHandlerImpl [there's no shot to handle]";
+	}
+
+	
 }
