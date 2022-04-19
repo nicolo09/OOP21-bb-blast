@@ -31,7 +31,7 @@ public class MovementHandlerImpl implements MovementHandler {
 	@Override
 	public boolean handle() {
 		// the MovementHandler can't handle a non existing MovingBubble
-		if (shot != null) {
+		if (shot == null) {
 			return false;
 		}
 		// if it's attachable it adds the shot to the grid and deletes it
