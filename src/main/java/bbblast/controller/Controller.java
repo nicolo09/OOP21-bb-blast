@@ -1,6 +1,7 @@
 package bbblast.controller;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import bbblast.model.Bubble;
 import bbblast.model.Model;
@@ -24,14 +25,15 @@ public interface Controller {
     void setModel(Model m);
 
     /**
-     * @return the settings associated with the controller.
+     * @return the settings of the game.
      */
-    Settings loadSettings();
+    Optional<Settings> loadSettings();
 
     /**
-     * @param s the setting written on file.
+     * @param s the settings to save.
+     * @return true if correctly written, false otherwise
      */
-    void writeSettings(Settings s);
+    boolean writeSettings(Settings s);
 
     /**
      * Starts the SinglePlayer Game.
