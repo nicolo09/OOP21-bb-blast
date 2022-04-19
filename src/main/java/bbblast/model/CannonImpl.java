@@ -44,7 +44,7 @@ public class CannonImpl implements Cannon {
         // TODO: decide if speed and FPS are parameters of the constructor
         this.startingPosition = new PositionImpl(p.getX(), p.getY());
         this.bbGenerator = bbGenerator;
-        this.loadedBubble = new MovingBubbleImpl(this.startingPosition, this.bbGenerator.generate());
+        this.loadedBubble = new MovingBubbleImpl(this.bbGenerator.generate(this.startingPosition));
         this.vectorConv = new VectorConverterImpl(fps);
         this.vectorConv.setModule(speed);
     }
@@ -75,7 +75,7 @@ public class CannonImpl implements Cannon {
         this.vectorConv.setAngle(this.angle);
         this.loadedBubble.setSpeed(this.vectorConv.getComponents());
         final var bb2Shoot = this.loadedBubble;
-        this.loadedBubble = new MovingBubbleImpl(this.startingPosition, this.bbGenerator.generate());
+        this.loadedBubble = new MovingBubbleImpl(this.bbGenerator.generate(this.startingPosition));
         return bb2Shoot;
     }
 

@@ -4,21 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import bbblast.utils.PositionImpl;
 
 public class CannonTest {
 
+    private final BubbleGenerator bbgen=new BubbleGeneratorImpl(List.of(COLOR.RED,COLOR.GREEN,COLOR.YELLOW,COLOR.BLUE));
+    
     @Test
     public void testCannonPersistence() {
-        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, null);
+        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60,bbgen);
         assertFalse(c.toString().equals(""), "Cannon has a toString");
     }
 
     @Test
     public void testCannonMove() {
-        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, null);
+        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);
         final int start = c.getAngle();
         final int change = 45;
         c.move(change);
@@ -39,7 +43,7 @@ public class CannonTest {
 
     @Test
     public void testGetCurrentlyLoadedBubble() {
-        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, null);
+        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);
         final var b1 = c.getCurrentlyLoadedBubble();
         final var b2 = c.shoot();
         assertEquals(b1, b2, "The bubble currently loaded is the one shot");
@@ -48,7 +52,7 @@ public class CannonTest {
 
     @Test
     public void testCannonShoot() {
-        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, null);
+        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);
         assertNotEquals(c.shoot(), null, "A bubble isn't null");
         c.move(CannonImpl.MAX_ANGLE);
         assertNotEquals(c.shoot(), null, "A bubble isn't null");
