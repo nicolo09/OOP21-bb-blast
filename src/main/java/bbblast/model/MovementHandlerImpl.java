@@ -36,14 +36,17 @@ public class MovementHandlerImpl implements MovementHandler {
 		if (!isShotSet) {
 			return false;
 		}
-		// if it's attachable it adds the shot to the grid and deletes it
+		// if the Bubble is attachable it adds the shot to the grid and deletes it
 		if (grid.isBubbleAttachable(this.shot.getStationaryCopy())) {
 			grid.addBubble(shot.getStationaryCopy());
 			this.shot = null;
 			this.isShotSet = false;
 			return false;
 		}
-
+		// the MovementHandler can't handle a MovingBubble with positive Y velocity
+		if(this.shot.getSpeedY() > 0) {
+			return false;
+		}
 		boolean fixed = false;
 		final var nextPos = getNextPos(shot);
 		if (nextPos.getX() < shotRadius || nextPos.getX() > infos.getPointsWidth() - shotRadius) {
