@@ -42,6 +42,7 @@ public class MovementHandlerTest {
 		final MovingBubble m2 = new MovingBubbleImpl(new PositionImpl(infos.getBubbleWidth() - 1, infos.getBubbleHeight()), COLOR.ORANGE);
 		final MovingBubble m3 = new MovingBubbleImpl(new PositionImpl(0.6, infos.getBubbleHeight()), COLOR.ORANGE);
 		final MovingBubble m4 = new MovingBubbleImpl(base);
+		final MovingBubble m5 = new MovingBubbleImpl(new PositionImpl(infos.getBubbleWidth() - 1, infos.getBubbleHeight()), COLOR.ORANGE);
 		m1.setSpeed(new PositionImpl(0, -1));
 		m4.setSpeed(new PositionImpl(0, -1));
 		handler.setShot(m1);
@@ -65,6 +66,11 @@ public class MovementHandlerTest {
 		handler.setShot(m4);
 		while(handler.handle()); //cycles until handler can't move the shot anymore 
 		assertEquals(6, grid.getBubbles().size(), "Now the grid should also contain the shot");
+		
+		m5.setSpeed(new PositionImpl(0.6, -0.8));
+		handler.setShot(m5);
+		handler.handle();
+		assertEquals(new PositionImpl(9.4, infos.getBubbleHeight() - 0.8), m5.getCoords(), "The shot bounced on the right wall while going up");
 		
 	}
 }
