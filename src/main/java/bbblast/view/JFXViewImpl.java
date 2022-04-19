@@ -50,7 +50,7 @@ public class JFXViewImpl implements View {
 
     @Override
     public void startOptionsMenu() {
-        final OptionViewController optionViewController = new OptionViewControllerImpl();
+        final OptionViewController optionViewController = new OptionViewControllerImpl(controller, this);
         final OptionView optionView = new OptionViewImpl(this, optionViewController);
         final Scene optionScene = optionView.getScene();
         Platform.runLater(() -> {
