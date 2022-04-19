@@ -3,7 +3,7 @@ package bbblast.utils.persister;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonForTest implements Serializable{
+public class PersonForTest implements Serializable {
     /**
      * 
      */
@@ -43,12 +43,15 @@ public class PersonForTest implements Serializable{
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final PersonForTest other = (PersonForTest) obj;
         return this.age == other.age && Objects.equals(this.name, other.name)
                 && Objects.equals(this.surname, other.surname);
