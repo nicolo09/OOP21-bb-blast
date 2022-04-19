@@ -10,6 +10,6 @@ public interface OptionViewController {
     
     void saveSettings(double masterVolume, double musicVolume, double effectsVolume);
     
-    void exitDiscarding();
+    void exit();
 
 }
