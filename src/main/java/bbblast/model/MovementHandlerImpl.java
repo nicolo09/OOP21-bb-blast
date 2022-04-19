@@ -85,7 +85,7 @@ public class MovementHandlerImpl implements MovementHandler {
 		final var correctX = shot.getSpeedX() > 0 ? infos.getPointsWidth() - shotRadius - nextPos.getX()
 				: -nextPos.getX() + shotRadius;
 
-		shot.moveBy(new PositionImpl(limitX + correctX, 0));
+		shot.moveBy(new PositionImpl(limitX + correctX, shot.getSpeedY()));
 		// after reaching the correct position its direction changes
 		shot.swapSpeedX();
 	}
