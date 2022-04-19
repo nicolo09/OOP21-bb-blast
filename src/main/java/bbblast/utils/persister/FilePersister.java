@@ -17,9 +17,9 @@ import java.util.Optional;
  */
 public class FilePersister<T> implements Persister<T> {
 
-    private final Path filePath;
     private static final OpenOption[] WRITEROPTIONS = { StandardOpenOption.CREATE, StandardOpenOption.WRITE,
             StandardOpenOption.TRUNCATE_EXISTING };
+    private final Path filePath;
     private final Class<T> t;
 
     /**
@@ -40,8 +40,7 @@ public class FilePersister<T> implements Persister<T> {
         try (ObjectInputStream input = new ObjectInputStream(Files.newInputStream(filePath))) {
             final var readObject = input.readObject();
             if (t.isInstance(readObject)) {
-                // TODO Check why unsafe type cast
-                return Optional.of((T)readObject);
+                return Optional.of(t.cast(readObject));
             }
         } catch (IOException|ClassNotFoundException e) {
             e.printStackTrace();
