@@ -40,14 +40,14 @@ public class SettingsImpl implements Settings, Serializable{
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
             return false;
         if (getClass() != obj.getClass())
             return false;
-        SettingsImpl other = (SettingsImpl) obj;
+        final SettingsImpl other = (SettingsImpl) obj;
         return this.effectsVolume == other.effectsVolume && this.masterVolume == other.masterVolume
                 && this.musicVolume == other.musicVolume;
     }
