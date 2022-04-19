@@ -64,7 +64,7 @@ public class CannonImpl implements Cannon {
      */
     @Override
     public Bubble getCurrentlyLoadedBubble() {
-        return new MovingBubble(loadedBubble);
+        return new MovingBubbleImpl(loadedBubble);
     }
 
     /***
@@ -75,7 +75,7 @@ public class CannonImpl implements Cannon {
         this.vectorConv.setAngle(this.angle);
         this.loadedBubble.setSpeed(this.vectorConv.getComponents());
         final var bb2Shoot = this.loadedBubble;
-        this.loadedBubble = new MovingBubble(this.startingPosition, this.bbGenerator.generate());
+        this.loadedBubble = new MovingBubbleImpl(this.startingPosition, this.bbGenerator.generate());
         return bb2Shoot;
     }
 
