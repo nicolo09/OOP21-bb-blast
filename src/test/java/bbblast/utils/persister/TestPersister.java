@@ -1,7 +1,9 @@
 package bbblast.utils.persister;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
@@ -20,17 +22,27 @@ public class TestPersister {
     public void testFilePersister() {
         final PersonForTest objectToSave = new PersonForTest("Marco", "Rossi", 24);
         final Persister<PersonForTest> persister = new FilePersister<>(PATH, PersonForTest.class);
-        persister.save(objectToSave);
-        final var loaded = persister.load();
+        try {
+            persister.save(objectToSave);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("Exception thrown");
+        }
+        final var loaded = persister.load().get();
         assertEquals(loaded, objectToSave, "Loaded object is different");
     }
-    
+
     @Test
     public void testSettingsPersister() {
-        final Settings objectToSave = new SettingsImpl(100,75,50);
+        final Settings objectToSave = new SettingsImpl(100, 75, 50);
         final Persister<Settings> persister = new FilePersister<>(PATH, Settings.class);
-        persister.save(objectToSave);
-        final var loaded = persister.load();
+        try {
+            persister.save(objectToSave);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("Exception thrown");
+        }
+        final var loaded = persister.load().get();
         assertEquals(loaded, objectToSave, "Loaded settings are different");
     }
 
