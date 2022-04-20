@@ -41,7 +41,6 @@ public class CannonImpl implements Cannon {
      * 
      */
     public CannonImpl(final Position p, final int fps, final int speed, final BubbleGenerator bbGenerator) {
-        // TODO: decide if speed and FPS are parameters of the constructor
         this.startingPosition = new PositionImpl(p.getX(), p.getY());
         this.bbGenerator = bbGenerator;
         this.loadedBubble = new MovingBubbleImpl(this.bbGenerator.generate(this.startingPosition));
