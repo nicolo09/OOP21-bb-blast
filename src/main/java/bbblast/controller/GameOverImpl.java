@@ -11,7 +11,6 @@ public class GameOverImpl implements GameOver {
     public GameOverImpl(final Map<Integer, Integer> scores) {
         this.timestamp = LocalDateTime.now();
         this.scores = Map.copyOf(scores);
-        
     }
     
     @Override
