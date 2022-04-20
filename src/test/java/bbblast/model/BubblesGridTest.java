@@ -169,7 +169,6 @@ public class BubblesGridTest {
         final BubblesGrid g2 = new BubblesGridImpl(List.of(b1, b2, b3, b4), gridInfo);
         assertTrue(g2.checkForUnconnectedBubbles().isEmpty(), "All bubbles are connected");
         final BubblesGrid g3 = new BubblesGridImpl(List.of(b1, b3, b6), gridInfo);
-        System.out.println(g3.toString());
         assertFalse(g3.checkForUnconnectedBubbles().isEmpty(), "Some bubbles are unconnected");
         assertEquals(g3.checkForUnconnectedBubbles().size(), 1, "This bubble is unconnected");
         final BubblesGrid g4 = new BubblesGridImpl(List.of(b1, b4, b6), gridInfo);
@@ -268,7 +267,6 @@ public class BubblesGridTest {
         assertFalse(g2.endReached(), "The grid hasn't got a bubble at the bottom");
         final BubblesGridImpl g3 = new BubblesGridImpl(
                 List.of(new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight()), COLOR.YELLOW)), gridInfo);
-        System.out.println(g3.toString());
         assertTrue(g3.endReached(), "The grid has a bubble at the bottom");
         g3.removeUnconnectedBubbles();
         assertFalse(g3.endReached(), "The grid hasn't got a bubble at the bottom");
