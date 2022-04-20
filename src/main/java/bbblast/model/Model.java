@@ -2,11 +2,12 @@ package bbblast.model;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 import bbblast.controller.Controller;
+import bbblast.controller.GameOver;
 import bbblast.controller.gameloop.Updatable;
 import bbblast.utils.Score;
-import bbblast.utils.Settings;
 
 /**
  * 
@@ -47,27 +48,15 @@ public interface Model extends Updatable {
 	Map<Integer, Integer> getScores();
 
 	/**
-	 * @return true if the BubblesGrid reaches the bottom, false otherwise
+	 * @return a {@link GameOver} if the BubblesGrid reaches the bottom, Optional empty otherwise
 	 */
-	boolean isGameOver();
+	Optional<GameOver> gameOver();
 	
 	/**
 	 * switches the Bubble inside the cannon.
 	 */
 	void switchBubble();
 
-	/**
-	 * reads from a file the Settings to load.
-	 * @return the Settings to apply to the game
-	 */
-	Settings loadSettings();
-
-	/**
-	 * writes on a file the current Settings.
-	 * @param s the current Settings
-	 */
-	void writeSettings(Settings s);
-	
 	/**
 	 * reads from a file the saved Scores.
 	 * @return a collection of Scores from the previous games 

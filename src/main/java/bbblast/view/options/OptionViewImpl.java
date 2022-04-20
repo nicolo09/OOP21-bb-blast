@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
 
 public class OptionViewImpl implements OptionView {
 
-    private static final double MINWIDTH = 0;
-    private static final double MINHEIGHT = 0;
+    private static final double MINWIDTH = 400;
+    private static final double MINHEIGHT = 300;
     private static final double MINIMUM_VOLUME = 0;
     private static final double MAXIMUM_VOLUME = 100;
     private static final int LABELSCOLUMNPERCENTAGE = 20;
@@ -27,7 +27,7 @@ public class OptionViewImpl implements OptionView {
     private OptionViewController controller;
     final private Scene scene;
 
-    public OptionViewImpl(final View mainView, OptionViewController controller) {
+    public OptionViewImpl(final View mainView, final OptionViewController controller) {
         this.controller = controller;
 
         final VBox root = new VBox();

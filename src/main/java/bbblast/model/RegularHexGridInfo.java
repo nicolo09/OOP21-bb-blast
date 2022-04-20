@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * 
- * A GridInfo made to generate a hex grid of regular hexagons
+ * A GridInfo that models a grid of regular hexagons.
  *
  */
 public class RegularHexGridInfo implements GridInfo {
@@ -79,6 +79,15 @@ public class RegularHexGridInfo implements GridInfo {
     public String toString() {
         return "RegularHexGridInfo [bubbleWidth=" + this.bubbleWidth + ", bubbleHeight=" + this.bubbleHeight
                 + ", ratio=" + this.ratio + "]";
+    }
+
+    /**
+     * {@inheritDoc}
+     * In this implementation the bubble radius is equivalent to the apothem of the hexagon.
+     */
+    @Override
+    public double getBubbleRadius() {
+        return ratio/2;
     }
     
     
