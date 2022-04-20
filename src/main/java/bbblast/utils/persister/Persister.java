@@ -21,4 +21,9 @@ public interface Persister <T> {
      */
     void save(T objectToSave) throws IOException;
 
+    /**
+     * deletes the object persistance
+     * @return true if successfully deleted
+     */
+    boolean reset();
 }
