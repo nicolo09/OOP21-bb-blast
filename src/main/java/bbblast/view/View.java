@@ -39,5 +39,10 @@ public interface View extends Updatable {
      * Shows this view.
      */
     void show();
+    /**
+     * Displays an error
+     * @param error the error to display
+     */
+    void showError(String error); 
 
 }

@@ -14,6 +14,8 @@ import bbblast.view.singleplayer.GameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class JFXViewImpl implements View {
@@ -44,13 +46,13 @@ public class JFXViewImpl implements View {
 
     @Override
     public void startMultiplayerGame() {
-        // TODO Auto-generated method stub
-
+        //TODO Implement multiplayer
+        this.showError("Not yet implemented");
     }
 
     @Override
     public void startOptionsMenu() {
-        final OptionViewController optionViewController = new OptionViewControllerImpl();
+        final OptionViewController optionViewController = new OptionViewControllerImpl(controller, this);
         final OptionView optionView = new OptionViewImpl(this, optionViewController);
         final Scene optionScene = optionView.getScene();
         Platform.runLater(() -> {
@@ -77,17 +79,16 @@ public class JFXViewImpl implements View {
     }
 
     private void adjustStageAndSetScene(final Scene scene) {
-        stage.setScene(scene);
         stage.setMinWidth(scene.getWidth());
         stage.setWidth(scene.getWidth());
         stage.setMinHeight(scene.getHeight());
         stage.setHeight(scene.getHeight());
+        stage.setScene(scene);
     }
 
     @Override
     public void update() {
         // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -98,6 +99,12 @@ public class JFXViewImpl implements View {
         final Scene mainMenuScene = mainMenuView.getScene();
         this.adjustStageAndSetScene(mainMenuScene);
         stage.show();
+    }
+    
+    @Override
+    public void showError(final String error) {
+        final Alert alert = new Alert(AlertType.ERROR, error);
+        alert.show();
     }
 
 }

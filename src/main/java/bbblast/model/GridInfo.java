@@ -27,5 +27,11 @@ public interface GridInfo {
      * @return the grid's width in points
      */
     double getPointsHeight();
+    
+    /**
+     * 
+     * @return the radius of a bubble in this grid
+     */
+    double getBubbleRadius();
 
 }

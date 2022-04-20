@@ -2,7 +2,10 @@ package bbblast.model;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
+import bbblast.controller.GameOver;
+import bbblast.controller.GameOverImpl;
 import bbblast.controller.Controller;
 import bbblast.utils.Score;
 import bbblast.utils.Settings;
@@ -55,26 +58,17 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public boolean isGameOver() {
-        // TODO Auto-generated method stub
-        return false;
+    public Optional<GameOver> gameOver() {
+        //TODO: End of bubbleGrid reached
+        if (false) {
+            return Optional.of(new GameOverImpl(this.getScores()));
+        }
+        return Optional.empty();
     }
 
     //TODO: Emma fa il cannone
     @Override
     public void switchBubble() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Settings loadSettings() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void writeSettings(final Settings s) {
         // TODO Auto-generated method stub
 
     }
