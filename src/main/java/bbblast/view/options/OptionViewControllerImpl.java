@@ -47,7 +47,7 @@ public class OptionViewControllerImpl implements OptionViewController {
                 new SettingsImpl(doubleToInt(masterVolume), doubleToInt(musicVolume), doubleToInt(effectsVolume)))) {
             this.exit();
         } else {
-            // TODO Show error on view
+            mainView.showError("Non è stato possibile salvare le impostazioni");
         }
     }
 
