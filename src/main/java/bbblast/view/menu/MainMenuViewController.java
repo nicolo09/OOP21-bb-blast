@@ -1,9 +1,7 @@
 package bbblast.view.menu;
 
 public interface MainMenuViewController {
-    
-    void setView(MainMenuView v);
-    
+        
     void startSingleplayer();
     
     void startMultiplayer();

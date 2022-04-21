@@ -6,7 +6,6 @@ import javafx.application.Platform;
 public class MainMenuViewControllerImpl implements MainMenuViewController {
 
     private final View mainView;
-    private MainMenuView menuView;
     
     /**
      * 
@@ -14,11 +13,6 @@ public class MainMenuViewControllerImpl implements MainMenuViewController {
      */
     public MainMenuViewControllerImpl(final View mainView) {
         this.mainView = mainView;
-    }
-    
-    @Override
-    public void setView(final MainMenuView v) {
-        this.menuView = v;
     }
 
     @Override

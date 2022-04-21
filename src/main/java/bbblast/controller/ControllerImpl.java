@@ -105,6 +105,4 @@ public class ControllerImpl implements Controller {
     public int getFPS() {
         return this.loop.getFPS();
     }
-
-
 }
