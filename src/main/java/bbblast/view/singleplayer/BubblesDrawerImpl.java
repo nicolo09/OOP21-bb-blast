@@ -1,6 +1,6 @@
 package bbblast.view.singleplayer;
 
-import java.util.List;
+import java.util.Collection;
 
 import bbblast.model.Bubble;
 import bbblast.model.GridInfo;
@@ -39,9 +39,8 @@ public class BubblesDrawerImpl implements BubblesDrawer {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void drawBubbles(final List<Bubble> l) {
-		gc.clearRect(0, 0, canvas.getWidth(), canvas.getLayoutY());
-		for (final var b : l) {
+	public void drawBubbles(final Collection<Bubble> coll) {
+		for (final var b : coll) {
 			gc.drawImage(getImg(b), adjustPos(b.getCoords().getX()) * getRateoOnX(),
 					adjustPos(b.getCoords().getY()) * getRateoOnY(), getRateoOnX(), getRateoOnY());
 		}
