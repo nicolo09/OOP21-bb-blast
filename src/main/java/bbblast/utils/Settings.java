@@ -2,10 +2,10 @@ package bbblast.utils;
 
 public interface Settings {
 
-    void getMasterVolume();
+    int getMasterVolume();
 
-    void getMusicVolume();
+    int getMusicVolume();
 
-    void getEffectsVolume();
+    int getEffectsVolume();
 
 }
