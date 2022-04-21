@@ -49,5 +49,12 @@ public class ScoreImpl implements Score, Serializable {
     public LocalDate getDate() {
         return this.date;
     }
+    @Override
+    public String toString() {
+        return "ScoreImpl [name=" + name + ", score=" + score + ", date=" + date + "]";
+    }
+    
+    
+    
     
 }
