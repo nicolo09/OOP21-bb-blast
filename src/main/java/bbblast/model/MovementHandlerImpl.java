@@ -11,7 +11,6 @@ public class MovementHandlerImpl implements MovementHandler {
 
 	private final BubblesGrid grid;
 	private final GridInfo infos;
-	private final double shotRadius;
 	private boolean isShotSet;
 	private MovingBubble shot;
 
@@ -24,7 +23,6 @@ public class MovementHandlerImpl implements MovementHandler {
 		this.grid = grid;
 		this.infos = infos;
 		this.isShotSet = false;
-		this.shotRadius = infos.getPointsWidth() / infos.getBubbleWidth() / 2;
 	}
 
 	/**
@@ -50,12 +48,12 @@ public class MovementHandlerImpl implements MovementHandler {
 		boolean fixedX = false;
 		boolean fixedY = false;
 		final var nextPos = getNextPos(shot);
-		if (nextPos.getX() < shotRadius || nextPos.getX() > infos.getPointsWidth() - shotRadius) {
+		if (nextPos.getX() < infos.getBubbleRadius() || nextPos.getX() > infos.getPointsWidth() - infos.getBubbleRadius()) {
 			fixMovement(shot, nextPos);
 			fixedX = true;
 		}
-		if(nextPos.getY() < shotRadius) {
-			this.shot.moveBy(new PositionImpl(0, -shot.getCoords().getY() + shotRadius));
+		if(nextPos.getY() < infos.getBubbleRadius()) {
+			this.shot.moveBy(new PositionImpl(0, -shot.getCoords().getY() + infos.getBubbleRadius()));
 			fixedY = true;
 		}
 
@@ -88,11 +86,11 @@ public class MovementHandlerImpl implements MovementHandler {
 
 	private void fixMovement(final MovingBubble shot, final Position nextPos) {
 		// the needed space to reach the wall
-		final var limitX = shot.getSpeedX() > 0 ? infos.getPointsWidth() - shotRadius - shot.getCoords().getX()
-				: -shot.getCoords().getX() + shotRadius;
+		final var limitX = shot.getSpeedX() > 0 ? infos.getPointsWidth() - infos.getBubbleRadius() - shot.getCoords().getX()
+				: -shot.getCoords().getX() + infos.getBubbleRadius();
 		// the remaining space that the shot has to move
-		final var correctX = shot.getSpeedX() > 0 ? infos.getPointsWidth() - shotRadius - nextPos.getX()
-				: -nextPos.getX() + shotRadius;
+		final var correctX = shot.getSpeedX() > 0 ? infos.getPointsWidth() - infos.getBubbleRadius() - nextPos.getX()
+				: -nextPos.getX() + infos.getBubbleRadius();
 
 		shot.moveBy(new PositionImpl(limitX + correctX, 0));
 		// after reaching the correct position its direction changes
