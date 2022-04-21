@@ -1,6 +1,7 @@
 package bbblast.view.singleplayer.assetsloader;
 
 import javafx.scene.image.Image;
+
 /**
  * Loads assets from files.
  */

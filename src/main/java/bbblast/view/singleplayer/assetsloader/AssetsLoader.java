@@ -1,7 +1,10 @@
 package bbblast.view.singleplayer.assetsloader;
 
 /**
- * Interface that models an assets loader.
+ * 
+ * Represent a class that loads assets.
+ *
+ * @param <T> the type of assets to load
  */
 public interface AssetsLoader<T> {
     /**
