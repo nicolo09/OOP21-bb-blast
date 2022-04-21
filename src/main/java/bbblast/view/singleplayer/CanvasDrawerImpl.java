@@ -7,6 +7,7 @@ import bbblast.model.Cannon;
 import bbblast.model.GridInfo;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+
 /**
  * 
  * Implementation of CanvasDrawer.
@@ -18,11 +19,12 @@ public class CanvasDrawerImpl implements CanvasDrawer {
 	private final CannonDrawer cannonD;
 	private final Canvas canvas;
 	private final GraphicsContext gc;
-	
+
 	/**
 	 * Creates a new CanvasDrawerImpl.
+	 * 
 	 * @param canvas where the elements will be drawn
-	 * @param infos the informations to draw the elements on the canvas
+	 * @param infos  the informations to draw the elements on the canvas
 	 */
 	public CanvasDrawerImpl(final Canvas canvas, final GridInfo infos) {
 		this.bubbleD = new BubblesDrawerImpl(canvas, infos);
@@ -30,13 +32,12 @@ public class CanvasDrawerImpl implements CanvasDrawer {
 		this.canvas = canvas;
 		this.gc = canvas.getGraphicsContext2D();
 	}
-	
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void drawOnCanvas(Collection<Bubble> bubbles, Cannon cannon) {
+	public void drawOnCanvas(final Collection<Bubble> bubbles, final Cannon cannon) {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getLayoutY());
 		bubbleD.drawBubbles(bubbles);
 		cannonD.drawCannon(cannon);
