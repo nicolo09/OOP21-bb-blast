@@ -1,6 +1,7 @@
 package bbblast.utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ScoreManagerImpl implements ScoreManager {
     
     @Override
     public void save(final Score s) {
-        final var l = f.load().get();
+        final var l = f.load().orElse(new ArrayList<>());
         l.add(s);
         try {
             f.save(l);
@@ -27,7 +28,7 @@ public class ScoreManagerImpl implements ScoreManager {
 
     @Override
     public Collection<Score> load() {
-        return f.load().get();
+        return f.load().orElse(new ArrayList<>());
     }
 
     @Override
