@@ -10,7 +10,7 @@ public interface AssetsLoader<T> {
     /**
      * 
      * @param assetName name of the desired asset
-     * @return the asset's image
+     * @return the asset
      */
     T load(String assetName);
 
