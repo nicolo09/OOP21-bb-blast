@@ -12,6 +12,9 @@ import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 import bbblast.utils.Score;
 
+/**
+ * Implements a game model.
+ */
 public class ModelImpl implements Model {
 
     private static final double CANNONVERTICALOFFSETPERCENT = 0.9;
@@ -22,6 +25,10 @@ public class ModelImpl implements Model {
     private final BubblesGrid grid;
     private final Cannon cannon;
 
+    /**
+     * 
+     * @param grid the grid informations
+     */
     public ModelImpl(final GridInfo grid) {
         this.gridInfo = grid;
         this.grid = new BubblesGridImpl(grid);
@@ -37,6 +44,9 @@ public class ModelImpl implements Model {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Collection<Bubble> getBubbles() {
         final var result = new HashSet<>(grid.getBubbles());
@@ -45,16 +55,25 @@ public class ModelImpl implements Model {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void moveCannon(final int angle) {
         cannon.move(angle);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void shootCannon() {
         cannon.shoot();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCannonAngle() {
         return cannon.getAngle();
@@ -67,6 +86,9 @@ public class ModelImpl implements Model {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<GameOver> gameOver() {
         if (this.grid.endReached()) {
@@ -75,11 +97,17 @@ public class ModelImpl implements Model {
         return Optional.empty();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void switchBubble() {
         cannon.exchange();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     // TODO: Taglia fa gli scores
     @Override
     public Collection<Score> loadScores() {
@@ -93,6 +121,9 @@ public class ModelImpl implements Model {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setController(final Controller controller) {
         this.controller = controller;

@@ -4,8 +4,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Represents the possible bubble colors. This is a model representation, and as
+ * such may not be connected to the way view represents bubbles.
+ */
 public enum COLOR {
-    
+
     BLUE,
     GREEN,
     ORANGE,
@@ -13,9 +17,9 @@ public enum COLOR {
     RED,
     YELLOW,
     GREY;
-    
-    static Collection<COLOR> allExceptGrey(){
-        return Stream.of(COLOR.values()).filter(a-> !a.equals(GREY)).collect(Collectors.toSet());
+
+    static Collection<COLOR> allExceptGrey() {
+        return Stream.of(COLOR.values()).filter(a -> !a.equals(GREY)).collect(Collectors.toSet());
     }
 
 }
