@@ -16,12 +16,12 @@ public class BubblesGridTest {
 
     // Some test bubbles
     private final Bubble b1 = new BubbleImpl(new PositionImpl(0, 0), COLOR.RED);
-    private final Bubble b2 = new BubbleImpl(new PositionImpl(1, 0), COLOR.ORANGE);
-    private final Bubble b3 = new BubbleImpl(new PositionImpl(0.216, 0.20), COLOR.YELLOW);
-    private final Bubble b4 = new BubbleImpl(new PositionImpl(0.36, 0.20), COLOR.GREEN);
-    private final Bubble b5 = new BubbleImpl(new PositionImpl(0.43, 0.70), COLOR.BLUE);
-    private final Bubble b6 = new BubbleImpl(new PositionImpl(0.77, 0.70), COLOR.PURPLE);
-    private final GridInfo gridInfo = new RegularHexGridInfo(5, 10, 0.56);
+    private final Bubble b2 = new BubbleImpl(new PositionImpl(0.65, 0), COLOR.ORANGE);
+    private final Bubble b3 = new BubbleImpl(new PositionImpl(0.49, 0.45), COLOR.YELLOW);
+    private final Bubble b4 = new BubbleImpl(new PositionImpl(0.82, 0.45), COLOR.GREEN);
+    private final Bubble b5 = new BubbleImpl(new PositionImpl(0.987, 1.4), COLOR.BLUE);
+    private final Bubble b6 = new BubbleImpl(new PositionImpl(1.31, 1.4), COLOR.PURPLE);
+    private final GridInfo gridInfo = new RegularHexGridInfo(5, 10, 1);
 
     @Test
     public void testBubblesGridPersistance() {
@@ -126,9 +126,9 @@ public class BubblesGridTest {
 
     @Test
     public void testBubblesSameColorNeighbors() {
-        final Bubble b7 = new BubbleImpl(new PositionImpl(0.216, 0.20), COLOR.RED);
-        final Bubble b8 = new BubbleImpl(new PositionImpl(0.77, 0.20), COLOR.RED);
-        final Bubble b9 = new BubbleImpl(new PositionImpl(0.36, 0.20), COLOR.RED);
+        final Bubble b7 = new BubbleImpl(new PositionImpl(0.49, 0.45), COLOR.RED);
+        final Bubble b8 = new BubbleImpl(new PositionImpl(2, 0.45), COLOR.RED);
+        final Bubble b9 = new BubbleImpl(new PositionImpl(0.82, 0.45), COLOR.RED);
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
         assertTrue(g1.getSameColorNeighbors(b1).containsAll(List.of()),
                 "No neighboring bubbles are present in an empty grid");
@@ -267,7 +267,6 @@ public class BubblesGridTest {
         assertFalse(g2.endReached(), "The grid hasn't got a bubble at the bottom");
         final BubblesGridImpl g3 = new BubblesGridImpl(
                 List.of(new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight()), COLOR.YELLOW)), gridInfo);
-        System.out.println(g3.toString());
         assertTrue(g3.endReached(), "The grid has a bubble at the bottom");
         g3.removeUnconnectedBubbles();
         assertFalse(g3.endReached(), "The grid hasn't got a bubble at the bottom");
