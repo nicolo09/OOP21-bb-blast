@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 /**
  * Loads assets from files.
  */
-public class StandardAssetsLoader implements AssetsLoader {
+public class ImageAssetsLoader implements AssetsLoader<Image> {
 
     @Override
     public Image load(final String assetName) {
