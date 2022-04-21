@@ -24,7 +24,7 @@ public class ControllerImpl implements Controller {
     private static final Path SETTINGSPATH = Path.of(System.getProperty("user.home") + SEPARATOR + ".bbblast" + SEPARATOR + "settings");
     private View mainView;
     private Model mainModel;
-    private GameLoop loop = null;
+    private GameLoop loop;
     private final Persister<Settings> settingsPersister = new FilePersister<>(SETTINGSPATH, Settings.class);
     
     @Override

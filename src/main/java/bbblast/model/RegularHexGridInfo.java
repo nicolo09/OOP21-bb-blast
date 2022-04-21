@@ -89,7 +89,4 @@ public class RegularHexGridInfo implements GridInfo {
     public double getBubbleRadius() {
         return ratio/2;
     }
-    
-    
-
 }

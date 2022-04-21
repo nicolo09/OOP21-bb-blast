@@ -10,7 +10,7 @@ public class GameLoopTest {
 
     private class UpdatableForTest implements Updatable {
 
-        private boolean updated = false;
+        private boolean updated;
 
         @Override
         public void update() {

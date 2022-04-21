@@ -7,6 +7,7 @@ public class MainMenuViewControllerImpl implements MainMenuViewController {
 
     private final View mainView;
     private MainMenuView menuView;
+    
     /**
      * 
      * @param mainView the main view on which method will be called
