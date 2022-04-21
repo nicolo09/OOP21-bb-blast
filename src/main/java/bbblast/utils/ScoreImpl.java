@@ -2,6 +2,7 @@ package bbblast.utils;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * 
@@ -52,6 +53,21 @@ public class ScoreImpl implements Score, Serializable {
     @Override
     public String toString() {
         return "ScoreImpl [name=" + name + ", score=" + score + ", date=" + date + "]";
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, name, score);
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ScoreImpl other = (ScoreImpl) obj;
+        return Objects.equals(date, other.date) && Objects.equals(name, other.name) && score == other.score;
     }
     
     
