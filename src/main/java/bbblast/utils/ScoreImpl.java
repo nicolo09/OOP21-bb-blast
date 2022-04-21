@@ -1,5 +1,6 @@
 package bbblast.utils;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -7,8 +8,12 @@ import java.time.LocalDate;
  * Score implementation
  *
  */
-public class ScoreImpl implements Score {
+public class ScoreImpl implements Score, Serializable {
     
+    /**
+     * Serialization of the class
+     */
+    private static final long serialVersionUID = -7586564633494845842L;
     private final String name;
     private final int score;
     private final LocalDate date;
