@@ -9,9 +9,14 @@ import bbblast.view.JFXViewImpl;
 import bbblast.view.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
+/**
+ * Implements {@link ViewControllerAssembler} using a {@link JFXViewImpl} as view.
+ */
 public class ViewControllerAssemblerImpl extends Application {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void start(final Stage primaryStage) throws Exception {
         final View view = new JFXViewImpl(primaryStage);
