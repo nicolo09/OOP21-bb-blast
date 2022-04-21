@@ -45,18 +45,22 @@ public class MovementHandlerImpl implements MovementHandler {
 		if(this.shot.getSpeedY() > 0) {
 			return false;
 		}
+		// checking if the MovingBubble moves in a legal position
 		boolean fixedX = false;
 		boolean fixedY = false;
 		final var nextPos = getNextPos(shot);
+		// the MovingBubble must bounce on the wall while moving
 		if (nextPos.getX() < infos.getBubbleRadius() || nextPos.getX() > infos.getPointsWidth() - infos.getBubbleRadius()) {
 			fixMovement(shot, nextPos);
 			fixedX = true;
 		}
+		// the MovingBubble can't go beyond the Y limit, but also can't go down, so it stops on the border
 		if(nextPos.getY() < infos.getBubbleRadius()) {
 			this.shot.moveBy(new PositionImpl(0, -shot.getCoords().getY() + infos.getBubbleRadius()));
 			fixedY = true;
 		}
-
+		
+		// in base of how the trajectory has been fixed it completes the shot movement
 		if(fixedX && !fixedY) {
 			shot.moveBy(new PositionImpl(0, shot.getSpeedY()));
 		} else if(!fixedX && fixedY) {
