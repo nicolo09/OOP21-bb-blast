@@ -10,6 +10,7 @@ import bbblast.view.singleplayer.assetsloader.ImageAssetsLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+
 /**
  * 
  * Implementation of BubbleDrawer.
@@ -41,23 +42,22 @@ public class BubblesDrawerImpl implements BubblesDrawer {
 	@Override
 	public void drawBubbles(final Collection<Bubble> coll) {
 		for (final var b : coll) {
-			gc.drawImage(getImg(b), adjustPos(b.getCoords().getX()) * getRateoOnX(),
-					adjustPos(b.getCoords().getY()) * getRateoOnY(), getRateoOnX(), getRateoOnY());
+			//posX and posY are the coordinates which represents the top-left "corner" of the Bubble to draw
+			final var posX = b.getCoords().getX() - infos.getBubbleRadius();
+			final var posY = b.getCoords().getY() - 2 * infos.getBubbleRadius() / Math.sqrt(3);
+			gc.drawImage(getImg(b), posX * getRateoOnX(), posY * getRateoOnY(), getRateoOnX(), getRateoOnY());
 		}
 	}
 
+	// Gets the image from the AssetsLoader
 	private Image getImg(final Bubble b) {
 		return loader.load(b.getColor().toString() + "Bubble.png");
 	}
-
-	private double adjustPos(final double coord) {
-		return coord - infos.getBubbleRadius();
-	}
-
+	// Calculates the correct width for the image
 	private double getRateoOnX() {
 		return canvas.getWidth() / infos.getBubbleWidth();
 	}
-
+	// Calculates the correct height for the image
 	private double getRateoOnY() {
 		return canvas.getHeight() / infos.getBubbleHeight();
 	}
