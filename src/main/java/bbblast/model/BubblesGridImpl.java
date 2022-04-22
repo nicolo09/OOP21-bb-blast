@@ -26,6 +26,8 @@ public class BubblesGridImpl implements BubblesGrid {
     private final List<Bubble> neighborsList = new ArrayList<>();
     private final GridInfo info;
     private final double size;
+    private final double xshift = 1.0 / 6.0;
+    private final double yshift = -1.0 / 3.0;
 
     /**
      * @param info the GridInfo that defines the dimentions of the grid. This
@@ -34,7 +36,7 @@ public class BubblesGridImpl implements BubblesGrid {
     public BubblesGridImpl(final GridInfo info) {
         this.info = info;
         this.grid = new HashMap<>();
-        this.size = this.info.getPointsHeight()/(2.0*(((3.0/4.0)*(this.info.getBubbleHeight()-1))+1));
+        this.size = this.info.getPointsHeight() / (2.0 * (((3.0 / 4.0) * (this.info.getBubbleHeight() - 1)) + 1));
     }
 
     /**
@@ -124,11 +126,12 @@ public class BubblesGridImpl implements BubblesGrid {
      */
     @Override
     public boolean isBubbleAttachable(final Bubble b) {
-        if (!this.grid.containsValue(b)) {
+        if (!this.grid.containsKey(this.convertCoords(b.getCoords()))) {
             final var tripletB = this.convertCoords(b.getCoords());
             // The bubble is inside the grid
-            if (tripletB.getX() < this.info.getBubbleWidth() && tripletB.getY() < this.info.getBubbleHeight()) {
-                if (tripletB.getY() == 0) {
+            if (tripletB.getX() < this.info.getBubbleWidth() && tripletB.getY() < this.info.getBubbleHeight()
+                    && tripletB.getY() >= 1) {
+                if (tripletB.getY() == 1) {
                     return true;
                 }
                 if (!this.grid.isEmpty()) {
@@ -172,7 +175,7 @@ public class BubblesGridImpl implements BubblesGrid {
         // connected to the top
         this.neighborsList.clear();
         if (!this.grid.isEmpty()) {
-            for (final var elem : this.grid.entrySet().stream().map(e -> e.getKey()).filter(k -> k.getY() == 0)
+            for (final var elem : this.grid.entrySet().stream().map(e -> e.getKey()).filter(k -> k.getY() == 1)
                     .collect(Collectors.toList())) {
                 checkForUnconnectedBubblesRecursive(elem);
             }
@@ -230,7 +233,7 @@ public class BubblesGridImpl implements BubblesGrid {
      * This function is the recursive method that fills neighborsList with all the
      * neighbors of b.
      * 
-     * @param b the bubble from where to start the search
+     * @param t the triplet from where to start the search
      */
     private void getSameColorNeighborsRecursive(final Triplet<Integer, Integer, Integer> t) {
         if (this.grid.containsKey(t) && !this.neighborsList.contains(this.grid.get(t))) {
@@ -267,9 +270,11 @@ public class BubblesGridImpl implements BubblesGrid {
      *         bubble
      */
     private Position roundCoords(final Triplet<Integer, Integer, Integer> triplet) {
-        final double x = this.size * (Math.sqrt(3.0) / 3.0 * triplet.getX() + Math.sqrt(3.0) / 2.0 * triplet.getY());
-        final double y = this.size * (2.0 / 3.0 * triplet.getY());
-        return new PositionImpl(x, y);
+        final double x = ((triplet.getX()*1.0 + this.xshift) * Math.sqrt(3.0))
+                + ((triplet.getY()*1.0 + this.yshift) * (Math.sqrt(3.0) / 2.0));
+        final double y = ((triplet.getY()*1.0 + this.yshift) * (3.0 / 2.0));
+
+        return new PositionImpl(x*this.size, y*this.size);
     }
 
     /**
