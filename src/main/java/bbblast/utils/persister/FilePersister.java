@@ -59,4 +59,17 @@ public class FilePersister<T> implements Persister<T> {
         }
     }
 
+    @Override
+    public boolean reset() {
+        try {
+            Files.delete(filePath);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
+
 }

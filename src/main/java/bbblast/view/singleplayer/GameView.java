@@ -1,5 +1,7 @@
 package bbblast.view.singleplayer;
 
+import javafx.scene.Scene;
+
 /** The Game view. */
 public interface GameView {
 
@@ -17,14 +19,17 @@ public interface GameView {
      * @param e the sound effect.
      */
     void playSoundEffect(Sound e);
-
+    
     /**
-     * shows the view.
+     * Sets the controller for this view.
+     * @param controller
      */
-    void show();
+    void setController(SingleplayerGameViewController controller);
 
     /**
      * updates the view.
      */
     void update();
+    
+    Scene getScene();
 }

@@ -34,7 +34,7 @@ public class BubblesGridImpl implements BubblesGrid {
     public BubblesGridImpl(final GridInfo info) {
         this.info = info;
         this.grid = new HashMap<>();
-        this.size = this.info.getPointsHeight() / this.info.getBubbleHeight() / 2.0;
+        this.size = this.info.getPointsHeight()/(2.0*(((3.0/4.0)*(this.info.getBubbleHeight()-1))+1));
     }
 
     /**
