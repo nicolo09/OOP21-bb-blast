@@ -22,7 +22,7 @@ public interface MovementHandler {
 	void setShot(MovingBubble shot);
 	
 	/**
-	 * Gets the currently checked {@link MovingBubble}
+	 * Gets the currently checked {@link MovingBubble}.
 	 * @return an {@link Optional} of the currently moving shot or optional empty if no shot is set
 	 */
 	Optional<MovingBubble> getShot(); 
