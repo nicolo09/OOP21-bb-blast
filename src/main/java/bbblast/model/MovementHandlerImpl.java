@@ -1,5 +1,7 @@
 package bbblast.model;
 
+import java.util.Optional;
+
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 /**
@@ -16,8 +18,8 @@ public class MovementHandlerImpl implements MovementHandler {
 
 	/**
 	 * Creates a new MovementHandler.
-	 * @param grid where the shot will be eventually attached to
-	 * @param infos the informations about the grid
+	 * @param grid the {@link BubblesGrid} where the shot will be eventually attached to
+	 * @param infos the {@link GridInfo} containing the informations about the grid
 	 */
 	public MovementHandlerImpl(final BubblesGrid grid, final GridInfo infos) {
 		this.grid = grid;
@@ -42,7 +44,7 @@ public class MovementHandlerImpl implements MovementHandler {
 			return false;
 		}
 		// the MovementHandler can't handle a MovingBubble with positive Y velocity
-		if(this.shot.getSpeedY() > 0) {
+		if (this.shot.getSpeedY() > 0) {
 			return false;
 		}
 		// checking if the MovingBubble moves in a legal position
@@ -55,17 +57,16 @@ public class MovementHandlerImpl implements MovementHandler {
 			fixedX = true;
 		}
 		// the MovingBubble can't go beyond the Y limit, but also can't go down, so it stops on the border
-		if(nextPos.getY() < infos.getBubbleRadius()) {
+		if (nextPos.getY() < infos.getBubbleRadius()) {
 			this.shot.moveBy(new PositionImpl(0, -shot.getCoords().getY() + infos.getBubbleRadius()));
 			fixedY = true;
 		}
-		
 		// in base of how the trajectory has been fixed it completes the shot movement
-		if(fixedX && !fixedY) {
+		if (fixedX && !fixedY) {
 			shot.moveBy(new PositionImpl(0, shot.getSpeedY()));
-		} else if(!fixedX && fixedY) {
+		} else if (!fixedX && fixedY) {
 			shot.moveBy(new PositionImpl(shot.getSpeedX(), 0));
-		} else if(!fixedX && !fixedY){
+		} else if (!fixedX && !fixedY) {
 			shot.move();
 		}
 
@@ -101,10 +102,22 @@ public class MovementHandlerImpl implements MovementHandler {
 		shot.swapSpeedX();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Optional<MovingBubble> getShot() {
+		return Optional.ofNullable(this.shot);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return isShotSet ? "MovementHandlerImpl [shot=" + shot + "]" : "MovementHandlerImpl [there's no shot to handle]";
 	}
+
 
 	
 }
