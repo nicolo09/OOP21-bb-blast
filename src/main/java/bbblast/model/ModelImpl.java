@@ -24,24 +24,31 @@ public class ModelImpl implements Model {
     private Controller controller;
     private final BubblesGrid grid;
     private final Cannon cannon;
+    private MovementHandler mover;
 
     /**
      * 
-     * @param grid the grid informations
+     * @param grid       the grid informations
+     * @param controller the MVC controller
      */
-    public ModelImpl(final GridInfo grid) {
+    public ModelImpl(final GridInfo grid, final Controller controller) {
+        this.controller = controller;
         this.gridInfo = grid;
         this.grid = new BubblesGridImpl(grid);
         final Position bubbleSpawnPosition = new PositionImpl(gridInfo.getPointsWidth() / 2,
                 gridInfo.getPointsHeight() * CANNONVERTICALOFFSETPERCENT);
         this.cannon = new CannonImpl(bubbleSpawnPosition, this.controller.getFPS(), BUBBLESPEED,
                 new BubbleGeneratorImpl(COLOR.allExceptGrey()));
+        this.mover = new MovementHandlerImpl(this.grid, this.gridInfo);
     }
 
-    // TODO: Casa fa la gestione del movimento e dei rimbalzi
+    /**
+     * {@inheritDoc}
+     * ticks the MovementHandler.
+     */
     @Override
     public void update() {
-        // TODO Auto-generated method stub
+        mover.handle();
     }
 
     /**
@@ -119,14 +126,6 @@ public class ModelImpl implements Model {
     @Override
     public void writeScore(final Score s) {
         // TODO Auto-generated method stub
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setController(final Controller controller) {
-        this.controller = controller;
     }
 
 }

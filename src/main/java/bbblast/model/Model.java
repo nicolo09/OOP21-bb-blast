@@ -68,7 +68,5 @@ public interface Model extends Updatable {
 	 * @param s the current Score
 	 */
 	void writeScore(Score s);
-
-    void setController(Controller controller);
 	
 }
