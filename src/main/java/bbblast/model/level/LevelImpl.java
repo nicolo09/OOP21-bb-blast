@@ -1,4 +1,4 @@
-package bbblast.utils;
+package bbblast.model.level;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ import bbblast.model.BubbleGenerator;
 import bbblast.model.BubblesGrid;
 import bbblast.model.BubblesGridImpl;
 import bbblast.model.GridInfo;
+import bbblast.utils.PositionImpl;
 
 /**
  * 

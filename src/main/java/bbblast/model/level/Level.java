@@ -1,4 +1,4 @@
-package bbblast.utils;
+package bbblast.model.level;
 
 import bbblast.model.Bubble;
 import bbblast.model.BubblesGrid;
