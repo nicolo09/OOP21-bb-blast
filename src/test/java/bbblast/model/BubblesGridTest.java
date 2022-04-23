@@ -15,12 +15,12 @@ import bbblast.utils.PositionImpl;
 public class BubblesGridTest {
 
     // Some test bubbles
-    private final Bubble b1 = new BubbleImpl(new PositionImpl(0, 0), COLOR.RED);
-    private final Bubble b2 = new BubbleImpl(new PositionImpl(0.65, 0), COLOR.ORANGE);
-    private final Bubble b3 = new BubbleImpl(new PositionImpl(0.49, 0.45), COLOR.YELLOW);
-    private final Bubble b4 = new BubbleImpl(new PositionImpl(0.82, 0.45), COLOR.GREEN);
-    private final Bubble b5 = new BubbleImpl(new PositionImpl(0.987, 1.4), COLOR.BLUE);
-    private final Bubble b6 = new BubbleImpl(new PositionImpl(1.31, 1.4), COLOR.PURPLE);
+    private final Bubble b1 = new BubbleImpl(new PositionImpl(0.5, 0.577), COLOR.RED);
+    private final Bubble b2 = new BubbleImpl(new PositionImpl(2.5, 0.577), COLOR.ORANGE);
+    private final Bubble b3 = new BubbleImpl(new PositionImpl(1, 1.433), COLOR.YELLOW);
+    private final Bubble b4 = new BubbleImpl(new PositionImpl(2, 1.433), COLOR.GREEN);
+    private final Bubble b5 = new BubbleImpl(new PositionImpl(1.5, 2.309), COLOR.BLUE);
+    private final Bubble b6 = new BubbleImpl(new PositionImpl(2.5, 2.309), COLOR.PURPLE);
     private final GridInfo gridInfo = new RegularHexGridInfo(5, 10, 1);
 
     @Test
@@ -52,10 +52,6 @@ public class BubblesGridTest {
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
         assertEquals(g1.toString(), "BubblesGridImpl [grid={}]", "The representation of an empty grid");
         g1.addBubble(b1);
-        assertEquals(g1.toString(), "BubblesGridImpl [grid={TripletImpl [x=0, y=0, z=0]=" + b1.toString() + "}]",
-                "The representation of a bubble");
-        g1.removeBubble(b1.getCoords());
-        g1.addBubble(b2);
         assertNotEquals(g1.toString(), "BubblesGridImpl []", "A grid with a bubble is not empty");
 
     }
@@ -126,9 +122,9 @@ public class BubblesGridTest {
 
     @Test
     public void testBubblesSameColorNeighbors() {
-        final Bubble b7 = new BubbleImpl(new PositionImpl(0.49, 0.45), COLOR.RED);
-        final Bubble b8 = new BubbleImpl(new PositionImpl(2, 0.45), COLOR.RED);
-        final Bubble b9 = new BubbleImpl(new PositionImpl(0.82, 0.45), COLOR.RED);
+        final Bubble b7 = new BubbleImpl(new PositionImpl(1, 1.433), COLOR.RED);
+        final Bubble b8 = new BubbleImpl(new PositionImpl(3, 1.433), COLOR.RED);
+        final Bubble b9 = new BubbleImpl(new PositionImpl(2, 1.433), COLOR.RED);
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
         assertTrue(g1.getSameColorNeighbors(b1).containsAll(List.of()),
                 "No neighboring bubbles are present in an empty grid");
