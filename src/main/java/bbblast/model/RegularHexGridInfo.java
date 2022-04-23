@@ -1,5 +1,6 @@
 package bbblast.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -7,9 +8,13 @@ import java.util.Objects;
  * A GridInfo that models a grid of regular hexagons.
  *
  */
-public class RegularHexGridInfo implements GridInfo {
+public class RegularHexGridInfo implements GridInfo, Serializable {
 
-    private final int bubbleWidth;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7403615975326048978L;
+	private final int bubbleWidth;
     private final int bubbleHeight;
     private final double ratio;
     
