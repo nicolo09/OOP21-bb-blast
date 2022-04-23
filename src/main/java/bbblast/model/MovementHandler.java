@@ -1,5 +1,7 @@
 package bbblast.model;
 
+import java.util.Optional;
+
 /**
  * 
  * The interface which models a MovementHandler that handles the movements on a 2D surface.
@@ -14,8 +16,14 @@ public interface MovementHandler {
 	boolean handle();
 	
 	/**
-	 * Sets the new MovingBubble to check.
+	 * Sets the new {@link MovingBubble} to check.
 	 * @param shot the MovingBubble that has to be handled
 	 */
 	void setShot(MovingBubble shot);
+	
+	/**
+	 * Gets the currently checked {@link MovingBubble}.
+	 * @return an {@link Optional} of the currently moving shot or optional empty if no shot is set
+	 */
+	Optional<MovingBubble> getShot(); 
 }
