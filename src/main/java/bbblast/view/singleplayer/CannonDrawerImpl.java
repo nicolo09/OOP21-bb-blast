@@ -17,7 +17,7 @@ public class CannonDrawerImpl implements CannonDrawer {
 
     private final Canvas canvas;
     private final AssetsLoader<Image> loader;
-    private final static String PATH = "Cannon.png";
+    private static final String PATH = "Cannon.png";
     private final GraphicsContext gc;
 
     /**
@@ -40,8 +40,7 @@ public class CannonDrawerImpl implements CannonDrawer {
         final double x = (canvas.getWidth() / 2.0) + c.getWidth() / 2.0;
         final double y = (canvas.getHeight() * 4.0 / 5.0) + c.getHeight();
         final Rotate rotate = new Rotate();
-
-        rotate.setPivotX(c.getWidth()/2);
+        rotate.setPivotX(c.getWidth() / 2);
         rotate.setPivotY(c.getHeight());
         rotate.setAngle(cannon.getAngle());
         iv.getTransforms().add(rotate);
