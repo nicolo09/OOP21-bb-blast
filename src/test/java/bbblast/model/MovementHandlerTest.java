@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,9 @@ public class MovementHandlerTest {
 		m2.setSpeed(new PositionImpl(0, 1));
 
 		assertFalse(handler.handle(), "No MovingBubble was set");
+		assertEquals(Optional.empty(), handler.getShot(), "When there is no shot set it returns an empty Optional");
 		handler.setShot(m1);
+		assertEquals(Optional.of(m1), handler.getShot(), "Should return the optional of the currently shot set");
 		assertTrue(handler.handle(), "MovingBubble is set and can move");
 		handler.setShot(m2);
 		assertFalse(handler.handle(), "The current shot has a positive Y velocity, which the handler can't handle");
@@ -106,6 +109,5 @@ public class MovementHandlerTest {
 		genericHandler.setShot(test2);
 		while(genericHandler.handle());
 		assertEquals(21, genericGrid.getBubbles().size(), "Now the grid should have a second coloumn");
-
 	}
 }
