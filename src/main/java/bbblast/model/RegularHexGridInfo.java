@@ -47,7 +47,7 @@ public class RegularHexGridInfo implements GridInfo {
      */
     @Override
     public double getPointsWidth() {
-        return this.bubbleWidth * this.ratio;
+        return this.bubbleWidth * this.ratio + (this.ratio / 2);
     }
 
     /**
