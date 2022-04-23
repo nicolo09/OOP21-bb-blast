@@ -33,7 +33,7 @@ public interface Level {
 
 	/**
 	 * This method generates random {@link Bubble}s to fill the specified number of
-	 * rows.
+	 * rows. If there are already some rows it moves them down
 	 * 
 	 * @param rows the number of rows to fill starting from the top
 	 */

@@ -69,6 +69,7 @@ public class LevelImpl implements Level, Serializable {
 	 */
 	@Override
 	public void fillGameBubblesGrid(final int rows) {
+		this.gameGrid.moveBubblesDown(rows);
 		for (int i = 1; i <= rows; i++) {
 			for (int j = 0; j < this.infos.getBubbleWidth(); j++) {
 				this.gameGrid.addBubble(generator.generate(new PositionImpl(
