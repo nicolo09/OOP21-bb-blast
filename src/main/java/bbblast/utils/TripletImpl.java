@@ -1,5 +1,6 @@
 package bbblast.utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,9 +9,13 @@ import java.util.Objects;
  * @param <Z> the type of the third element of the triplet. This class
  *            implements a triplet of three different elements.
  */
-public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z> {
+public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializable {
 
-    private final X x;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4377376501856616611L;
+	private final X x;
     private final Y y;
     private final Z z;
 
