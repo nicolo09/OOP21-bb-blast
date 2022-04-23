@@ -1,6 +1,7 @@
 package bbblast.model.level;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import bbblast.model.BubbleGenerator;
 import bbblast.model.BubblesGrid;
@@ -79,4 +80,36 @@ public class LevelImpl implements Level, Serializable {
 
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(gameGrid, generator, infos, score);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final LevelImpl other = (LevelImpl) obj;
+		return Objects.equals(gameGrid, other.gameGrid) && Objects.equals(generator, other.generator)
+				&& Objects.equals(infos, other.infos) && score == other.score;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return "LevelImpl [score=" + score + ", infos=" + infos + ", gameGrid=" + gameGrid + ", generator=" + generator
+				+ "]";
+	}
 }
