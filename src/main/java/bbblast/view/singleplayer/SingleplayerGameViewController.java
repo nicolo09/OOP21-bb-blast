@@ -3,12 +3,16 @@ package bbblast.view.singleplayer;
 import java.util.Collection;
 
 import bbblast.model.Bubble;
+import bbblast.model.CannonImpl;
 
 /**
  * The interface of the SinglePlayer Game Controller.
  */
 public interface SingleplayerGameViewController {
 
+    int a = CannonImpl.START_ANGLE;
+    
+    
     /**
      * @return the Collection of bubbles.
      */
@@ -17,7 +21,7 @@ public interface SingleplayerGameViewController {
     /**
      * @param a the Angle at which the cannon shoots at.
      */
-    void cannonShoot(int a);
+    void cannonShoot();
 
     /**
      * @return the score.
