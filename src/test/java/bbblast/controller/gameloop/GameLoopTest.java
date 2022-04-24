@@ -5,12 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-
+/**
+ * Tests {@link GameLoop} implementations.
+ */
 public class GameLoopTest {
 
+    /**
+     * Fake Updatable used for test purposes only.
+     */
     private class UpdatableForTest implements Updatable {
 
-        private boolean updated = false;
+        private boolean updated;
 
         @Override
         public void update() {
@@ -27,6 +32,9 @@ public class GameLoopTest {
 
     }
 
+    /**
+     * Tests the {@link GameLoopImpl}.
+     */
     @Test
     public void testGameLoopImplMethods() {
         final GameLoop loop = new GameLoopImpl();
@@ -58,5 +66,5 @@ public class GameLoopTest {
         assertTrue(updatable.isUpdated(), "Loop doesn't update Updatable when resumed");
         assertTrue(loop.isRunning(), "Loop says he's not running after resume");
     }
-    
+
 }
