@@ -41,10 +41,7 @@ public class LevelTest {
 	public void testLevelSavingAndLoading() {
 		final GridInfo saveInfos = new RegularHexGridInfo(20, 50, 50);
 		final BubbleGenerator saveGenerator = new BubbleGeneratorImpl(List.of(COLOR.BLUE, COLOR.RED, COLOR.GREEN));
-		final BubbleGenerator differentGenerator = new BubbleGeneratorImpl(List.of(COLOR.values()));
 		final Level saveLevel = new LevelImpl(saveInfos, saveGenerator);
-		final Level sameLevel = new LevelImpl(saveInfos, saveGenerator);
-		final Level differentLevel = new LevelImpl(saveInfos, differentGenerator);
 		final Persister<Level> persister = new FilePersister<>(PATH, Level.class);
 		
 		try {
@@ -56,7 +53,25 @@ public class LevelTest {
 		
 		final var loadLevel = persister.load().get();
 		assertEquals(loadLevel, saveLevel, "Original and loaded levels should be equals");
-		assertNotEquals(loadLevel, differentLevel, "Two Levels are different if they can generate different Bubbles");
+	}
+	
+	@Test
+	public void testLevelEquals() {
+		final GridInfo originInfos = new RegularHexGridInfo(10, 10, 2);
+		final GridInfo differentInfos = new RegularHexGridInfo(10, 10, 1);
+		final BubbleGenerator originGenerator = new BubbleGeneratorImpl(List.of(COLOR.BLUE, COLOR.RED, COLOR.GREEN));
+		final BubbleGenerator differentGenerator = new BubbleGeneratorImpl(List.of(COLOR.values()));
+		final Level originLvl = new LevelImpl(originInfos, originGenerator);
+		final Level differentLvl1 = new LevelImpl(differentInfos, originGenerator);
+		final Level differentLvl2 = new LevelImpl(originInfos, differentGenerator);
+		final Level differentLvl3 = new LevelImpl(originInfos, originGenerator);
+		
+		assertNotEquals(originLvl, differentLvl1, "Two levels with different grid infos are different");
+		assertNotEquals(originLvl, differentLvl2, "Two levels with different generators are different");
+		assertEquals(originLvl, differentLvl3, "Two levels created with same grid infos and generators are initially the same");
+		differentLvl3.fillGameBubblesGrid(1); //Filling the first row
+		assertNotEquals(originLvl, differentLvl3, "Two levels initially equals are different when filling a row");
+		
 	}
 
 }
