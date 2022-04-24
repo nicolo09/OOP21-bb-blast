@@ -18,7 +18,7 @@ public interface GameView {
     /**
      * @param e the sound effect.
      */
-    void playSoundEffect(Sound e);
+    void playSoundEffect();
     
     /**
      * Sets the controller for this view.
