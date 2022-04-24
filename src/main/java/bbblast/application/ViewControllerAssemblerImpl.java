@@ -21,12 +21,11 @@ public class ViewControllerAssemblerImpl extends Application {
     public void start(final Stage primaryStage) throws Exception {
         final View view = new JFXViewImpl(primaryStage);
         final Controller controller = new ControllerImpl();
-        final Model model = new ModelImpl(new RegularHexGridInfo(10, 18, 100));
+        final Model model = new ModelImpl();
 
         view.setController(controller);
         controller.setView(view);
         controller.setModel(model);
-        model.setController(controller);
 
         view.show();
     }
