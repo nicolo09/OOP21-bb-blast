@@ -11,7 +11,7 @@ import bbblast.utils.PositionImpl;
 
 /**
  * 
- * Implementation of {@link Level}
+ * Implementation of {@link Level}.
  *
  */
 public class LevelImpl implements Level, Serializable {
@@ -26,6 +26,11 @@ public class LevelImpl implements Level, Serializable {
 	private final BubblesGrid gameGrid;
 	private final BubbleGenerator generator;
 
+	/**
+	 * Creates a new Level.
+	 * @param infos the {@link GridInfo} containing the informations to generate the {@link BubblesGrid}
+	 * @param generator the {@link BubbleGenerator} that will be used by the {@link BubblesGrid}
+	 */
 	public LevelImpl(final GridInfo infos, final BubbleGenerator generator) {
 		this.score = INIT_SCORE;
 		this.infos = infos;
