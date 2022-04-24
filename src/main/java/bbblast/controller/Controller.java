@@ -76,4 +76,10 @@ public interface Controller {
      * @return the FPS target game is running at
      */
     int getFPS();
+
+    /**
+     * Loads the list of saved scores
+     * @return saved scores
+     */
+    Collection<Score> loadScores();
 }
