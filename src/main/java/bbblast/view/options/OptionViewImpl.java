@@ -13,6 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Implements an OptionView.
+ */
 public class OptionViewImpl implements OptionView {
 
     private static final double MINWIDTH = 400;
@@ -25,8 +28,13 @@ public class OptionViewImpl implements OptionView {
     private static final int SLIDERSMINORTICK = 5;
     private static final int SLIDERSBLOCKINCREMENT = 10;
     private OptionViewController controller;
-    final private Scene scene;
+    private final Scene scene;
 
+    /**
+     * 
+     * @param mainView       the main application view
+     * @param controller     the controller for this view
+     */
     public OptionViewImpl(final View mainView, final OptionViewController controller) {
         this.controller = controller;
 
@@ -90,16 +98,26 @@ public class OptionViewImpl implements OptionView {
         this.scene = new Scene(root, MINWIDTH, MINHEIGHT);
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
     public void setController(final OptionViewController controller) {
         this.controller = controller;
     }
 
+    /**
+     * {@inheritDoc}}
+     */
     @Override
     public Scene getScene() {
         return this.scene;
     }
 
+    /**
+     * sets slider properties.
+     * @param s
+     */
     private void beautifySlider(final Slider s) {
         s.setShowTickLabels(true);
         s.setShowTickMarks(true);

@@ -10,17 +10,26 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class MainMenuViewImpl implements MainMenuView{
+/**
+ * 
+ * A MainMenuView implemented in JavaFX.
+ */
+public class MainMenuViewImpl implements MainMenuView {
 
     private static final double TITLEFONTSIZE = 22;
     private static final double BUTTONS_MAX_WIDTH = 400;
     private MainMenuViewController controller;
-    final private Scene scene;
+    private final Scene scene;
 
     private static final double MINWIDTH = 500;
     private static final double MINHEIGHT = 300;
     private static final double SPACING = 10;
-    
+    private static final double TOPBOTTOMPADDING = 10;
+    private static final double SIDEPADDING = 50;
+
+    /**
+     * 
+     */
     public MainMenuViewImpl() {
         final VBox buttonsVBox = new VBox();
         final BorderPane root = new BorderPane(buttonsVBox);
@@ -56,32 +65,33 @@ public class MainMenuViewImpl implements MainMenuView{
         btnExit.setOnMouseClicked(e -> {
             this.controller.quit();
         });
-        
-        root.setPadding(new Insets(0, 50, 10, 50));
+
+        root.setPadding(new Insets(TOPBOTTOMPADDING, SIDEPADDING, TOPBOTTOMPADDING, SIDEPADDING));
 
         btnSinglePlayer.setMaxWidth(BUTTONS_MAX_WIDTH);
         btnMultiPlayer.setMaxWidth(BUTTONS_MAX_WIDTH);
         btnOptions.setMaxWidth(BUTTONS_MAX_WIDTH);
         btnExit.setMaxWidth(BUTTONS_MAX_WIDTH);
-        
+
         buttonsVBox.setAlignment(Pos.CENTER);
         buttonsVBox.getChildren().addAll(lbl, btnSinglePlayer, btnMultiPlayer, btnOptions, btnExit);
-        
-        this.scene = new Scene(root,MINWIDTH,MINHEIGHT);
+
+        this.scene = new Scene(root, MINWIDTH, MINHEIGHT);
     }
-    
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setController(final MainMenuViewController controller) {
         this.controller = controller;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public Scene getScene() {
         return this.scene;
-    }
-
-    @Override
-    public void show() {
     }
 
 }

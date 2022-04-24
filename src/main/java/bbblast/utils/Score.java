@@ -22,5 +22,11 @@ public interface Score {
 	 * @return the date when the player got this Score 
 	 */
 	LocalDate getDate();
+	
+	/**
+	 * Increment the score
+	 * @param s the score to add
+	 */
+	void incrementScore(int s);
 
 }

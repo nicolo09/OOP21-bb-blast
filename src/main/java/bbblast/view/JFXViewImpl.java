@@ -18,38 +18,57 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+/**
+ * JavaFX implementation of a view.
+ */
 public class JFXViewImpl implements View {
 
     private Controller controller;
     private final Stage stage;
 
+    /**
+     * 
+     * @param stage the main application stage
+     */
     public JFXViewImpl(final Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setController(final Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startSinglePlayerGame() {
         final GameView gameView = null;
         final SingleplayerGameViewController gameViewController = null;
         this.controller.startSinglePlayerGame();
         Platform.runLater(() -> {
-            //TODO Create singleplayer view
+            // TODO Create singleplayer view
             this.adjustStageAndSetScene(null);
             stage.show();
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startMultiplayerGame() {
-        //TODO Implement multiplayer
+        // TODO Implement multiplayer
         this.showError("Not yet implemented");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startOptionsMenu() {
         final OptionViewController optionViewController = new OptionViewControllerImpl(controller, this);
@@ -61,11 +80,14 @@ public class JFXViewImpl implements View {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void gameOver(final GameOver gameOverEvent) {
         final GameOverView gameOverView = new GameOverViewImpl(this);
-        final GameOverViewController gameOverController = new GameOverViewControllerImpl(
-                gameOverEvent.getScores(), (score) -> this.controller.saveScore(score));
+        final GameOverViewController gameOverController = new GameOverViewControllerImpl(gameOverEvent.getScores(),
+                (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
         Platform.runLater(() -> {
             this.adjustStageAndSetScene(gameOverView.getScene());
@@ -73,11 +95,20 @@ public class JFXViewImpl implements View {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void show() {
         this.goToMainMenu();
     }
 
+    /**
+     * Sets stage's minimum width and height to scene size and set scene as stage's
+     * scene.
+     * 
+     * @param scene
+     */
     private void adjustStageAndSetScene(final Scene scene) {
         stage.setMinWidth(scene.getWidth());
         stage.setWidth(scene.getWidth());
@@ -86,11 +117,17 @@ public class JFXViewImpl implements View {
         stage.setScene(scene);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void goToMainMenu() {
         final MainMenuViewController mainMenuController = new MainMenuViewControllerImpl(this);
@@ -100,7 +137,10 @@ public class JFXViewImpl implements View {
         this.adjustStageAndSetScene(mainMenuScene);
         stage.show();
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showError(final String error) {
         final Alert alert = new Alert(AlertType.ERROR, error);
