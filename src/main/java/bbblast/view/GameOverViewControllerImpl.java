@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import bbblast.utils.Score;
+import bbblast.utils.ScoreImpl;
 /**
  * Implements a {@link GameOverViewController} showing a dialog to save the score in leaderboard.
  */
