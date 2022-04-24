@@ -1,10 +1,18 @@
 package bbblast.view.singleplayer;
 
 import java.util.Collection;
+import java.util.List;
 
 import bbblast.model.Bubble;
+import bbblast.model.BubbleGeneratorImpl;
+import bbblast.model.COLOR;
+import bbblast.model.Cannon;
+import bbblast.model.CannonImpl;
 
 public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewController {
+    
+    private final int a = CannonImpl.START_ANGLE;
+    private final Cannon c = new CannonImpl(null, 60, 60, new BubbleGeneratorImpl(List.of(COLOR.BLUE, COLOR.GREEN, COLOR.RED)));
 
     @Override
     public Collection<Bubble> getBubbles() {
@@ -13,7 +21,7 @@ public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewC
     }
 
     @Override
-    public void cannonShoot(int a) {
+    public void cannonShoot() {
         // TODO Auto-generated method stub
         
     }
