@@ -1,6 +1,5 @@
 package bbblast.model.level;
 
-import bbblast.model.Bubble;
 import bbblast.model.BubblesGrid;
 import bbblast.model.GridInfo;
 
@@ -27,13 +26,15 @@ public interface Level {
 	int getCurrentScore();
 
 	/**
-	 * Adds points to the current score
+	 * Adds points to the current score value.
+	 * 
+	 * @param points the amount to add to the score
 	 */
 	void updateScore(int points);
 
 	/**
 	 * This method generates random {@link Bubble}s to fill the specified number of
-	 * rows. If there are already some rows it moves them down
+	 * rows. If there are already some rows it moves them down.
 	 * 
 	 * @param rows the number of rows to fill starting from the top
 	 */
