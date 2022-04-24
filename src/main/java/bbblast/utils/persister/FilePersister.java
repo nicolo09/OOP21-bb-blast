@@ -42,10 +42,13 @@ public class FilePersister<T> implements Persister<T> {
             if (t.isInstance(readObject)) {
                 return Optional.of(t.cast(readObject));
             }
+            else {
+                return Optional.empty();
+            }
         } catch (IOException | ClassNotFoundException e) {
             //e.printStackTrace();
+            return Optional.empty();
         } 
-        return Optional.empty();
     }
 
     /**
