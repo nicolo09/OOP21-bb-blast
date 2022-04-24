@@ -43,7 +43,7 @@ public class FilePersister<T> implements Persister<T> {
                 return Optional.of(t.cast(readObject));
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } 
         return Optional.empty();
     }
