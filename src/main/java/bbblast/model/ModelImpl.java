@@ -18,30 +18,26 @@ import bbblast.utils.Score;
 public class ModelImpl implements Model {
 
     private static final double CANNONVERTICALOFFSETPERCENT = 0.9;
-    // Set a speed
+    // TODO: Set a speed
     private static final int BUBBLESPEED = 0;
-    private final GridInfo gridInfo;
-    private Controller controller;
-    private final BubblesGrid grid;
-    private final Cannon cannon;
+    
+    private BubblesGrid grid;
+    private Cannon cannon;
     private MovementHandler mover;
 
     /**
-     * 
-     * @param grid       the grid informations
-     * @param controller the MVC controller
+     * {@inheritDoc}
      */
-    public ModelImpl(final GridInfo grid, final Controller controller) {
-        this.controller = controller;
-        this.gridInfo = grid;
+    @Override
+    public void startNewGame(final GridInfo grid, final int fps) {
         this.grid = new BubblesGridImpl(grid);
-        final Position bubbleSpawnPosition = new PositionImpl(gridInfo.getPointsWidth() / 2,
-                gridInfo.getPointsHeight() * CANNONVERTICALOFFSETPERCENT);
-        this.cannon = new CannonImpl(bubbleSpawnPosition, this.controller.getFPS(), BUBBLESPEED,
+        final Position bubbleSpawnPosition = new PositionImpl(grid.getPointsWidth() / 2,
+                grid.getPointsHeight() * CANNONVERTICALOFFSETPERCENT);
+        this.cannon = new CannonImpl(bubbleSpawnPosition, fps, BUBBLESPEED,
                 new BubbleGeneratorImpl(COLOR.allExceptGrey()));
-        this.mover = new MovementHandlerImpl(this.grid, this.gridInfo);
+        this.mover = new MovementHandlerImpl(this.grid, grid);
     }
-
+    
     /**
      * {@inheritDoc}
      * ticks the MovementHandler.
@@ -110,22 +106,6 @@ public class ModelImpl implements Model {
     @Override
     public void switchBubble() {
         cannon.exchange();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    // TODO: Taglia fa gli scores
-    @Override
-    public Collection<Score> loadScores() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    // TODO: Taglia fa gli scores
-    @Override
-    public void writeScore(final Score s) {
-        // TODO Auto-generated method stub
     }
 
 }

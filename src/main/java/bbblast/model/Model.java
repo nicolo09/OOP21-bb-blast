@@ -58,15 +58,9 @@ public interface Model extends Updatable {
 	void switchBubble();
 
 	/**
-	 * reads from a file the saved Scores.
-	 * @return a collection of Scores from the previous games 
+	 * Set up this model for a new game
+	 * @param grid
 	 */
-	Collection<Score> loadScores();
-	
-	/**
-	 * writes on a file the current score.
-	 * @param s the current Score
-	 */
-	void writeScore(Score s);
+    void startNewGame(GridInfo grid, int fps);
 	
 }
