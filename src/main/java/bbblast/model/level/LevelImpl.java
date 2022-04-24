@@ -28,8 +28,11 @@ public class LevelImpl implements Level, Serializable {
 
 	/**
 	 * Creates a new Level.
-	 * @param infos the {@link GridInfo} containing the informations to generate the {@link BubblesGrid}
-	 * @param generator the {@link BubbleGenerator} that will be used by the {@link BubblesGrid}
+	 * 
+	 * @param infos     the {@link GridInfo} containing the informations to generate
+	 *                  the {@link BubblesGrid}
+	 * @param generator the {@link BubbleGenerator} that will be used by the
+	 *                  {@link BubblesGrid}
 	 */
 	public LevelImpl(final GridInfo infos, final BubbleGenerator generator) {
 		this.score = INIT_SCORE;
@@ -98,15 +101,18 @@ public class LevelImpl implements Level, Serializable {
 	 */
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		final LevelImpl other = (LevelImpl) obj;
-		return Objects.equals(gameGrid, other.gameGrid) && Objects.equals(generator, other.generator)
-				&& Objects.equals(infos, other.infos) && score == other.score;
+		return gameGrid.equals(other.gameGrid) && generator.equals(other.generator)
+				&& infos.equals(other.infos) && score == other.score;
 	}
 
 	/**
