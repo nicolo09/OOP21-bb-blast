@@ -28,7 +28,7 @@ public class CanvasDrawerImpl implements CanvasDrawer {
 	 */
 	public CanvasDrawerImpl(final Canvas canvas, final GridInfo infos) {
 		this.bubbleD = new BubblesDrawerImpl(canvas, infos);
-		this.cannonD = new CannonDrawerImpl(); // TO BE DEFINED
+		this.cannonD = new CannonDrawerImpl(canvas); 
 		this.canvas = canvas;
 		this.gc = canvas.getGraphicsContext2D();
 	}
@@ -39,8 +39,8 @@ public class CanvasDrawerImpl implements CanvasDrawer {
 	@Override
 	public void drawOnCanvas(final Collection<Bubble> bubbles, final Cannon cannon) {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getLayoutY());
-		bubbleD.drawBubbles(bubbles);
 		cannonD.drawCannon(cannon);
+		bubbleD.drawBubbles(bubbles);
 	}
 
 }
