@@ -42,10 +42,8 @@ public class LevelTest {
 		assertEquals(infos.getBubbleWidth(), lvl.getGameBubblesGrid().getBubbles().size(),
 				"The first row should be filled");
 		lvl.fillGameBubblesGrid(1);
-		// Talk about it
-		// assertNotEquals(2 * infos.getBubbleWidth(),
-		// lvl.getGameBubblesGrid().getBubbles().size(), "Not all the rows contain the
-		// same number of Bubbles");
+		assertEquals(2 * infos.getBubbleWidth(), lvl.getGameBubblesGrid().getBubbles().size(),
+				"Now the grid contains two rows");
 		System.out.println(lvl.getGameBubblesGrid());
 	}
 
