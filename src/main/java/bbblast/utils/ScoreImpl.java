@@ -16,7 +16,7 @@ public class ScoreImpl implements Score, Serializable {
      */
     private static final long serialVersionUID = -7586564633494845842L;
     private final String name;
-    private final int score;
+    private int score;
     private final LocalDate date;
     
     /**
@@ -50,6 +50,14 @@ public class ScoreImpl implements Score, Serializable {
     public LocalDate getDate() {
         return this.date;
     }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void incrementScore(final int s) {
+        this.score = score + s;
+    }
+    
     @Override
     public String toString() {
         return "ScoreImpl [name=" + name + ", score=" + score + ", date=" + date + "]";
@@ -59,18 +67,15 @@ public class ScoreImpl implements Score, Serializable {
         return Objects.hash(date, name, score);
     }
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ScoreImpl other = (ScoreImpl) obj;
+        final ScoreImpl other = (ScoreImpl) obj;
         return Objects.equals(date, other.date) && Objects.equals(name, other.name) && score == other.score;
     }
-    
-    
-    
     
 }
