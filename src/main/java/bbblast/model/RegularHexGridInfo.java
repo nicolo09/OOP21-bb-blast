@@ -17,12 +17,13 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
 	private final int bubbleWidth;
     private final int bubbleHeight;
     private final double ratio;
-    
+
     /**
      * 
-     * @param bubbleWidth grid's width in bubbles
-     * @param bubbleHeight grid's height in bubbles
-     * @param pointBubbleRatio width of a bubble in points (equivalent to 2*apothem in a hex grid)
+     * @param bubbleWidth      grid's width in bubbles
+     * @param bubbleHeight     grid's height in bubbles
+     * @param pointBubbleRatio width of a bubble in points (equivalent to 2*apothem
+     *                         in a hex grid)
      */
     public RegularHexGridInfo(final int bubbleWidth, final int bubbleHeight, final double pointBubbleRatio) {
         this.bubbleWidth = bubbleWidth;
@@ -51,15 +52,16 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
      */
     @Override
     public double getPointsWidth() {
-        return this.bubbleWidth * this.ratio;
+        return this.bubbleWidth * this.ratio + (this.ratio / 2);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public double getPointsHeight() {
-        return (double)3/4 * (2*(this.ratio/Math.sqrt(3))*(this.bubbleHeight-1))+2*(this.ratio/Math.sqrt(3));
+        return (double) 3 / 4 * (2 * (this.ratio / Math.sqrt(3)) * (this.bubbleHeight - 1))
+                + 2 * (this.ratio / Math.sqrt(3));
     }
 
     @Override
@@ -69,12 +71,15 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;            
+        }
         final RegularHexGridInfo other = (RegularHexGridInfo) obj;
         return this.bubbleHeight == other.bubbleHeight && this.bubbleWidth == other.bubbleWidth
                 && Double.compare(this.ratio, other.ratio) == 0;
@@ -87,14 +92,11 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
     }
 
     /**
-     * {@inheritDoc}
-     * In this implementation the bubble radius is equivalent to the apothem of the hexagon.
+     * {@inheritDoc} In this implementation the bubble radius is equivalent to the
+     * apothem of the hexagon.
      */
     @Override
     public double getBubbleRadius() {
-        return ratio/2;
+        return ratio / 2;
     }
-    
-    
-
 }
