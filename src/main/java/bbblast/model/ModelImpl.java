@@ -7,7 +7,11 @@ import java.util.Optional;
 
 import bbblast.controller.Controller;
 import bbblast.controller.gameover.GameOver;
+<<<<<<< HEAD
 import bbblast.controller.gameover.GameOverImpl;
+=======
+import bbblast.controller.gameover.LastRowGameOverImpl;
+>>>>>>> 4844ea8517119d1b3602816160bb17f280f07695
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 import bbblast.utils.Score;
@@ -93,11 +97,8 @@ public class ModelImpl implements Model {
      * {@inheritDoc}
      */
     @Override
-    public Optional<GameOver> gameOver() {
-        if (this.grid.endReached()) {
-            return Optional.of(new GameOverImpl(this.getScores()));
-        }
-        return Optional.empty();
+    public boolean isLastRowReached() {
+        return this.grid.endReached();
     }
 
     /**

@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.Objects;
 import java.util.Optional;
 /**
  * 
@@ -42,10 +44,13 @@ public class FilePersister<T> implements Persister<T> {
             if (t.isInstance(readObject)) {
                 return Optional.of(t.cast(readObject));
             }
+            else {
+                return Optional.empty();
+            }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            return Optional.empty();
         } 
-        return Optional.empty();
     }
 
     /**
@@ -53,9 +58,14 @@ public class FilePersister<T> implements Persister<T> {
      */
     @Override
     public void save(final T objectToSave) throws IOException {
-        Files.createDirectories(filePath.getParent());
-        try (ObjectOutputStream output = new ObjectOutputStream(Files.newOutputStream(filePath, WRITEROPTIONS))) {
-            output.writeObject(objectToSave);
+        final Path directory = filePath.getParent();
+        if (Objects.nonNull(directory)) {
+            Files.createDirectories(directory);
+            try (ObjectOutputStream output = new ObjectOutputStream(Files.newOutputStream(filePath, WRITEROPTIONS))) {
+                output.writeObject(objectToSave);
+            }            
+        } else {
+            throw new IOException("Invalid file path");
         }
     }
 
