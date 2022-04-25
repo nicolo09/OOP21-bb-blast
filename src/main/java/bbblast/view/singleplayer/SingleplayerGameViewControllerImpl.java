@@ -11,6 +11,7 @@ public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewC
     
     private Controller mainController;
     private static final int MOV = 5;
+    private int counter;
     /**
      * Check the input key and do the right action.
      */
@@ -27,6 +28,10 @@ public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewC
             break;
         case SPACE:
             mainController.shootCannon();
+            this.counter += 1;
+            if (counter == 5) {
+                mainController.getLevel().fillGameBubblesGrid(1);
+            }
             break;
         case ESCAPE:
             mainController.pauseGame();
