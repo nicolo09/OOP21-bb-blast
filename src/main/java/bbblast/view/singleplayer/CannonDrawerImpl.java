@@ -1,6 +1,5 @@
 package bbblast.view.singleplayer;
 
-import bbblast.model.Cannon;
 import bbblast.view.singleplayer.assetsloader.AssetsLoader;
 import bbblast.view.singleplayer.assetsloader.CachingAssetsLoader;
 import bbblast.view.singleplayer.assetsloader.ImageAssetsLoader;
@@ -34,7 +33,7 @@ public class CannonDrawerImpl implements CannonDrawer {
      * {@inheritDoc}
      */
     @Override
-    public void drawCannon(final Cannon cannon) {
+    public void drawCannon(final int angle) {
         final Image c = loader.load(PATH);
         final ImageView iv = new ImageView();
         final double x = (canvas.getWidth() / 2.0) + c.getWidth() / 2.0;
@@ -42,7 +41,7 @@ public class CannonDrawerImpl implements CannonDrawer {
         final Rotate rotate = new Rotate();
         rotate.setPivotX(c.getWidth() / 2);
         rotate.setPivotY(c.getHeight());
-        rotate.setAngle(cannon.getAngle());
+        rotate.setAngle(angle);
         iv.getTransforms().add(rotate);
         gc.drawImage(iv.getImage(), x, y);
 
