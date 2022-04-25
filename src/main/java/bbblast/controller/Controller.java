@@ -82,4 +82,9 @@ public interface Controller {
      * @return saved scores
      */
     Collection<Score> loadScores();
+    
+    /**
+     * @return cannon angle
+     */
+    int getCannonAngle();
 }
