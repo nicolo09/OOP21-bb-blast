@@ -186,14 +186,14 @@ ma implementando l'interfaccia si possono creare griglie di qualsiasi forma di b
 
 \begin{figure}[H]
 	\centering{}
-	\includegraphics[width=.7\textwidth]{img/bubble_grid.pdf}
+	\includegraphics[width=.7\textwidth]{img/triplet.pdf}
 	\caption{UML del Gameloop}
 \end{figure}
 
 \paragraph{Problema} Nella griglia ho usato coordinate con tre valori e avevo necessità di un oggetto per memorizzarle
 
-\paragraph{Soluzione} Ho creato un'interfaccia generica che supporta qualsiasi tipo di trippletta di valori, poi implementata in una classe generica.
-Per poter sommare i valori ho poi creato una classe con metodi statici che fa la somma delle tripplette.
+\paragraph{Soluzione} Ho creato un'interfaccia generica che supporta qualsiasi tipo di tripletta di valori, poi implementata in una classe generica.
+Per poter sommare i valori ho poi creato una classe con metodi statici che fa la somma delle triplette.
 
 
 \chapter{Sviluppo}
@@ -242,8 +242,8 @@ In questo progetto i miei compiti sono stati:
 	\item Bolle statiche (package package bbblast.model Bubble e BubbleImpl)
 	\item Comportamento del cannone (package bbblast.model Cannon e CannonImpl)
 	\item Grafica del cannone (package bblast.view.singleplayer CannonDrawerImpl e CannonDrawer)
-	\item Tripplette di valori (package bbblast.utils Triplet, TripletImpl )
-	\item Somma di Tripplette di valori interi (package bbblast.utils TripletIntegerUtility)
+	\item Triplette di valori (package bbblast.utils Triplet, TripletImpl )
+	\item Somma di Triplette di valori interi (package bbblast.utils TripletIntegerUtility)
 \end{itemize}
 
 \section{Note di sviluppo}
@@ -265,6 +265,7 @@ In questo progetto i miei compiti sono stati:
 	\item Lambda expressions
 	\item JavaFX
 \end{itemize}
+Per la gestione delle coordinate su tre assi ho usato lo pseudocodice di Amit Patel \url{https://www.redblobgames.com/grids/hexagons/} e ho usato sempre il suo codice per cercare gli esagoni vicini.
 
 \chapter{Commenti finali}
 
@@ -282,15 +283,19 @@ prima di iniziare il progetto. Avremmo dovuto inoltre soffermarci meglio sulle i
 
 \subsection{Emma Leonardi}
 
-Sono soddisfatta del mio lavoro individuale, ma non del progetto in totale. Ci sono stati parecchi problemi sulle parti del codice in comune, perchè spesso chi doveva fare una parte non parlava o non si capiva
-con chi avrebbe fatto il resto dell'implementazione. Questo mi ha rallentato nello sviluppo della mia parte e a tratti ha costretto a riscrivere parti di codice che non rispettavano l'idea altrui. Non ha aiutato 
-la coordinazione del progetto anche il fatto che essendo al nostro primo progetto, alcuni aspetti che inizialmente ritenevamo dettagli si sono rivelati problemi implementativi ben maggiori. 
-In futuro cercherò di spiegarmi meglio sulle caratteristiche del software prodotto da me e comunicare meglio con i miei compagni di progetto cosa aspettarmi dal loro codice. 
+Sono soddisfatta del mio lavoro individuale, ma non del progetto in totale. Ci sono stati parecchi problemi sulle parti del codice in comune, 
+perchè ci sono stati dei problemi di comunicazione e incomprensioni, spesso dovute a una prima fase di design poco precisa. Questo mi ha rallentato nello sviluppo della mia parte di progetto e a tratti ha costretto a riscrivere parti di codice frutto di aspettative diverse di implementazione. 
+Non ha aiutato la coordinazione del progetto anche l'inesperienza, che ci ha fatto sottovalutare alcuni aspetti che si sono rivelati problemi implementativi. 
+In futuro cercherò di spiegarmi meglio sulle caratteristiche del software prodotto da me e comunicare meglio con i miei compagni di progetto. 
 
 \section{Difficoltà incontrate e commenti per i docenti}
 \subsection{Nicolò Guerra}
 Sicuramente la caratteristica che ho apprezzato del corso è la disponibilità dei docenti, le correzioni in laboratorio allo svolgimento di ogni esercizio risultano molto utili per migliorare la tecnica.
 Sarebbe interessante approfondire meglio la parte di analisi di dominio di un problema e di design di una soluzione, al di la di quella che è la programmazione Java, che forse è più semplice da capire.
+
+\subsection{Emma Leonardi}
+Mi è piaciuta la struttura del corso, i laboratori e l'attenzione dei docenti verso gli studenti. 
+Ho trovato difficile capire gli aspetti di Java più avanzati e avrei voluto dedicare più tempo su Stream e Pattern.
 
 \appendix
 \chapter{Guida utente}
