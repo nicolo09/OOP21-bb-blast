@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import bbblast.utils.Settings;
@@ -44,6 +45,12 @@ public class TestPersister {
         }
         final var loaded = persister.load().get();
         assertEquals(loaded, objectToSave, "Loaded settings are different");
+    }
+    
+    @AfterEach
+    public void deleteFile() {
+        final Persister<Settings> persister = new FilePersister<>(PATH, Settings.class);
+        persister.reset();
     }
 
 }
