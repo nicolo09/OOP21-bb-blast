@@ -18,10 +18,9 @@ public class ScoreManagerTest {
     private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
     private static final Path PATH = Path
             .of(System.getProperty("user.home") + SEPARATOR + ".bbblast-test" + SEPARATOR + "ScoreManagerTest.json");
-    private final List<Score> l = new ArrayList<>();
+    private final ScoreTable l = new ScoreTable();
 
-    private final ScoreManager x = new ScoreManagerImpl(
-            new FilePersister<List<Score>>(PATH, (Class<List<Score>>) l.getClass()));
+    private final ScoreManager x = new ScoreManagerImpl(new FilePersister<ScoreTable>(PATH, ScoreTable.class));
 
     @Test
     public void TestScoreManager() {
@@ -30,7 +29,7 @@ public class ScoreManagerTest {
 
         // test 2
         x.resetScores();
-        
+
         final ScoreImpl s1 = new ScoreImpl("nicolo", 2000);
         final ScoreImpl s2 = new ScoreImpl("emma", 1500);
         final ScoreImpl s3 = new ScoreImpl("casa", 4000);
@@ -46,7 +45,5 @@ public class ScoreManagerTest {
         // test 3
         x.resetScores();
         assertEquals(x.load().size(), 0, "It hasn't been resetted");
-
     }
-
 }
