@@ -1,6 +1,7 @@
 package bbblast.model.level;
 
 import bbblast.model.BubblesGrid;
+import bbblast.model.Cannon;
 import bbblast.model.GridInfo;
 
 /**
@@ -19,6 +20,11 @@ public interface Level {
 	 * @return the {@link GridInfo} modeling the game grid
 	 */
 	GridInfo getGameGridInfo();
+
+	/**
+	 * @return the {@link Cannon} used in this level
+	 */
+	Cannon getGameCannon();
 
 	/**
 	 * @return the current score value

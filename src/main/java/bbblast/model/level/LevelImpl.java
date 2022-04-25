@@ -6,6 +6,8 @@ import java.util.Objects;
 import bbblast.model.BubbleGenerator;
 import bbblast.model.BubblesGrid;
 import bbblast.model.BubblesGridImpl;
+import bbblast.model.Cannon;
+import bbblast.model.CannonImpl;
 import bbblast.model.GridInfo;
 import bbblast.utils.PositionImpl;
 
@@ -24,6 +26,7 @@ public class LevelImpl implements Level, Serializable {
 	private int score;
 	private final GridInfo infos;
 	private final BubblesGrid gameGrid;
+	private final Cannon gameCannon;
 	private final BubbleGenerator generator;
 
 	/**
@@ -33,12 +36,16 @@ public class LevelImpl implements Level, Serializable {
 	 *                  the {@link BubblesGrid}
 	 * @param generator the {@link BubbleGenerator} that will be used by the
 	 *                  {@link BubblesGrid}
+	 * @param fps		number of frame per second 
+	 * @param speed     the shooting speed of the {@link Cannon}
 	 */
-	public LevelImpl(final GridInfo infos, final BubbleGenerator generator) {
+	public LevelImpl(final GridInfo infos, final BubbleGenerator generator, final int fps, final int speed) {
 		this.score = INIT_SCORE;
 		this.infos = infos;
 		this.gameGrid = new BubblesGridImpl(infos);
 		this.generator = generator;
+		final var cannonPos = new PositionImpl(infos.getPointsWidth() / 2, infos.getBubbleHeight());
+		this.gameCannon = new CannonImpl(cannonPos, fps, speed, generator);
 	}
 
 	/**
@@ -55,6 +62,14 @@ public class LevelImpl implements Level, Serializable {
 	@Override
 	public GridInfo getGameGridInfo() {
 		return this.infos;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Cannon getGameCannon() {
+		return this.gameCannon;
 	}
 
 	/**
@@ -95,7 +110,7 @@ public class LevelImpl implements Level, Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(gameGrid, generator, infos, score);
+		return Objects.hash(gameGrid, generator, infos, score, gameCannon);
 	}
 
 	/**
@@ -114,7 +129,7 @@ public class LevelImpl implements Level, Serializable {
 		}
 		final LevelImpl other = (LevelImpl) obj;
 		return gameGrid.equals(other.gameGrid) && generator.equals(other.generator) && infos.equals(other.infos)
-				&& score == other.score;
+				&& score == other.score && gameCannon.equals(other.gameCannon);
 	}
 
 	/**
@@ -122,7 +137,8 @@ public class LevelImpl implements Level, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "LevelImpl [score=" + score + ", infos=" + infos + ", gameGrid=" + gameGrid + ", generator=" + generator
+		return "LevelImpl [score=" + score + ", infos=" + infos + ", gameGrid=" + gameGrid + ", gameCannon=" + gameCannon + ", generator=" + generator
 				+ "]";
 	}
+
 }
