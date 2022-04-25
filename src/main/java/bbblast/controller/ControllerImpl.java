@@ -212,4 +212,9 @@ public class ControllerImpl implements Controller {
 	public Optional<Level> loadLevel() {
 		return levelPersister.load();
 	}
+
+    @Override
+    public Level getLevel() {
+        return mainModel.getCurrentLevel();
+    }
 }
