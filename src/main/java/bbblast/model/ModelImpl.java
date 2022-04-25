@@ -5,104 +5,100 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 
-import bbblast.controller.Controller;
-import bbblast.controller.gameover.GameOver;
-import bbblast.controller.gameover.LastRowGameOverImpl;
-import bbblast.utils.Position;
-import bbblast.utils.PositionImpl;
-import bbblast.utils.Score;
+import bbblast.model.level.Level;
+import bbblast.model.level.LevelImpl;
 
 /**
  * Implements a game model.
  */
 public class ModelImpl implements Model {
 
-    private static final double CANNONVERTICALOFFSETPERCENT = 0.9;
-    // TODO: Set a speed
-    private static final int BUBBLESPEED = 0;
-    
-    private BubblesGrid grid;
-    private Cannon cannon;
-    private MovementHandler mover;
+	private MovementHandler mover;
+	private Level gameLevel;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void startNewGame(final GridInfo grid, final int fps) {
-        this.grid = new BubblesGridImpl(grid);
-        final Position bubbleSpawnPosition = new PositionImpl(grid.getPointsWidth() / 2,
-                grid.getPointsHeight() * CANNONVERTICALOFFSETPERCENT);
-        this.cannon = new CannonImpl(bubbleSpawnPosition, fps, BUBBLESPEED,
-                new BubbleGeneratorImpl(COLOR.allExceptGrey()));
-        this.mover = new MovementHandlerImpl(this.grid, grid);
-    }
-    
-    /**
-     * {@inheritDoc}
-     * ticks the MovementHandler.
-     */
-    @Override
-    public void update() {
-        mover.handle();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void startNewGame(final GridInfo grid, final int fps) {
+		this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
+		this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Collection<Bubble> getBubbles() {
-        final var result = new HashSet<>(grid.getBubbles());
-        result.add(cannon.getCurrentlyLoadedBubble());
-        // TODO: Add moving bubble to result
-        return result;
-    }
+	/**
+	 * {@inheritDoc} ticks the MovementHandler.
+	 */
+	@Override
+	public void update() {
+		mover.handle();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void moveCannon(final int angle) {
-        cannon.move(angle);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Collection<Bubble> getBubbles() {
+		final var result = new HashSet<>(this.gameLevel.getGameBubblesGrid().getBubbles());
+		result.add(this.gameLevel.getGameCannon().getCurrentlyLoadedBubble());
+		if (!mover.getShot().equals(Optional.empty())) {
+			result.add(mover.getShot().get());
+		}
+		return result;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void shootCannon() {
-        cannon.shoot();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void moveCannon(final int angle) {
+		this.gameLevel.getGameCannon().move(angle);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getCannonAngle() {
-        return cannon.getAngle();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void shootCannon() {
+		this.gameLevel.getGameCannon().shoot();
+	}
 
-    // TODO: Taglia fa gli score
-    @Override
-    public Map<Integer, Integer> getScores() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getCannonAngle() {
+		return this.gameLevel.getGameCannon().getAngle();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isLastRowReached() {
-        return this.grid.endReached();
-    }
+	// TODO: Taglia fa gli score
+	@Override
+	public Map<Integer, Integer> getScores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void switchBubble() {
-        cannon.exchange();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isLastRowReached() {
+		return this.gameLevel.getGameBubblesGrid().endReached();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void switchBubble() {
+		this.gameLevel.getGameCannon().exchange();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Level getCurrentLevel() {
+		return this.gameLevel;
+	}
 
 }

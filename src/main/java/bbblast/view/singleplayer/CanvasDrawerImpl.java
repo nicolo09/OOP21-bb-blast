@@ -3,10 +3,10 @@ package bbblast.view.singleplayer;
 import java.util.Collection;
 
 import bbblast.model.Bubble;
-import bbblast.model.Cannon;
 import bbblast.model.GridInfo;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 /**
  * 
@@ -15,6 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class CanvasDrawerImpl implements CanvasDrawer {
 
+	private final static Image BACKGROUND = new Image("background.jpg");
 	private final BubblesDrawer bubbleD;
 	private final CannonDrawer cannonD;
 	private final Canvas canvas;
@@ -37,9 +38,10 @@ public class CanvasDrawerImpl implements CanvasDrawer {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void drawOnCanvas(final Collection<Bubble> bubbles, final Cannon cannon) {
+	public void drawOnCanvas(final Collection<Bubble> bubbles, final int cannonAngle) {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getLayoutY());
-		cannonD.drawCannon(cannon);
+		gc.drawImage(BACKGROUND, 0, 0, canvas.getWidth(), canvas.getHeight());
+		cannonD.drawCannon(cannonAngle);
 		bubbleD.drawBubbles(bubbles);
 	}
 

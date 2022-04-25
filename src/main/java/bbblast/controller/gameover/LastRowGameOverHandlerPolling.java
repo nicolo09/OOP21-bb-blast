@@ -10,14 +10,12 @@ import bbblast.view.View;
  * Implementation of {@link GameOverHandler} that generates a {@link GameOver}
  * asking the model when updated (see {@link Updatable}).
  */
-public class LastRowGameOverHandlerPolling implements GameOverHandler, Updatable {
+public class LastRowGameOverHandlerPolling extends ViewDelegateGameOverHandler implements GameOverHandler, Updatable {
 
     private final Model gameModel;
-    private final View gameView;
-
     public LastRowGameOverHandlerPolling(final Model gameModel, final View gameView) {
+        super(gameView);
         this.gameModel = gameModel;
-        this.gameView = gameView;
     }
 
     /**
@@ -32,14 +30,6 @@ public class LastRowGameOverHandlerPolling implements GameOverHandler, Updatable
         } else {
             return false;
         }
-    }
-
-    /**
-     * {@inheritDoc} Tells the view to show a gameOverScreen.
-     */
-    @Override
-    public void handleGameOver(final GameOver gameOver) {
-        gameView.gameOver(gameOver);
     }
 
     /**

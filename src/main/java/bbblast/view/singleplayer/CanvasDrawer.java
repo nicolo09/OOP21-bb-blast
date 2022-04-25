@@ -13,8 +13,8 @@ public interface CanvasDrawer {
 	/**
 	 * Makes the CanvasDrawer draw the game elements.
 	 * @param bubbles the collection of bubbles to draw
-	 * @param cannon the cannon to draw
+	 * @param cannonAngle the angle of the cannon to draw
 	 */
-	void drawOnCanvas(Collection<Bubble> bubbles, Cannon cannon);
+	void drawOnCanvas(Collection<Bubble> bubbles, int cannonAngle);
 	
 }
