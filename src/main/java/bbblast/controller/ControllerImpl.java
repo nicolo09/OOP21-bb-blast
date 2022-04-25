@@ -10,6 +10,7 @@ import java.util.Optional;
 import bbblast.controller.gameloop.GameLoop;
 import bbblast.controller.gameloop.GameLoopImpl;
 import bbblast.controller.gameloop.Updatable;
+import bbblast.controller.gameover.LastRowGameOverHandlerPolling;
 import bbblast.model.Bubble;
 import bbblast.model.Model;
 import bbblast.model.RegularHexGridInfo;
@@ -90,7 +91,7 @@ public class ControllerImpl implements Controller {
     @Override
     public void startSinglePlayerGame() {
         //Gameover Handler
-        final Updatable gameOverHandler = new GameOverHandlerPolling(this.mainModel, this.mainView);
+        final Updatable gameOverHandler = new LastRowGameOverHandlerPolling(this.mainModel, this.mainView);
         //GameLoop setup
         loop = new GameLoopImpl();
         loop.registerUpdatable(mainModel);
