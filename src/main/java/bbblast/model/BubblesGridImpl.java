@@ -1,5 +1,6 @@
 package bbblast.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,9 +18,13 @@ import bbblast.utils.PositionImpl;
 /**
  * The implementation of BubblesGrid.
  */
-public class BubblesGridImpl implements BubblesGrid {
+public class BubblesGridImpl implements BubblesGrid, Serializable {
 
-    private final Map<Triplet<Integer, Integer, Integer>, Bubble> grid;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8547741440830310991L;
+	private final Map<Triplet<Integer, Integer, Integer>, Bubble> grid;
     private final List<Triplet<Integer, Integer, Integer>> directions = List.of(new TripletImpl<>(1, 0, -1),
             new TripletImpl<>(1, -1, 0), new TripletImpl<>(0, -1, 1), new TripletImpl<>(-1, 0, 1),
             new TripletImpl<>(-1, 1, 0), new TripletImpl<>(0, 1, -1));
