@@ -4,15 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
-<<<<<<< HEAD
-import bbblast.controller.Controller;
 import bbblast.controller.gameloop.Updatable;
 import bbblast.controller.gameover.GameOver;
-import bbblast.utils.Score;
-=======
-import bbblast.controller.gameloop.Updatable;
-import bbblast.controller.gameover.GameOver;
->>>>>>> 4844ea8517119d1b3602816160bb17f280f07695
 
 /**
  * 
