@@ -3,6 +3,8 @@ package bbblast.view.singleplayer;
 import java.util.Collection;
 
 import bbblast.model.Bubble;
+import bbblast.model.Cannon;
+import bbblast.model.GridInfo;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -29,6 +31,16 @@ public interface SingleplayerGameViewController {
      * exits the game.
      */
     void exit();
+    
+    /**
+     * @return grid informations.
+     */
+    GridInfo getGridInfo();
+    
+    /**
+     * @return a cannon angle
+     */
+    int getCannonAngle();
     
 
 }
