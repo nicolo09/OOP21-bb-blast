@@ -37,9 +37,9 @@ public class CanvasDrawerImpl implements CanvasDrawer {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void drawOnCanvas(final Collection<Bubble> bubbles, final Cannon cannon) {
+	public void drawOnCanvas(final Collection<Bubble> bubbles, final int cannonAngle) {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getLayoutY());
-		cannonD.drawCannon(cannon);
+		cannonD.drawCannon(cannonAngle);
 		bubbleD.drawBubbles(bubbles);
 	}
 
