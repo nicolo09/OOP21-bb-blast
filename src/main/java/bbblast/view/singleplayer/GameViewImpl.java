@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 public class GameViewImpl implements GameView {
 
     private SingleplayerGameViewController controller;
-    private CanvasDrawer cDrawer;
+    private final CanvasDrawer cDrawer;
 
     private static final double MINWIDTH = 500;
     private static final double MINHEIGHT = 300;
