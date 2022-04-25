@@ -42,5 +42,7 @@ public interface SingleplayerGameViewController {
      */
     int getCannonAngle();
     
+    
+    
 
 }
