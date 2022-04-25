@@ -1,15 +1,14 @@
 package bbblast.view.singleplayer;
 
-import bbblast.model.Cannon;
-
 /**
  * Interface that model the cannon drawer.
  */
 public interface CannonDrawer {
     /**
      * draw the cannon.
-     * @param c the cannon
+     * 
+     * @param angle the cannon angle
      */
-    void drawCannon(Cannon c);
+    void drawCannon(int angle);
 
 }
