@@ -1,47 +1,52 @@
 package bbblast.view.singleplayer;
 
 import java.util.Collection;
-import java.util.List;
 
+import bbblast.controller.Controller;
 import bbblast.model.Bubble;
-import bbblast.model.BubbleGeneratorImpl;
-import bbblast.model.COLOR;
-import bbblast.model.Cannon;
-import bbblast.model.CannonImpl;
+import javafx.scene.input.KeyEvent;
 
 public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewController {
     
-    private final int a = CannonImpl.START_ANGLE;
-    private final Cannon c = new CannonImpl(null, 60, 60, new BubbleGeneratorImpl(List.of(COLOR.BLUE, COLOR.GREEN, COLOR.RED)));
+    private Controller mainController;
+    private static final int MOV = 5;
 
+    @Override
+    public void inputCheck(final KeyEvent e) {
+        
+        switch (e.getCode()) {
+        
+        case LEFT:
+            mainController.moveCannon(mainController.getCannonAngle() + MOV);
+            break;
+        case RIGHT:
+            mainController.moveCannon(mainController.getCannonAngle() - MOV);
+            break;
+        case SPACE:
+            mainController.shootCannon();
+            break;
+        case ESCAPE:
+            mainController.pauseGame();
+            break;
+        default:
+            break;
+        }
+    }
+    
     @Override
     public Collection<Bubble> getBubbles() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void cannonShoot() {
-        // TODO Auto-generated method stub
-        
+        return mainController.getBubbles();
     }
 
     @Override
     public int getScore() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void pause() {
-        // TODO Auto-generated method stub
-        
+        return mainController.getScore();
     }
 
     @Override
     public void exit() {
-        // TODO Auto-generated method stub
-        
+        // TODO        
     }
+
 
 }
