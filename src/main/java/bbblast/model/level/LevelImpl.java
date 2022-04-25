@@ -79,10 +79,12 @@ public class LevelImpl implements Level, Serializable {
 	@Override
 	public void fillGameBubblesGrid(final int rows) {
 		this.gameGrid.moveBubblesDown(rows);
-		for (int i = 1; i <= rows; i++) {
+		for (int i = 0; i < rows; i++) { 
 			for (int j = 0; j < this.infos.getBubbleWidth(); j++) {
-				this.gameGrid.addBubble(generator.generate(new PositionImpl(
-						j * 2 * infos.getBubbleRadius() + infos.getBubbleRadius(), i * infos.getBubbleRadius())));
+				//NOTE: these coordinates are just an estimate of what they will be inside the BubblesGrid
+				final var centerX = j * 2 * infos.getBubbleRadius() + infos.getBubbleRadius(); // bubbles centers are distanced of two times the radius one from the another on x axis
+				final var centerY = i * 2 * infos.getBubbleRadius() + infos.getBubbleRadius(); // bubbles centers are distanced of about two times the radius one from the another on y axis
+				this.gameGrid.addBubble(generator.generate(new PositionImpl(centerX, centerY)));
 			}
 		}
 
@@ -111,8 +113,8 @@ public class LevelImpl implements Level, Serializable {
 			return false;
 		}
 		final LevelImpl other = (LevelImpl) obj;
-		return gameGrid.equals(other.gameGrid) && generator.equals(other.generator)
-				&& infos.equals(other.infos) && score == other.score;
+		return gameGrid.equals(other.gameGrid) && generator.equals(other.generator) && infos.equals(other.infos)
+				&& score == other.score;
 	}
 
 	/**
