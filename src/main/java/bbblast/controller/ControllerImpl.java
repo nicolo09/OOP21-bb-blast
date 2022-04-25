@@ -10,6 +10,7 @@ import java.util.Optional;
 import bbblast.controller.gameloop.GameLoop;
 import bbblast.controller.gameloop.GameLoopImpl;
 import bbblast.controller.gameloop.Updatable;
+import bbblast.controller.gameover.GameOverHandlerPolling;
 import bbblast.model.Bubble;
 import bbblast.model.Model;
 import bbblast.model.RegularHexGridInfo;
