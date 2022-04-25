@@ -1,7 +1,7 @@
 package bbblast.view;
 
 import bbblast.controller.Controller;
-import bbblast.controller.GameOver;
+import bbblast.controller.gameover.GameOver;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
