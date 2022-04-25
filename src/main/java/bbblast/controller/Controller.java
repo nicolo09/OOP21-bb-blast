@@ -114,4 +114,9 @@ public interface Controller {
 	 * @return the last saved level, if there isn't any it returns an optional empty
 	 */
 	Optional<Level> loadLevel();
+	
+	/**
+	 * @return the current level
+	 */
+	Level getLevel();
 }
