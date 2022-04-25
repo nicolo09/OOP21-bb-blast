@@ -46,11 +46,6 @@ public interface Model extends Updatable {
 	Map<Integer, Integer> getScores();
 
 	/**
-	 * @return a {@link GameOver} if the BubblesGrid reaches the bottom, Optional empty otherwise
-	 */
-	Optional<GameOver> gameOver();
-	
-	/**
 	 * switches the Bubble inside the cannon.
 	 */
 	void switchBubble();
@@ -60,5 +55,10 @@ public interface Model extends Updatable {
 	 * @param grid
 	 */
     void startNewGame(GridInfo grid, int fps);
+
+    /**
+     * Returns true if bubbles has reached last row
+     */
+    boolean isLastRowReached();
 	
 }
