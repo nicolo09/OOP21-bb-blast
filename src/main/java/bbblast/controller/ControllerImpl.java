@@ -89,8 +89,6 @@ public class ControllerImpl implements Controller {
      */
     @Override
     public void startSinglePlayerGame() {
-        //View setup
-        mainView.startSinglePlayerGame();
         //Gameover Handler
         final Updatable gameOverHandler = new GameOverHandlerPolling(this.mainModel, this.mainView);
         //GameLoop setup
