@@ -1,8 +1,8 @@
 package bbblast.view;
 
 import bbblast.controller.Controller;
-import bbblast.controller.GameOver;
 import bbblast.controller.gameloop.Updatable;
+import bbblast.controller.gameover.GameOver;
 
 /**
  * 

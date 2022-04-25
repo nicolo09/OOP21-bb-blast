@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 
-import bbblast.controller.GameOver;
-import bbblast.controller.GameOverImpl;
 import bbblast.controller.Controller;
+import bbblast.controller.gameover.GameOver;
+import bbblast.controller.gameover.GameOverImpl;
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 import bbblast.utils.Score;

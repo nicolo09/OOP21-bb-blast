@@ -1,4 +1,4 @@
-package bbblast.controller;
+package bbblast.controller.gameover;
 
 import java.util.Optional;
 
