@@ -168,4 +168,9 @@ public class ControllerImpl implements Controller {
     public int getFPS() {
         return this.loop.getFPS();
     }
+
+    @Override
+    public int getCannonAngle() {
+        return mainModel.getCannonAngle();
+    }
 }
