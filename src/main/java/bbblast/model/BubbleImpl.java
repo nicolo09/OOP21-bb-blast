@@ -1,5 +1,6 @@
 package bbblast.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import bbblast.utils.Position;
@@ -9,9 +10,13 @@ import bbblast.utils.PositionImpl;
  * The class that implements the bubble interface, used to rappresent a 2D
  * bubble.
  */
-public class BubbleImpl implements Bubble {
+public class BubbleImpl implements Bubble, Serializable {
 
-    private final PositionImpl pos;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3225398734780099099L;
+	private final PositionImpl pos;
     private final COLOR color;
 
     /**

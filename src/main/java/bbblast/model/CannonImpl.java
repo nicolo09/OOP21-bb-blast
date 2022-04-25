@@ -1,5 +1,6 @@
 package bbblast.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import bbblast.utils.Position;
@@ -12,9 +13,13 @@ import bbblast.utils.VectorConverterImpl;
  * This class implements a Cannon.
  *
  */
-public class CannonImpl implements Cannon {
+public class CannonImpl implements Cannon, Serializable {
 
-    private int angle = START_ANGLE;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5046837992787988716L;
+	private int angle = START_ANGLE;
     private MovingBubble loadedBubble;
     private final Position startingPosition;
     private final BubbleGenerator bbGenerator;

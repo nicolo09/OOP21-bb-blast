@@ -1,5 +1,6 @@
 package bbblast.utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -7,8 +8,12 @@ import java.util.Objects;
  * Position Implementation.
  *
  */
-public class PositionImpl implements Position {
+public class PositionImpl implements Position, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3284684949009359861L;
 	private double x;
 	private double y;
 	

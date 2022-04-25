@@ -36,7 +36,7 @@ punteggio possibile. La partita è persa se le bolle arrivano in fondo allo sche
 
 \subsubsection{Requisiti funzionali}
 \begin{itemize}
-	\item All'apertura del gioco verrà mostrata una schermata per la scelta delle modalità di gioco, delle opzioni e la spiegazione dei comandi.
+	\item All'apertura del gioco verrà mostrata una schermata per la scelta delle modalità di gioco e delle opzioni.
 	\item Il gioco dovrà generare una griglia di bolle colorate in maniera casuale.
 	\item Il cannone in basso dovrà permettere di sparare bolle generate casualmente, muovendosi angolarmente a destra e sinistra.
 	\item Le bolle sparate dal cannone potranno rimbalzare sui muri del campo di gioco se colpiti.
@@ -66,89 +66,31 @@ Questi requisiti non sono necessari al funzionamento di base del gioco e per que
 \section{Analisi e modello del dominio}
 
 L'entità principale in gioco è la Bubble, un insieme di Bubble formano una Grid. Una Grid dovrà poter essere generata in maniera casuale.
-Una bolla potrà essere sparata da un cannone, il quale potrà anche decidere di scambiarla con la successiva. Dovrà poi essere disegnata
-una linea di previsione del lancio. Lo scoppio delle bolle dovrà inoltre far incrementare il punteggio.
+Una bolla potrà essere sparata da un cannone, il quale potrà anche decidere di scambiarla con la successiva. Lo scoppio delle bolle dovrà inoltre far incrementare il punteggio.
 
 \begin{figure}[H]
 \centering{}
 \includegraphics{img/analysis.pdf}
-\caption{Schema UML dell'analisi del problema, con rappresentate le entità principali ed i rapporti fra loro}
+\caption{UML delle entità che rappresentano il dominio del problema.}
 \label{img:analysis}
 \end{figure}
 
 \chapter{Design}
 
-In questo capitolo si spiegano le strategie messe in campo per soddisfare i requisiti identificati nell'analisi.
-
-Si parte da una visione architetturale, il cui scopo è informare il lettore di quale sia il funzionamento dell'applicativo realizzato ad alto livello.
-%
-In particolare, è necessario descrivere accuratamente in che modo i componenti principali del sistema si coordinano fra loro.
-%
-A seguire, si dettagliano alcune parti del design, quelle maggiormente rilevanti al fine di chiarificare la logica con cui sono stati affrontati i principali aspetti dell'applicazione.
-
 \section{Architettura}
 
-Questa sezione spiega come le componenti principali del software interagiscono fra loro.
+Per questo progetto è stato scelto di fare uso del pattern MVC, che consente di separare in maniera efficace la logica del dominio da quella di visualizzazione e interazione con l'utente. 
+L'interfaccia principale del Model è rappresentata dal Level che fornisce le informazioni necessarie alla rappresentazione di una partita. La view è nascosta da un interfaccia che non dipende dalla sua 
+implementazione, in questo modo una sua sostituzione in blocco non dovrebbe comportare modifiche al resto dell'architettura dell'applicazione, questo perché il modello non è in alcun modo a conoscenza 
+di come venga rappresentato all'esterno. 
 %
-In particolare, qui va spiegato \textbf{se} e \textbf{come} è stato utilizzato il pattern
-architetturale model-view-controller (e/o alcune sue declinazioni specifiche, come entity-control-boundary).
-
-Se non è stato utilizzato MVC, va spiegata in maniera molto accurata l'architettura scelta, giustificandola in modo appropriato.
-
-Se è stato scelto MVC, vanno identificate con precisione le interfacce e classi che rappresentano i punti d'ingresso per modello, view, e controller.
-Raccomandiamo di sfruttare la definizione del dominio fatta in fase di analisi per capire quale sia l'entry point del model, e di non realizzare un'unica macro-interfaccia che, spesso, finisce con l'essere il prodromo ad una ``God class''.
-%
-Consigliamo anche di separare bene controller e model, facendo attenzione a non includere nel secondo strategie d'uso che appartengono al primo.
-
-In questa sezione vanno descritte, per ciascun componente architetturale che ruoli ricopre (due o tre ruoli al massimo), ed in che modo interagisce (ossia, scambia informazioni) con gli altri componenti dell'architettura.
-%
-Raccomandiamo di porre particolare attenzione al design dell'interazione fra view e controller: se ben progettato, sostituire in blocco la view non dovrebbe causare alcuna modifica nel controller (tantomeno nel model).
-
-\subsection*{Elementi positivi}
-\begin{itemize}
- \item Si mostrano pochi, mirati schemi UML dai quali si deduce con chiarezza quali sono le parti principali del software e come interagiscono fra loro.
- \item Si mette in evidenza se e come il pattern architetturale model-view-controller è stato applicato, anche con l'uso di un UML che mostri le interfacce principali ed i rapporti fra loro.
- \item Si discute se sia semplice o meno, con l'architettura scelta, sostituire in blocco la view: in un MVC ben fatto, controller e modello non dovrebbero in alcun modo cambiare se si transitasse da una libreria grafica ad un'altra (ad esempio, da Swing a JavaFX, o viceversa).
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
- \item L'architettura è fatta in modo che sia impossibile riusare il modello per un software diverso che affronta lo stesso problema.
- \item L'architettura è tale che l'aggiunta di una funzionalità sul controller impatta pesantemente su view e/o modello.
- \item L'architettura è tale che la sostituzione in blocco della view impatta sul controller o, peggio ancora, sul modello.
- \item Si presentano UML caotici, difficili da leggere.
- \item Si presentano UML in cui sono mostrati elementi di dettaglio non appartenenti all'architettura, ad esempio includenti campi o con metodi che non interessano la parte di interazione fra le componenti principali del software.
- \item Si presentano schemi UML con classi (nel senso UML del termine) che ``galleggiano'' nello schema, non connesse, ossia senza relazioni con il resto degli elementi inseriti.
- \item Si presentano elementi di design di dettaglio, ad esempio tutte le classi e interfacce del modello o della view.
- \item Si discutono aspetti implementativi, ad esempio eventuali librerie usate oppure dettagli di codice.
-\end{itemize}
-
-\subsection*{Esempio}
-
-L'architettura di GLaDOS segue il pattern architetturale MVC.
-%
-Più nello specifico, a livello architetturale, si è scelto di utilizzare MVC in forma ``ECB'', ossia ``entity-control-boundary''\footnote{
-Si fa presente che il pattern ECB effettivamente esiste in letteratura come ``istanza'' di MVC, e chi volesse può utilizzarlo come reificazione di MVC.
-}.
-%
-GLaDOS implementa l'interfaccia AI, ed è il controller del sistema.
-Essendo una intelligenza artificiale, è una classe attiva.
-%
-GLaDOS accetta la registrazione di Input ed Output, che fanno parte della ``view'' di MVC, e sono il ``boundary'' di ECB.
-Gli Input rappresentano delle nuove informazioni che vengono fornite all'IA, ad esempio delle modifiche nel valore di un sensore, oppure un comando da parte dell'operatore.
-Questi input infatti forniscono eventi.
-Ottenere un evento è un'operazione bloccante: chi la esegue resta in attesa di un effettivo evento.
-Di fatto, quindi, GLaDOS si configura come entità \textit{reattiva}.
-Ogni volta che c'è un cambio alla situazione del soggetto, GLaDOS notifica i suoi Output,
-informandoli su quale sia la situazione corrente.
-%
-Conseguentemente, GLaDOS è un ``observable'' per Output.
+Il punto d'ingresso del Model è il Cannon, che permette al Controller di modificare lo stato del gioco muovendo il cannone e sparando le bolle.
+Il tempo del gioco è scandito dal Controller. Il movimento del cannone è invece un evento generato dalla View, che viene passato al Model attraverso il controller e gestito in maniera asincrona.
 
 \begin{figure}[h]
 \centering{}
-\includegraphics[width=\textwidth]{img/arch}
-\caption{Schema UML architetturale di GLaDOS. L'interfaccia \texttt{GLaDOS} è il controller del sistema, mentre \texttt{Input} ed \texttt{Output} sono le interfacce che mappano la view (o, più correttamente in questo specifico esempio, il boundary). Un'eventuale interfaccia grafica interattiva dovrà implementarle entrambe.}
-\label{img:goodarch}
+\includegraphics[width=\textwidth]{img/arch.pdf}
+\caption{Schema UML architetturale del gioco. L'interfaccia \texttt{Controller} gestisce il flusso dell'applicazione, mentre la \texttt{View} gestisce l'interazione con l'utente e il \texttt{Model} fornisce le informazioni sul \texttt{Level}.}
 \end{figure}
 
 Con questa architettura, possono essere aggiunti un numero arbitrario di input ed output

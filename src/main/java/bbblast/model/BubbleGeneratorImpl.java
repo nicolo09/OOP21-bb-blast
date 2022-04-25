@@ -1,5 +1,6 @@
 package bbblast.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Random;
@@ -10,9 +11,13 @@ import bbblast.utils.Position;
  * Implementation of Bubble Generator.
  *
  */
-public class BubbleGeneratorImpl implements BubbleGenerator {
+public class BubbleGeneratorImpl implements BubbleGenerator, Serializable {
     
-    private final Collection<COLOR> col;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -113177648690737170L;
+	private final Collection<COLOR> col;
     private final Random rnd;
     /**
      * Costructor of the Bubble generator.

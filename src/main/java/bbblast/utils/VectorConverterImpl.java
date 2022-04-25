@@ -1,11 +1,16 @@
 package bbblast.utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /** The implementation of VectorConverter. */
-public class VectorConverterImpl implements VectorConverter {
+public class VectorConverterImpl implements VectorConverter, Serializable {
 
-    private int module;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1680059491684009699L;
+	private int module;
     private int angle;
     private final int fps;
 

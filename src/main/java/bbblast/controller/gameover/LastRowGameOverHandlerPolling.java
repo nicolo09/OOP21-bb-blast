@@ -1,4 +1,4 @@
-package bbblast.controller;
+package bbblast.controller.gameover;
 
 import java.util.Optional;
 
@@ -10,12 +10,12 @@ import bbblast.view.View;
  * Implementation of {@link GameOverHandler} that generates a {@link GameOver}
  * asking the model when updated (see {@link Updatable}).
  */
-public class GameOverHandlerPolling implements GameOverHandler, Updatable {
+public class LastRowGameOverHandlerPolling implements GameOverHandler, Updatable {
 
     private final Model gameModel;
     private final View gameView;
 
-    public GameOverHandlerPolling(final Model gameModel, final View gameView) {
+    public LastRowGameOverHandlerPolling(final Model gameModel, final View gameView) {
         this.gameModel = gameModel;
         this.gameView = gameView;
     }
@@ -26,9 +26,8 @@ public class GameOverHandlerPolling implements GameOverHandler, Updatable {
      */
     @Override
     public boolean checkGameOver() {
-        final Optional<GameOver> gameOver = gameModel.gameOver();
-        if (gameOver.isPresent()) {
-            handleGameOver(gameOver.get());
+        if (gameModel.isLastRowReached()) {
+            handleGameOver(new LastRowGameOverImpl(gameModel.getScores()));
             return true;
         } else {
             return false;
