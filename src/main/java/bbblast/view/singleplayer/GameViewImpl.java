@@ -2,42 +2,37 @@ package bbblast.view.singleplayer;
 
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.Pane;
 
 public class GameViewImpl implements GameView {
 
     private SingleplayerGameViewController controller;
-    private final BackgroundImage b = new BackgroundImage(new Image("background.jpg", 500, 300, false, true),
-            BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-    private final Background bGround = new Background(b);
+    private CanvasDrawer cDrawer;
 
     private static final double MINWIDTH = 500;
     private static final double MINHEIGHT = 300;
 
+    final private Canvas canvas;
     final private Scene scene;
+    final private Pane root;
 
     public GameViewImpl() {
-        final VBox bg = new VBox();
-        final BorderPane root = new BorderPane(bg);
-        bg.setFillWidth(true);
-        root.setBackground(bGround);
-
-        //serve col canvas
-        //final ChangeListener<Number> resizeListener = (observable, oldValue, newValue) ->{
-        //    canvas.setHeight(this.scene.getHeight());
-        //    canvas.setWidth(this.scene.getWidth());
-        //};  
-        //this.scene.widthProperty().addListener(resizeListener);
-        //this.scene.heightProperty().addListener(resizeListener);
         
+        canvas = new Canvas(MINWIDTH, MINHEIGHT);
+        root = new Pane();
+        cDrawer = new CanvasDrawerImpl(canvas, controller.getGridInfo());
+        root.getChildren().add(canvas);
+        canvas.setOnKeyPressed(key -> controller.inputCheck(key));
         this.scene = new Scene(root, MINWIDTH, MINHEIGHT);
+        
+        final ChangeListener<Number> resizeListener = (observable, oldValue, newValue) ->{
+            canvas.setHeight(this.scene.getHeight());
+            canvas.setWidth(this.scene.getWidth());
+        };
+        this.scene.widthProperty().addListener(resizeListener);
+        this.scene.heightProperty().addListener(resizeListener);
+        
     }
 
     @Override
@@ -57,17 +52,20 @@ public class GameViewImpl implements GameView {
         // TODO Auto-generated method stub
 
     }
-
+    /**
+     * Set the controller.
+     */
     @Override
     public void setController(final SingleplayerGameViewController controller) {
         this.controller = controller;
 
     }
-
+    /**
+     * Update the canvas
+     */
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-
+        cDrawer.drawOnCanvas(controller.getBubbles(), controller.getCannonAngle());
     }
 
     @Override
