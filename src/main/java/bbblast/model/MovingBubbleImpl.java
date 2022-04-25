@@ -1,5 +1,7 @@
 package bbblast.model;
 
+import java.io.Serializable;
+
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 
@@ -8,8 +10,12 @@ import bbblast.utils.PositionImpl;
  * The class which models a Bubble that can move on a 2D surface.
  *
  */
-public class MovingBubbleImpl extends BubbleImpl implements MovingBubble {
+public class MovingBubbleImpl extends BubbleImpl implements MovingBubble, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6864076588481992337L;
 	private final Position speed;
 
 	/**
