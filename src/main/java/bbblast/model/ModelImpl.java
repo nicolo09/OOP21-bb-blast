@@ -84,7 +84,7 @@ public class ModelImpl implements Model {
     @Override
     public Map<Integer, Integer> getScores() {
         // TODO Auto-generated method stub
-        return null;
+        return Map.of();
     }
 
     /**
