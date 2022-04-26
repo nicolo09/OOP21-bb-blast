@@ -1,7 +1,13 @@
 package bbblast.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bbblast.controller.Controller;
+import bbblast.controller.gameloop.Updatable;
 import bbblast.controller.gameover.GameOver;
+import bbblast.model.GridInfo;
+import bbblast.model.RegularHexGridInfo;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
@@ -25,6 +31,7 @@ public class JFXViewImpl implements View {
 
     private Controller controller;
     private final Stage stage;
+    private final List<Updatable> updatable = new ArrayList<>();
 
     /**
      * 
@@ -125,7 +132,7 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void update() {
-        // TODO Auto-generated method stub
+        this.updatable.forEach(a -> a.update());
     }
 
     /**
