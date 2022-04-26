@@ -33,6 +33,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
     private final double size;
     private final double xshift = 1.0 / 6.0;
     private final double yshift = -1.0 / 3.0;
+    private final int maxBubbles; 
 
     /**
      * @param info the GridInfo that defines the dimentions of the grid. This
@@ -42,6 +43,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
         this.info = info;
         this.grid = new HashMap<>();
         this.size = this.info.getPointsHeight() / (2.0 * (((3.0 / 4.0) * (this.info.getBubbleHeight() - 1)) + 1));
+        this.maxBubbles=Math.toIntExact(Math.round(3.0/5.0*this.info.getBubbleHeight()));
     }
 
     /**
@@ -90,7 +92,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
 
         if (!this.grid.isEmpty()) {
             return this.grid.entrySet().stream().map(e -> e.getKey()).sorted((t1, t2) -> t2.getY() - t1.getY())
-                    .findFirst().get().getY() >= this.info.getBubbleHeight();
+                    .findFirst().get().getY() >= this.maxBubbles;
         }
         return false;
     }
