@@ -26,7 +26,6 @@ import bbblast.utils.persister.Persister;
  */
 public class LevelTest {
 	private static final int FPS = 60;
-	private static final int SPEED = 5;
 	private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
 	private static final Path PATH = Path
 			.of(System.getProperty("user.home") + SEPARATOR + ".bbblast-test" + SEPARATOR + "levelTest.json");
@@ -38,7 +37,7 @@ public class LevelTest {
 	public void testLevelCreation() {
 		final GridInfo infos = new RegularHexGridInfo(10, 10, 1);
 		final BubbleGenerator generator = new BubbleGeneratorImpl(List.of(COLOR.values()));
-		final Level lvl = new LevelImpl(infos, generator, FPS, SPEED);
+		final Level lvl = new LevelImpl(infos, generator, FPS);
 
 		lvl.fillGameBubblesGrid(1);
 		assertEquals(infos.getBubbleWidth(), lvl.getGameBubblesGrid().getBubbles().size(),
@@ -56,7 +55,7 @@ public class LevelTest {
 	public void testLevelSavingAndLoading() {
 		final GridInfo saveInfos = new RegularHexGridInfo(20, 50, 50);
 		final BubbleGenerator saveGenerator = new BubbleGeneratorImpl(List.of(COLOR.BLUE, COLOR.RED, COLOR.GREEN));
-		final Level saveLevel = new LevelImpl(saveInfos, saveGenerator, FPS, SPEED);
+		final Level saveLevel = new LevelImpl(saveInfos, saveGenerator, FPS);
 		final Persister<Level> persister = new FilePersister<>(PATH, Level.class);
 
 		try {
@@ -79,10 +78,10 @@ public class LevelTest {
 		final GridInfo differentInfos = new RegularHexGridInfo(10, 10, 1);
 		final BubbleGenerator originGenerator = new BubbleGeneratorImpl(List.of(COLOR.BLUE, COLOR.RED, COLOR.GREEN));
 		final BubbleGenerator differentGenerator = new BubbleGeneratorImpl(List.of(COLOR.values()));
-		final Level originLvl = new LevelImpl(originInfos, originGenerator, FPS, SPEED);
-		final Level differentLvl1 = new LevelImpl(differentInfos, originGenerator, FPS, SPEED);
-		final Level differentLvl2 = new LevelImpl(originInfos, differentGenerator, FPS, SPEED);
-		final Level differentLvl3 = new LevelImpl(originInfos, originGenerator, FPS, SPEED);
+		final Level originLvl = new LevelImpl(originInfos, originGenerator, FPS);
+		final Level differentLvl1 = new LevelImpl(differentInfos, originGenerator, FPS);
+		final Level differentLvl2 = new LevelImpl(originInfos, differentGenerator, FPS);
+		final Level differentLvl3 = new LevelImpl(originInfos, originGenerator, FPS);
 
 		assertNotEquals(originLvl, differentLvl1, "Two levels with different grid infos are different");
 		assertNotEquals(originLvl, differentLvl2, "Two levels with different generators are different");
