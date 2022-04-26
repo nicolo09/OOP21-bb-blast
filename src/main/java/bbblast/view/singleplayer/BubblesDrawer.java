@@ -9,8 +9,8 @@ import bbblast.model.Bubble;
 public interface BubblesDrawer {
     /**
      * draws bubble.
+     * 
      * @param coll collection of bubbles
      */
     void drawBubbles(Collection<Bubble> coll);
-    
 }

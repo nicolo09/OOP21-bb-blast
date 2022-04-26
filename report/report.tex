@@ -225,10 +225,40 @@ begin{figure}[H]
 	\includegraphics[width=.7\textwidth]{img/drawers.pdf}
 	\caption{UML del CanvasDrawer}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Emma Leonardi}
+\subsubsection{Gestione del campo di Bolle}
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/bubble_grid.pdf}
+	\caption{UML del Gameloop}
+\end{figure}
+
+\paragraph{Problema} La griglia di Bolle deve essere indipendente dalla forma delle bolle
+
+\paragraph{Soluzione} Un interfaccia BubblesGrid con metodi che astraggono la forma delle bolle. 
+In particolare l'implementazione di BubblesGridImpl è per griglie di esagoni con la punta verso l'alto, 
+ma implementando l'interfaccia si possono creare griglie di qualsiasi forma di bolle.
+
+\subsubsection{Gestione di tre valori appaiati}
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/triplet.pdf}
+	\caption{UML del Gameloop}
+\end{figure}
+
+\paragraph{Problema} Nella griglia ho usato coordinate con tre valori e avevo necessità di un oggetto per memorizzarle
+
+\paragraph{Soluzione} Ho creato un'interfaccia generica che supporta qualsiasi tipo di tripletta di valori, poi implementata in una classe generica.
+Per poter sommare i valori ho poi creato una classe con metodi statici che fa la somma delle triplette.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Sviluppo}
 \section{Testing automatizzato}
+
+Abbiamo usato JUnit 5 per fare test automatici delle classi.
 
 Il testing automatizzato è un requisito di qualunque progetto software che si rispetti, e consente di verificare che non vi siano regressioni nelle funzionalità a fronte di aggiornamenti.
 %
@@ -263,6 +293,18 @@ In questo progetto i miei compiti sono stati:
 	\item Caricamento degli assets (package bbblast.view.singleplayer.assetsloader)
 \end{itemize}
 
+\subsection{Emma Leonardi}
+
+In questo progetto i miei compiti sono stati:
+\begin{itemize}
+	\item Gestire il comportamento di Griglie di bolle (package bbblast.model BubblesGrid e BubblesGridImpl)
+	\item Bolle statiche (package package bbblast.model Bubble e BubbleImpl)
+	\item Comportamento del cannone (package bbblast.model Cannon e CannonImpl)
+	\item Grafica del cannone (package bblast.view.singleplayer CannonDrawerImpl e CannonDrawer)
+	\item Triplette di valori (package bbblast.utils Triplet, TripletImpl )
+	\item Somma di Triplette di valori interi (package bbblast.utils TripletIntegerUtility)
+\end{itemize}
+
 \section{Note di sviluppo}
 
 \subsection{Nicolò Guerra}
@@ -275,24 +317,44 @@ In questo progetto i miei compiti sono stati:
 	\item Thread
 \end{itemize}
 
+\subsection{Emma Leonardi}
+\begin{itemize}
+	\item Stream
+	\item Progettazione di classi generiche
+	\item Lambda expressions
+	\item JavaFX
+\end{itemize}
+Per la gestione delle coordinate su tre assi ho usato lo pseudocodice di Amit Patel \url{https://www.redblobgames.com/grids/hexagons/} e ho usato sempre il suo codice per cercare gli esagoni vicini.
+
 \chapter{Commenti finali}
 
 In quest'ultimo capitolo si tirano le somme del lavoro svolto e si delineano eventuali sviluppi
 futuri.
 
-\subsection{Nicolò Guerra}
-
 \section{Autovalutazione e lavori futuri}
+
+\subsection{Nicolò Guerra}
 
 Non sono soddisfatto del progetto che abbiamo svolto. Purtroppo abbiamo avuto diversi problemi già a partire dalla parte di design generale dell'applicazione, complice anche l'inesperienza essendo la prima
 volta che ognuno di noi portava avanti un progetto che tutto sommato comincia ad avere dimensioni importanti. Ci sono stati alcuni problemi anche nella coordinazione interna del team, e sicuramente questo
 non ha influito positivamente sul risultato finale. Probabilmente avremmo dovuto iniziare scegliendo un progetto diverso da sviluppare e una divisone di compiti diversa, cosa che purtroppo non potevamo sapere
 prima di iniziare il progetto. Avremmo dovuto inoltre soffermarci meglio sulle interazioni tra le diverse parti del software. Sono aspetti a cui starò molto più attento una prossima volta.
 
-\section{Difficoltà incontrate e commenti per i docenti}
+\subsection{Emma Leonardi}
 
+Sono soddisfatta del mio lavoro individuale, ma non del progetto in totale. Ci sono stati parecchi problemi sulle parti del codice in comune, 
+perchè ci sono stati dei problemi di comunicazione e incomprensioni, spesso dovute a una prima fase di design poco precisa. Questo mi ha rallentato nello sviluppo della mia parte di progetto e a tratti ha costretto a riscrivere parti di codice frutto di aspettative diverse di implementazione. 
+Non ha aiutato la coordinazione del progetto anche l'inesperienza, che ci ha fatto sottovalutare alcuni aspetti che si sono rivelati problemi implementativi. 
+In futuro cercherò di spiegarmi meglio sulle caratteristiche del software prodotto da me e comunicare meglio con i miei compagni di progetto. 
+
+\section{Difficoltà incontrate e commenti per i docenti}
+\subsection{Nicolò Guerra}
 Sicuramente la caratteristica che ho apprezzato del corso è la disponibilità dei docenti, le correzioni in laboratorio allo svolgimento di ogni esercizio risultano molto utili per migliorare la tecnica.
 Sarebbe interessante approfondire meglio la parte di analisi di dominio di un problema e di design di una soluzione, al di la di quella che è la programmazione Java, che forse è più semplice da capire.
+
+\subsection{Emma Leonardi}
+Mi è piaciuta la struttura del corso, i laboratori e l'attenzione dei docenti verso gli studenti. 
+Ho trovato di difficile comprensione gli aspetti di Programmazione ad Oggetti avanzati, come Stream e Pattern e avrei voluto gli si fosse dedicato più tempo.
 
 \appendix
 \chapter{Guida utente}
@@ -329,6 +391,16 @@ elencando i permalink dei post sul forum dove è avvenuta la consegna.
 \begin{itemize}
 	\item Laboratorio 07: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=88829#p137443}
 	\item Laboratorio 08: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=89272#p138741}
+\end{itemize}
+
+\subsection{Emma Leonardi}
+\begin{itemize}
+	\item Laboratorio 05: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=87881#p135211}
+	\item Laboratorio 06: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=87880#p135213}
+	\item Laboratorio 07: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=88829#p136445}
+	\item Laboratorio 08: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=89272#p138799}
+	\item Laboratorio 09: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=90125#p138800}
+	\item Laboratorio 10: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=91128#p139973}
 \end{itemize}
 
 \bibliographystyle{alpha}
