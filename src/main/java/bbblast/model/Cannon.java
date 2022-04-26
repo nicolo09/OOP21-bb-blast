@@ -19,7 +19,7 @@ public interface Cannon {
      * 
      * @return the moving bubble shot
      */
-    Bubble shoot();
+    MovingBubble shoot();
 
     /**
      * switches the Bubble inside the Cannon with the outside one.
