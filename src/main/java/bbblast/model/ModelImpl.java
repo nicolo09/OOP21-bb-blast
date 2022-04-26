@@ -3,14 +3,8 @@ package bbblast.model;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Optional;
-
-import bbblast.controller.Controller;
-import bbblast.controller.gameover.GameOver;
-import bbblast.controller.gameover.LastRowGameOverImpl;
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
-import bbblast.utils.Score;
 
 /**
  * Implements a game model.
