@@ -55,11 +55,11 @@ public class BubblesDrawerImpl implements BubblesDrawer {
 	}
 	// Calculates the correct width for the image
 	private double getRateoOnX() {
-		return canvas.getWidth() / infos.getBubbleWidth();
+		return canvas.getWidth() / infos.getPointsWidth();
 	}
 	// Calculates the correct height for the image
 	private double getRateoOnY() {
-		return canvas.getHeight() / infos.getBubbleHeight();
+		return canvas.getHeight() / infos.getPointsHeight();
 	}
 
 }
