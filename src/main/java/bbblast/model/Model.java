@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import bbblast.controller.gameloop.Updatable;
+import bbblast.model.level.Level;
 
 /**
  * 
@@ -11,30 +12,31 @@ import bbblast.controller.gameloop.Updatable;
  * 
  */
 public interface Model extends Updatable {
-	
+
 	/**
-	 * updates the game values. 
+	 * updates the game values.
 	 */
 	void update();
 
 	/**
-	 * @return the collection of all Bubbles
+	 * @return the collection of all {@link Bubble}s
 	 */
 	Collection<Bubble> getBubbles();
-	
+
 	/**
-	 * moves the cannon.
-	 * @param angle 
+	 * moves the {@link Cannon}.
+	 * 
+	 * @param angle
 	 */
 	void moveCannon(int angle);
 
 	/**
-	 * makes the cannon shoot.
+	 * makes the {@link Cannon} shoot.
 	 */
 	void shootCannon();
 
 	/**
-	 * @return the angle of the cannon
+	 * @return the angle of the {@link Cannon}
 	 */
 	int getCannonAngle();
 
@@ -44,21 +46,27 @@ public interface Model extends Updatable {
 	Map<Integer, Integer> getScores();
 
 	/**
-	 * switches the Bubble inside the cannon.
+	 * switches the {@link Bubble} inside the cannon.
 	 */
 	void switchBubble();
 
 	/**
-	 * Set up this model for a new game
+	 * Set up this model for a new game.
+	 * 
 	 * @param grid
 	 */
-    void startNewGame(GridInfo grid, int fps);
+	void startNewGame(GridInfo grid, int fps);
 
-    /**
-     * Returns true if bubbles has reached last row
-     */
-    boolean isLastRowReached();
-	
+	/**
+	 * @return true if {@link Bubble}s has reached last row
+	 */
+	boolean isLastRowReached();
+
+	/**
+	 * @return the current {@link Level}
+	 */
+	Level getCurrentLevel();
+
     /**
      * Reset the status of this model.
      */

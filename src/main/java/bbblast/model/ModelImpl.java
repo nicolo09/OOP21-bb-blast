@@ -3,38 +3,29 @@ package bbblast.model;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import bbblast.utils.Position;
-import bbblast.utils.PositionImpl;
+
+import bbblast.model.level.Level;
+import bbblast.model.level.LevelImpl;
 
 /**
  * Implements a game model.
  */
 public class ModelImpl implements Model {
 
-    private static final double CANNONVERTICALOFFSETPERCENT = 0.9;
-    // TODO: Set a speed
-    private static final int BUBBLESPEED = 0;
-    
-    private BubblesGrid grid;
-    private Cannon cannon;
     private MovementHandler mover;
+    private Level gameLevel;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void startNewGame(final GridInfo grid, final int fps) {
-        this.grid = new BubblesGridImpl(grid);
-        final Position bubbleSpawnPosition = new PositionImpl(grid.getPointsWidth() / 2,
-                grid.getPointsHeight() * CANNONVERTICALOFFSETPERCENT);
-        this.cannon = new CannonImpl(bubbleSpawnPosition, fps, BUBBLESPEED,
-                new BubbleGeneratorImpl(COLOR.allExceptGrey()));
-        this.mover = new MovementHandlerImpl(this.grid, grid);
+        this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
+        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid);
     }
-    
+
     /**
-     * {@inheritDoc}
-     * ticks the MovementHandler.
+     * {@inheritDoc} ticks the MovementHandler.
      */
     @Override
     public void update() {
@@ -46,8 +37,8 @@ public class ModelImpl implements Model {
      */
     @Override
     public Collection<Bubble> getBubbles() {
-        final var result = new HashSet<>(grid.getBubbles());
-        result.add(cannon.getCurrentlyLoadedBubble());
+        final var result = new HashSet<>(this.gameLevel.getGameBubblesGrid().getBubbles());
+        result.add(this.gameLevel.getGameCannon().getCurrentlyLoadedBubble());
         mover.getShot().ifPresent(a -> {
             result.add(a);
         });
@@ -59,7 +50,7 @@ public class ModelImpl implements Model {
      */
     @Override
     public void moveCannon(final int angle) {
-        cannon.move(angle);
+        this.gameLevel.getGameCannon().move(angle);
     }
 
     /**
@@ -68,16 +59,8 @@ public class ModelImpl implements Model {
     @Override
     public void shootCannon() {
         if (mover.getShot().isEmpty()) {
-            mover.setShot(cannon.shoot());
+            this.gameLevel.getGameCannon().shoot();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getCannonAngle() {
-        return cannon.getAngle();
     }
 
     // TODO: Taglia fa gli score
@@ -91,8 +74,16 @@ public class ModelImpl implements Model {
      * {@inheritDoc}
      */
     @Override
+    public int getCannonAngle() {
+        return this.gameLevel.getGameCannon().getAngle();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isLastRowReached() {
-        return this.grid.endReached();
+        return this.gameLevel.getGameBubblesGrid().endReached();
     }
 
     /**
@@ -100,13 +91,20 @@ public class ModelImpl implements Model {
      */
     @Override
     public void switchBubble() {
-        cannon.exchange();
+        this.gameLevel.getGameCannon().exchange();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Level getCurrentLevel() {
+        return this.gameLevel;
     }
 
     @Override
     public void reset() {
-        grid = null;
-        cannon = null;
+        this.gameLevel = null;
         mover = null;
     }
 }
