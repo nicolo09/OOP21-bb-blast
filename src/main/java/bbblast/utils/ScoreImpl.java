@@ -50,14 +50,7 @@ public class ScoreImpl implements Score, Serializable {
     public LocalDate getDate() {
         return this.date;
     }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void incrementScore(final int s) {
-        this.score = score + s;
-    }
-    
+
     @Override
     public String toString() {
         return "ScoreImpl [name=" + name + ", score=" + score + ", date=" + date + "]";
