@@ -114,4 +114,9 @@ public interface Controller {
 	 * @return the last saved level, if there isn't any it returns an optional empty
 	 */
 	Optional<Level> loadLevel();
+	
+	/**
+	 * Resets the status of the application.
+	 */
+	void reset();
 }
