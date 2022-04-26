@@ -34,9 +34,11 @@ public class GameLoopImpl extends Thread implements GameLoop {
             if (!this.isPaused()) {
                 update();
             }
-            try {
-                sleep(start + TICKDURATION - System.currentTimeMillis());
-            } catch (InterruptedException e) {
+            if (start + TICKDURATION - System.currentTimeMillis() > 0) {
+                try {
+                    sleep(start + TICKDURATION - System.currentTimeMillis());
+                } catch (InterruptedException e) {
+                }
             }
         }
     }
