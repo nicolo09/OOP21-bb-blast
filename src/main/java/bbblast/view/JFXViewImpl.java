@@ -18,6 +18,8 @@ import bbblast.view.options.OptionViewControllerImpl;
 import bbblast.view.options.OptionViewImpl;
 import bbblast.view.singleplayer.GameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
+import bbblast.view.singleplayer.SingleplayerGameViewControllerImpl;
+import bbblast.view.singleplayer.SingleplayerGameViewImpl;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -57,12 +59,14 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void startSinglePlayerGame() {
-        final GameView gameView = null;
-        final SingleplayerGameViewController gameViewController = null;
         this.controller.startSinglePlayerGame();
+        final SingleplayerGameViewImpl gameView = new SingleplayerGameViewImpl(this.controller.getGridInfo());
+        this.updatable.add(gameView);
+        final SingleplayerGameViewController gameViewController = new SingleplayerGameViewControllerImpl(controller);
+        gameView.setController(gameViewController);
         Platform.runLater(() -> {
             // TODO Create singleplayer view
-            this.adjustStageAndSetScene(null);
+            this.adjustStageAndSetScene(gameView.getScene());
             stage.show();
         });
     }
