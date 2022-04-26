@@ -15,9 +15,16 @@ public interface SingleplayerGameViewController {
     Collection<Bubble> getBubbles();
 
     /**
-     * @param a the Angle at which the cannon shoots at.
+     * Moves the cannon.
+     * 
+     * @param angle
      */
-    void cannonShoot(int a);
+    void moveCannon(int angle);
+
+    /**
+     * Tells the cannon to shoot.
+     */
+    void cannonShoot();
 
     /**
      * @return the score.
@@ -33,5 +40,21 @@ public interface SingleplayerGameViewController {
      * exits the game.
      */
     void exit();
+
+    /**
+     * 
+     * @return the angle the cannon is at.
+     */
+    int getCannonAngle();
+
+    /**
+     * Moves the cannon to the right.
+     */
+    void moveCannonRight();
+
+    /**
+     * Moves the cannon to the left.
+     */
+    void moveCannonLeft();
 
 }
