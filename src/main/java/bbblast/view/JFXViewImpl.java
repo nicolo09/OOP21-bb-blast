@@ -99,13 +99,14 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void gameOver(final GameOver gameOverEvent) {
-        final GameOverView gameOverView = new GameOverViewImpl(this);
+        final GameOverView gameOverView = new GameOverViewImpl(this, this.controller.getBubbles(), this.controller.getGridInfo());
         final GameOverViewController gameOverController = new GameOverViewControllerImpl(gameOverEvent.getScores(),
                 (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
         Platform.runLater(() -> {
             this.adjustStageAndSetScene(gameOverView.getScene());
             stage.show();
+            gameOverView.showEndDialog();
         });
     }
 
