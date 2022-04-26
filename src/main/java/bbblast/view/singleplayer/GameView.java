@@ -25,11 +25,6 @@ public interface GameView {
      * @param controller
      */
     void setController(SingleplayerGameViewController controller);
-
-    /**
-     * updates the view.
-     */
-    void update();
     
     Scene getScene();
 }
