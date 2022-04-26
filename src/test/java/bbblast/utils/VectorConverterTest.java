@@ -15,7 +15,7 @@ public class VectorConverterTest {
         assertEquals(tmp.getX(), vc.getComponents().getX(), 0.001, "Angle=0");
         assertEquals(tmp.getY(), vc.getComponents().getY(), 0.001, "Angle=0");
         vc.setAngle(45);
-        assertEquals(vc.getComponents().getX(), vc.getComponents().getY(), 0.001, "Angle=45");
+        assertEquals(vc.getComponents().getX(), -vc.getComponents().getY(), 0.001, "Angle=45");
         vc.setAngle(180);
         tmp = new PositionImpl(-10, 0);
         assertEquals(tmp.getX(), vc.getComponents().getX(), 0.001, "Angle=180");
