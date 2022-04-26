@@ -59,7 +59,7 @@ public class ModelImpl implements Model {
     @Override
     public void shootCannon() {
         if (mover.getShot().isEmpty()) {
-            this.gameLevel.getGameCannon().shoot();
+            mover.setShot(gameLevel.getGameCannon().shoot());
         }
     }
 
