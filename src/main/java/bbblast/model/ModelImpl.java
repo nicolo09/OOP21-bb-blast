@@ -71,7 +71,9 @@ public class ModelImpl implements Model {
      */
     @Override
     public void shootCannon() {
-        cannon.shoot();
+        if (mover.getShot().isEmpty()) {
+            mover.setShot(cannon.shoot());
+        }
     }
 
     /**
