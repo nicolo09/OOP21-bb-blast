@@ -92,7 +92,7 @@ Il tempo del gioco è scandito dal Controller. Il movimento del cannone è invec
 	\includegraphics[width=\textwidth]{img/arch.pdf}
 	\caption{Schema UML architetturale del gioco. L'interfaccia \texttt{Controller} gestisce il flusso dell'applicazione, mentre la \texttt{View} gestisce l'interazione con l'utente e il \texttt{Model} fornisce le informazioni sul \texttt{Level}.}
 \end{figure}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Design dettagliato}
 \subsection{Nicolò Guerra}
 \subsubsection{Caratteristiche della griglia di bolle}
@@ -166,7 +166,67 @@ e aumentarne l'efficienza. In questo modo è facile riutilizzare il meccanismo d
 
 \paragraph{Soluzione} È stato utilizzato il pattern Gameloop, creando un interfaccia che ne definisce le interazioni con il Controller, presso cui altri componenti che implementano Updatable possono registrarsi
 per essere aggiornati ad ogni ciclo.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Filippo Casadei}
+\subsubsection{Movimento e collisioni delle bolle}
 
+\paragraph{Problema} Le bolle normalmente sono identificate da un colore e una posizione, ma per potersi spostare hanno bisogno di una velocità per potersi spostare all'interno della griglia di gioco.
+Perciò è necessaria un tipo di bolla che può avere una sua velocità.
+
+\paragraph{Soluzione} Per risolvere questo punto è stata modellata una MovingBubble, che estende una bolla normale, che però è caratterizzata da una velocità e da varie operazioni su di essa.
+
+begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/movingbubble.pdf}
+	\caption{UML della MovingBubble}
+\end{figure}
+
+\paragraph{Problema} L'applicazione si comporrà di una griglia di gioco, sulla quale saranno presenti a loro volta una griglia di bolle e la bolla che verrà sparata dal cannone,
+quest'ultima potrà muoversi liberamente finchè non verrà a contatto con le bolle già presenti, perciò bisogna controllare che gli spostamenti della bolla in
+movimento siano "legali" e che quando questa collida con la griglia di bolle si annetta ad essa.
+Inoltre la bolla dovrà poter rimbalzare sui muri laterali facendole cambiare direzione di movimento.
+
+\paragraph{Soluzione} L'entità che gestirà i movimenti della bolla sarà il MovementHandler, quest'ultimo avrà il compito di muovere la bolla solo in posizioni "legali" e nel caso stia per uscire dalla griglia
+gestisca il movimento della bolla riposizionandola coerentemente a seconda della sua velocità, facendola rimbalzare se necessario.
+Il MovementHandler deve sapere che bolla dovrà controllare, di base non c'è nessuna bolla da controllare.  
+
+begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/movementhandler.pdf}
+	\caption{UML del MovementHandler}
+\end{figure}
+
+\subsection{Gestione dei livelli}
+
+\paragraph{Problema} L'applicazione dovrà creare ogni volta un nuovo livello che il giocatore potrà giocare, questo livello deve poter essere modificabile in base al livello di sfida che vorrà affrontare
+il giocatore. 
+
+\paragraph{Soluzione} Il Level è stato modellato per contenere gli elementi fondamentali di una partita, ovvero è suo compito generare la nuova griglia e il cannone con cui il giocatore interagirà,
+inoltre contiene anche il valore numerico del punteggio attuale. Dato che implementa l'interfaccia Serializable è anche possibile salvare lo stato del livello in
+qualsiasi momento per poi riprendere da dove si era rimasti.
+
+begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/level.pdf}
+	\caption{UML del Level}
+\end{figure}
+
+\subsection{Raffigurazione grafica delle bolle e del campo di gioco}
+
+\paragraph{Problema} L'utente per interagire correttamente con l'applicazione necessita di avere una corretta rappresentazione grafica delle posizioni delle bolle e del cannone,
+questa dovrà inoltre esser aggiornata coerentemente durante lo svolgimento della partita.
+
+\paragraph{Soluzione} Per aggiornare continuamente l'intera griglia la view principale farà utilizzo del CanvasDrawer, il quale ha il compito di ridisegnare ad ogni tick 
+ogni elemento di gioco, per fare ciò delega il compito di disegnare le bolle, sia quelle della griglia sia quella in movimento, ad un BubbleDrawer, mentre il compito
+di disegnare il cannone alla giusta angolazione è delegato ad un CannonDrawer.
+
+begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/drawers.pdf}
+	\caption{UML del CanvasDrawer}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Sviluppo}
 \section{Testing automatizzato}
 
