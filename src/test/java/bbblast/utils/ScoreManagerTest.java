@@ -18,7 +18,6 @@ public class ScoreManagerTest {
     private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
     private static final Path PATH = Path
             .of(System.getProperty("user.home") + SEPARATOR + ".bbblast-test" + SEPARATOR + "ScoreManagerTest.json");
-    private final ScoreTable l = new ScoreTable();
 
     private final ScoreManager x = new ScoreManagerImpl(new FilePersister<ScoreTable>(PATH, ScoreTable.class));
 
