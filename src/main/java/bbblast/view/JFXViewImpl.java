@@ -32,6 +32,9 @@ public class JFXViewImpl implements View {
      */
     public JFXViewImpl(final Stage stage) {
         this.stage = stage;
+        stage.setOnCloseRequest(a -> {
+            System.exit(0);
+        });
     }
 
     /**
