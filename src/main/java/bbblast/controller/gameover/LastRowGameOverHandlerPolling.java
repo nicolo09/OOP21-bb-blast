@@ -2,6 +2,7 @@ package bbblast.controller.gameover;
 
 import java.util.Optional;
 
+import bbblast.controller.Controller;
 import bbblast.controller.gameloop.Updatable;
 import bbblast.model.Model;
 import bbblast.view.View;
@@ -13,8 +14,8 @@ import bbblast.view.View;
 public class LastRowGameOverHandlerPolling extends ViewDelegateGameOverHandler implements GameOverHandler, Updatable {
 
     private final Model gameModel;
-    public LastRowGameOverHandlerPolling(final Model gameModel, final View gameView) {
-        super(gameView);
+    public LastRowGameOverHandlerPolling(final Model gameModel, final View gameView, final Controller mainController) {
+        super(gameView, mainController);
         this.gameModel = gameModel;
     }
 
