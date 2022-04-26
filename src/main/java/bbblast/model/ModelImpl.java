@@ -54,7 +54,9 @@ public class ModelImpl implements Model {
     public Collection<Bubble> getBubbles() {
         final var result = new HashSet<>(grid.getBubbles());
         result.add(cannon.getCurrentlyLoadedBubble());
-        // TODO: Add moving bubble to result
+        mover.getShot().ifPresent(a -> {
+            result.add(a);
+        });
         return result;
     }
 
