@@ -43,7 +43,7 @@ public class GameOverViewControllerImpl implements GameOverViewController {
      * @return the maximum score of this game
      */
     private int getMaximumScore() {
-        return this.scores.values().stream().max(Integer::compare).get();
+        return this.scores.values().stream().max(Integer::compare).orElseGet(() -> 0);
     }
 
 }
