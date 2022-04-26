@@ -14,6 +14,9 @@ public class ModelImpl implements Model {
 
     private MovementHandler mover;
     private Level gameLevel;
+    private static final int BUBBLEVALUE = 100;
+    private static final int MAXBUBBLE = 3;
+    private Bubble bubble;
 
     /**
      * {@inheritDoc}
@@ -60,10 +63,10 @@ public class ModelImpl implements Model {
     public void shootCannon() {
         if (mover.getShot().isEmpty()) {
             mover.setShot(gameLevel.getGameCannon().shoot());
+            bubble = mover.getShot().get();
         }
     }
 
-    // TODO: Taglia fa gli score
     @Override
     public Map<Integer, Integer> getScores() {
         // TODO Auto-generated method stub
@@ -106,5 +109,26 @@ public class ModelImpl implements Model {
     public void reset() {
         this.gameLevel = null;
         mover = null;
+    }
+
+    private void scoreUpdater() {
+        int score = 0;
+        if (!mover.handle()) {
+            if (this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble).size() > MAXBUBBLE) {
+                final Collection<Bubble> bubbleSaved = this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble);
+                score = score + (bubbleSaved.size() * BUBBLEVALUE);
+                for (final Bubble b : bubbleSaved) {
+                    this.gameLevel.getGameBubblesGrid().removeBubble(b.getCoords());
+                }
+            }
+            final Collection<Bubble> floatingBubbles = this.gameLevel.getGameBubblesGrid().checkForUnconnectedBubbles();
+            if (!floatingBubbles.isEmpty()) {
+                for (final Bubble b : floatingBubbles) {
+                    this.gameLevel.getGameBubblesGrid().removeBubble(b.getCoords());
+                    score = score + BUBBLEVALUE;
+                }
+            }
+        }
+        this.gameLevel.updateScore(score);
     }
 }
