@@ -75,7 +75,7 @@ public class CannonImpl implements Cannon, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public Bubble shoot() {
+    public MovingBubble shoot() {
         this.vectorConv.setAngle(this.angle);
         this.loadedBubble.setSpeed(this.vectorConv.getComponents());
         final var bb2Shoot = this.loadedBubble;

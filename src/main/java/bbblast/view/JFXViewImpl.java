@@ -1,7 +1,13 @@
 package bbblast.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bbblast.controller.Controller;
+import bbblast.controller.gameloop.Updatable;
 import bbblast.controller.gameover.GameOver;
+import bbblast.model.GridInfo;
+import bbblast.model.RegularHexGridInfo;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
@@ -12,6 +18,8 @@ import bbblast.view.options.OptionViewControllerImpl;
 import bbblast.view.options.OptionViewImpl;
 import bbblast.view.singleplayer.GameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
+import bbblast.view.singleplayer.SingleplayerGameViewControllerImpl;
+import bbblast.view.singleplayer.SingleplayerGameViewImpl;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,6 +33,7 @@ public class JFXViewImpl implements View {
 
     private Controller controller;
     private final Stage stage;
+    private final List<Updatable> updatable = new ArrayList<>();
 
     /**
      * 
@@ -32,6 +41,9 @@ public class JFXViewImpl implements View {
      */
     public JFXViewImpl(final Stage stage) {
         this.stage = stage;
+        stage.setOnCloseRequest(a -> {
+            System.exit(0);
+        });
     }
 
     /**
@@ -47,12 +59,14 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void startSinglePlayerGame() {
-        final GameView gameView = null;
-        final SingleplayerGameViewController gameViewController = null;
         this.controller.startSinglePlayerGame();
+        final SingleplayerGameViewImpl gameView = new SingleplayerGameViewImpl(this.controller.getGridInfo());
+        this.updatable.add(gameView);
+        final SingleplayerGameViewController gameViewController = new SingleplayerGameViewControllerImpl(controller);
+        gameView.setController(gameViewController);
         Platform.runLater(() -> {
             // TODO Create singleplayer view
-            this.adjustStageAndSetScene(null);
+            this.adjustStageAndSetScene(gameView.getScene());
             stage.show();
         });
     }
@@ -85,13 +99,14 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void gameOver(final GameOver gameOverEvent) {
-        final GameOverView gameOverView = new GameOverViewImpl(this);
+        final GameOverView gameOverView = new GameOverViewImpl(this, this.controller.getBubbles(), this.controller.getGridInfo());
         final GameOverViewController gameOverController = new GameOverViewControllerImpl(gameOverEvent.getScores(),
                 (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
         Platform.runLater(() -> {
             this.adjustStageAndSetScene(gameOverView.getScene());
             stage.show();
+            gameOverView.showEndDialog();
         });
     }
 
@@ -122,7 +137,7 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void update() {
-        // TODO Auto-generated method stub
+        this.updatable.forEach(a -> a.update());
     }
 
     /**

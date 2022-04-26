@@ -1,14 +1,17 @@
 package bbblast.controller.gameover;
 
+import bbblast.controller.Controller;
 import bbblast.controller.gameloop.Updatable;
 import bbblast.view.View;
 
 public abstract class ViewDelegateGameOverHandler implements GameOverHandler{
 
     protected final View gameView;
+    private final Controller controller;
 
-    public ViewDelegateGameOverHandler(final View gameView) {
+    public ViewDelegateGameOverHandler(final View gameView, final Controller mainController) {
         this.gameView = gameView;
+        this.controller = mainController;
     }
     
     /**
@@ -22,6 +25,7 @@ public abstract class ViewDelegateGameOverHandler implements GameOverHandler{
     @Override
     public void handleGameOver(final GameOver gameOver) {
         gameView.gameOver(gameOver);
+        controller.reset();
     }
 
 }

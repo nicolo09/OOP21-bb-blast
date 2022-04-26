@@ -4,82 +4,119 @@ import java.util.Collection;
 import java.util.Optional;
 
 import bbblast.model.Bubble;
+import bbblast.model.GridInfo;
 import bbblast.model.Model;
+import bbblast.model.level.Level;
 import bbblast.utils.Score;
 import bbblast.utils.Settings;
 import bbblast.view.View;
 
 /***
- * The Controller
+ * The Controller.
  */
 public interface Controller {
 
-    /**
-     * @param v The view associated with the controller.
-     */
-    void setView(View v);
+	/**
+	 * @param v The view associated with the controller.
+	 */
+	void setView(View v);
 
-    /**
-     * @param m The model associated with the controller.
-     */
-    void setModel(Model m);
+	/**
+	 * @param m The model associated with the controller.
+	 */
+	void setModel(Model m);
 
-    /**
-     * @return the settings of the game.
-     */
-    Optional<Settings> loadSettings();
+	/**
+	 * @return the settings of the game.
+	 */
+	Optional<Settings> loadSettings();
 
-    /**
-     * @param s the settings to save.
-     * @return true if correctly written, false otherwise
-     */
-    boolean writeSettings(Settings s);
+	/**
+	 * @param s the settings to save.
+	 * @return true if correctly written, false otherwise
+	 */
+	boolean writeSettings(Settings s);
 
-    /**
-     * Starts the SinglePlayer Game.
-     */
-    void startSinglePlayerGame();
-    
-    /**
-     * Pauses the game.
-     */
-    void pauseGame();
-    
-    /**
-     * 
-     * @return the score
-     */
-    int getScore();
+	/**
+	 * Starts the SinglePlayer Game.
+	 */
+	void startSinglePlayerGame();
 
-    /**
-     * Saves a score in the leaderboard.
-     * @param name the player's name
-     */
-    void saveScore(Score score);
+	/**
+	 * Pauses the game.
+	 */
+	void pauseGame();
 
-    /**
-     * @return the collection of bubbles in the game.
-     */
-    Collection<Bubble> getBubbles();
+	/**
+	 * 
+	 * @return the score
+	 */
+	int getScore();
 
-    /**
-     * moves the cannon.
-     */
-    void moveCannon(int angle);
+	/**
+	 * Saves a score in the leaderboard.
+	 * 
+	 * @param score the current game's score
+	 */
+	void saveScore(Score score);
 
-    /**
-     * shoots the cannon.
-     */
-    void shootCannon();
+	/**
+	 * @return the collection of bubbles in the game.
+	 */
+	Collection<Bubble> getBubbles();
 
-    /**
-     * @return the FPS target game is running at
-     */
-    int getFPS();
+	/**
+	 * Moves the cannon.
+	 * 
+	 * @param angle the new {@link Cannon}'s angle
+	 */
+	void moveCannon(int angle);
 
-    /**
-     * Loads the list of saved scores
-     * @return saved scores
-     */
-    Collection<Score> loadScores();
+	/**
+	 * Shoots the cannon.
+	 */
+	void shootCannon();
+	
+	/**
+	 * @return the current {@link Cannon}'s angle
+	 */
+	int getCannonAngle();
+
+	/**
+	 * @return the FPS target game is running at.
+	 */
+	int getFPS();
+
+	/**
+	 * Loads the collection of saved scores.
+	 * 
+	 * @return saved scores
+	 */
+	Collection<Score> loadScores();
+
+	/**
+	 * @return the {@link GridInfo} containing the current game's informations
+	 */
+	GridInfo getGridInfo();
+
+	/**
+	 * Saves the {@link Level} status on a file.
+	 * 
+	 * @param lvl the current level
+	 * 
+	 * @return true if saved successfully, false otherwise
+	 */
+	boolean saveLevel(Level lvl);
+
+	/**
+	 * Loads from file the last saved {@link Level}, if there's any.
+	 * 
+	 * @return the last saved level, if there isn't any it returns an optional empty
+	 */
+	Optional<Level> loadLevel();
+	
+	/**
+	 * Resets the status of the application.
+	 */
+	void reset();
 }

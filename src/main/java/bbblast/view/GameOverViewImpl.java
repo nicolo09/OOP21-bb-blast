@@ -1,10 +1,19 @@
 package bbblast.view;
 
+import java.util.Collection;
 import java.util.Optional;
 
+import bbblast.model.Bubble;
+import bbblast.model.GridInfo;
+import bbblast.view.singleplayer.BubbleCanvas;
+import bbblast.view.singleplayer.BubblesDrawer;
+import bbblast.view.singleplayer.BubblesDrawerImpl;
+import bbblast.view.singleplayer.CanvasDrawer;
+import bbblast.view.singleplayer.CanvasDrawerImpl;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 
@@ -14,15 +23,28 @@ import javafx.scene.control.TextInputDialog;
  */
 public class GameOverViewImpl implements GameOverView {
 
+    private static final double MINWIDTH = 0;
+    private static final double MINHEIGHT = 0;
     private final View mainView;
     private GameOverViewController controller;
+    private Scene scene;
 
     /**
      * 
      * @param mainView the main View instance
      */
-    public GameOverViewImpl(final View mainView) {
+    public GameOverViewImpl(final View mainView, final Collection<Bubble> bubbles, final GridInfo grid) {
         this.mainView = mainView;
+        final BorderPane root = new BorderPane();
+        final BubbleCanvas bubbleCanvas = new BubbleCanvas(grid.getPointsWidth(), grid.getPointsHeight());
+        root.setCenter(bubbleCanvas);
+        final BubblesDrawer drawer = new BubblesDrawerImpl(bubbleCanvas, grid);
+        root.setCenter(bubbleCanvas);
+        this.scene = new Scene(root, MINWIDTH, MINHEIGHT);
+
+        // Keep canvas' aspect ratio by binding its properties
+        bubbleCanvas.widthProperty().bind(root.heightProperty().divide(1.5));
+        bubbleCanvas.heightProperty().bind(root.heightProperty());
     }
 
     /**
@@ -30,9 +52,7 @@ public class GameOverViewImpl implements GameOverView {
      */
     @Override
     public Scene getScene() {
-        // TODO return scene identical to gameview but with grey bubbles and no action
-        // listeners
-        return null;
+        return this.scene;
     }
 
     /**
