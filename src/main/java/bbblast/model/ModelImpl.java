@@ -105,4 +105,10 @@ public class ModelImpl implements Model {
         cannon.exchange();
     }
 
+    @Override
+    public void reset() {
+        grid = null;
+        cannon = null;
+        mover = null;
+    }
 }

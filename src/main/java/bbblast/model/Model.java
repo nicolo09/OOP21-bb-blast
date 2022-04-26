@@ -2,10 +2,8 @@ package bbblast.model;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
 
 import bbblast.controller.gameloop.Updatable;
-import bbblast.controller.gameover.GameOver;
 
 /**
  * 
@@ -61,4 +59,8 @@ public interface Model extends Updatable {
      */
     boolean isLastRowReached();
 	
+    /**
+     * Reset the status of this model.
+     */
+    void reset();
 }
