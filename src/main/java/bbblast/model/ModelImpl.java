@@ -21,7 +21,8 @@ public class ModelImpl implements Model {
     @Override
     public void startNewGame(final GridInfo grid, final int fps) {
         this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
-        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid);
+        //TODO insert consumer
+        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid, null);
     }
 
     /**
