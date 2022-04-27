@@ -6,8 +6,6 @@ import java.util.List;
 import bbblast.controller.Controller;
 import bbblast.controller.gameloop.Updatable;
 import bbblast.controller.gameover.GameOver;
-import bbblast.model.GridInfo;
-import bbblast.model.RegularHexGridInfo;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
@@ -16,7 +14,6 @@ import bbblast.view.options.OptionView;
 import bbblast.view.options.OptionViewController;
 import bbblast.view.options.OptionViewControllerImpl;
 import bbblast.view.options.OptionViewImpl;
-import bbblast.view.singleplayer.GameView;
 import bbblast.view.singleplayer.SingleplayerGameViewController;
 import bbblast.view.singleplayer.SingleplayerGameViewControllerImpl;
 import bbblast.view.singleplayer.SingleplayerGameViewImpl;
@@ -157,7 +154,7 @@ public class JFXViewImpl implements View {
         final Scene mainMenuScene = mainMenuView.getScene();
         this.adjustStageAndSetScene(mainMenuScene);
         Platform.runLater(() -> {
-            stage.show();            
+            stage.show();
         });
     }
 

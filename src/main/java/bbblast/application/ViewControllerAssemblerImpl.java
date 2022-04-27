@@ -4,7 +4,6 @@ import bbblast.controller.Controller;
 import bbblast.controller.ControllerImpl;
 import bbblast.model.Model;
 import bbblast.model.ModelImpl;
-import bbblast.model.RegularHexGridInfo;
 import bbblast.view.JFXViewImpl;
 import bbblast.view.View;
 import javafx.application.Application;
