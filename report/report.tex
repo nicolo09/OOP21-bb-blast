@@ -265,9 +265,9 @@ di disegnare il cannone alla giusta angolazione è delegato ad un CannonDrawer.
 
 \paragraph{Problema} Nel progetto è stata necessaria, molteplici volte, una generazione casuale delle bolle.
 
-\paragraph{Soluzione} È stato creato un generatore che, basandosi sulla posizione della bolla da posiziona sulla griglia, sfrutta una lista di colori dichiarata per generare
-una bolla di colore casuale.
-Si è preferito fare un generatore come oggetto a se stante invece di implementarlo nel cannone o nella griglia stessa.
+\paragraph{Soluzione} È stato creato un generatore che, basandosi sulla posizione della bolla da posizionare sulla griglia, sfrutta una lista di colori dichiarata per generare
+una bolla di colore casuale. 
+Si è preferito fare un generatore come oggetto a sé stante invece di implementarlo nel cannone o nella griglia stessa.
 
 \subsubsection{Gestione dei punteggi}
 
@@ -286,7 +286,8 @@ La lista viene creata e gestita dalla classe ScoreTable, creata per semplificare
 \chapter{Sviluppo}
 \section{Testing automatizzato}
 
-Abbiamo usato JUnit 5 per fare test automatici delle classi.
+Abbiamo usato JUnit 5 per fare test automatici delle classi. 
+Abbiamo testato le componenti del model fondamentali, come Bubble e Cannon, per assicurarci del loro corretto funzionamento.
 
 Il testing automatizzato è un requisito di qualunque progetto software che si rispetti, e consente di verificare che non vi siano regressioni nelle funzionalità a fronte di aggiornamenti.
 %
@@ -441,27 +442,37 @@ allo studio. Personalmente ho avuto alcune difficoltà negli ultimi argomenti tr
 \appendix
 \chapter{Guida utente}
 
-Capitolo in cui si spiega come utilizzare il software. Nel caso in cui il suo uso sia del tutto
-banale, tale capitolo può essere omesso.
-%
-A tal riguardo, si fa presente agli studenti che i docenti non hanno mai utilizzato il software
-prima, per cui aspetti che sembrano del tutto banali a chi ha sviluppato l'applicazione possono non
-esserlo per chi la usa per la prima volta.
-%
-Se, ad esempio, per cominciare una partita con un videogioco è necessario premere la barra
-spaziatrice, o il tasto ``P'', è necessario che gli studenti lo segnalino.
-
-\subsection*{Elementi positivi}
-
-\begin{itemize}
-	\item Si istruisce in modo semplice l'utente sull'uso dell'applicazione, eventualmente facendo uso di schermate e descrizioni.
-\end{itemize}
-
-\subsection*{Elementi negativi}
-\begin{itemize}
-	\item Si descrivono in modo eccessivamente minuzioso tutte le caratteristiche, anche minori, del software in oggetto.
-	\item Manca una descrizione che consenta ad un utente qualunque di utilizzare almeno le funzionalità primarie dell'applicativo.
-\end{itemize}
+Il gioco parte con una schermata inizale, navigabile con il mouse. 
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=\textwidth]{img/main_menu.pdf}
+	\caption{La schermata iniziale}
+\end{figure}
+Il tasto singleplayer fa partire il gioco vero e proprio. 
+Il tasto multiplayer porta ad una schermata di errore, perchè per motivi di tempo non è stato implementato. 
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=\textwidth]{img/options.pdf}
+	\caption{La schermata di opzioni}
+\end{figure}
+Il tasto opzioni porta alla schermata di opzioni, con due slider per musica e effetti sonori. Le opzioni sono salvabili su file, 
+ma per problemi implementativi non essendoci nel gioco ne' musica ne' effetti sonori, non cambiano nulla nel gioco.
+Il tasto exit fa uscire dall'applicazione.
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=\textwidth]{img/game_1.pdf}
+	\caption{La schermata di gioco}
+\end{figure}
+Il cannone, posto in basso e nel centro della schermata, si comanda con i tasti 'A' e 'D' che rispettivamente lo fanno girare verso destra e sinistra.
+La bolla viene fatta sparare con il tasto 'W'. La bolla una volta sparata viaggia in linea retta e rimbalza se colpisce le pareti del campo di gioco.
+Le bolle se quando si uniscono ad un gruppo di 4 o più bolle dello stesso colore, scoppiano aumentando il punteggio. 
+Il gioco finisce quando le bolle raggiungono i 3/5 dello schermo. A game over, viene presentata una schermata per salvare il punteggio.
+Si viene poi riportati nella schermata iniziale
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=\textwidth]{img/game_over.pdf}
+	\caption{La schermata di gioco}
+\end{figure}
 
 \chapter{Esercitazioni di laboratorio}
 
