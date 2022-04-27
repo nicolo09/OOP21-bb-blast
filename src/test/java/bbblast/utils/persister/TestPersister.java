@@ -13,12 +13,19 @@ import org.junit.jupiter.api.Test;
 import bbblast.utils.Settings;
 import bbblast.utils.SettingsImpl;
 
+/**
+ * Tests for {@link FilePersister}.
+ */
 public class TestPersister {
 
     private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
     private static final Path PATH = Path
             .of(System.getProperty("user.home") + SEPARATOR + ".bbblast-test" + SEPARATOR + "test1.json");
 
+    /**
+     * Tests {@link FilePersister} implementation of {@link Persister} that works
+     * with a {@link PersonForTest} to make the test independent from other classes.
+     */
     @Test
     public void testFilePersister() {
         final PersonForTest objectToSave = new PersonForTest("Marco", "Rossi", 24);
@@ -33,6 +40,10 @@ public class TestPersister {
         assertEquals(loaded, objectToSave, "Loaded object is different");
     }
 
+    /**
+     * Tests {@link FilePersister} implementation of {@link Persister} with
+     * {@link Settings} class.
+     */
     @Test
     public void testSettingsPersister() {
         final Settings objectToSave = new SettingsImpl(100, 75, 50);
@@ -46,7 +57,10 @@ public class TestPersister {
         final var loaded = persister.load().get();
         assertEquals(loaded, objectToSave, "Loaded settings are different");
     }
-    
+
+    /**
+     * Deletes the file.
+     */
     @AfterEach
     public void deleteFile() {
         final Persister<Settings> persister = new FilePersister<>(PATH, Settings.class);
