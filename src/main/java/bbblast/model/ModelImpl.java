@@ -17,7 +17,6 @@ public class ModelImpl implements Model {
     private Level gameLevel;
     private static final int BUBBLEVALUE = 100;
     private static final int MAXBUBBLE = 3;
-    private Bubble bubble;
 
     /**
      * {@inheritDoc}
@@ -25,10 +24,9 @@ public class ModelImpl implements Model {
     @Override
     public void startNewGame(final GridInfo grid, final int fps) {
         this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
-        this.gameLevel.fillGameBubblesGrid(Math.toIntExact(Math.round(grid.getBubbleHeight()*FILLHEIGHTPERCENT)));
-        //TODO insert consumer
+        this.gameLevel.fillGameBubblesGrid(Math.toIntExact(Math.round(grid.getBubbleHeight() * FILLHEIGHTPERCENT)));
         this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid, a -> {
-            //TODO: Add handler for bubble deleting and score updating
+            this.scoreUpdater(a);
         });
     }
 
@@ -68,7 +66,6 @@ public class ModelImpl implements Model {
     public void shootCannon() {
         if (mover.getShot().isEmpty()) {
             mover.setShot(gameLevel.getGameCannon().shoot());
-            bubble = mover.getShot().get();
         }
     }
 
@@ -116,24 +113,20 @@ public class ModelImpl implements Model {
         mover = null;
     }
 
-    private void scoreUpdater() {
-        int score = 0;
-        if (!mover.handle()) {
-            if (this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble).size() > MAXBUBBLE) {
-                final Collection<Bubble> bubbleSaved = this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble);
-                score = score + (bubbleSaved.size() * BUBBLEVALUE);
-                for (final Bubble b : bubbleSaved) {
-                    this.gameLevel.getGameBubblesGrid().removeBubble(b.getCoords());
-                }
-            }
-            final Collection<Bubble> floatingBubbles = this.gameLevel.getGameBubblesGrid().checkForUnconnectedBubbles();
-            if (!floatingBubbles.isEmpty()) {
-                for (final Bubble b : floatingBubbles) {
-                    this.gameLevel.getGameBubblesGrid().removeBubble(b.getCoords());
-                    score = score + BUBBLEVALUE;
-                }
+    private void scoreUpdater(final Bubble bubble) {
+        if (this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble).size() > MAXBUBBLE) {
+            final Collection<Bubble> bubbleSaved = this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble);
+            this.gameLevel.updateScore(bubbleSaved.size() * BUBBLEVALUE);
+            for (final Bubble b : bubbleSaved) {
+                this.gameLevel.getGameBubblesGrid().removeBubble(b.getCoords());
             }
         }
-        this.gameLevel.updateScore(score);
+        final Collection<Bubble> floatingBubbles = this.gameLevel.getGameBubblesGrid().checkForUnconnectedBubbles();
+        if (!floatingBubbles.isEmpty()) {
+            for (final Bubble b : floatingBubbles) {
+                this.gameLevel.getGameBubblesGrid().removeBubble(b.getCoords());
+                this.gameLevel.updateScore(BUBBLEVALUE);
+            }
+        }
     }
 }
