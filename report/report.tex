@@ -19,7 +19,7 @@ Filippo Casadei \and
 Lorenzo Tagliani}
 \date{\today}
 
-\begin{document}
+\begin{document} 
 
 \maketitle
 
@@ -167,8 +167,97 @@ e aumentarne l'efficienza. In questo modo è facile riutilizzare il meccanismo d
 \paragraph{Soluzione} È stato utilizzato il pattern Gameloop, creando un interfaccia che ne definisce le interazioni con il Controller, presso cui altri componenti che implementano Updatable possono registrarsi
 per essere aggiornati ad ogni ciclo.
 
+\subsection{Emma Leonardi}
+\subsubsection{Gestione del campo di Bolle}
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/bubble_grid.pdf}
+	\caption{UML del Gameloop}
+\end{figure}
+
+\paragraph{Problema} La griglia di Bolle deve essere indipendente dalla forma delle bolle
+
+\paragraph{Soluzione} Un interfaccia BubblesGrid con metodi che astraggono la forma delle bolle. 
+In particolare l'implementazione di BubblesGridImpl è per griglie di esagoni con la punta verso l'alto, 
+ma implementando l'interfaccia si possono creare griglie di qualsiasi forma di bolle.
+
+\subsubsection{Gestione di tre valori appaiati}
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/triplet.pdf}
+	\caption{UML del Gameloop}
+\end{figure}
+
+\paragraph{Problema} Nella griglia ho usato coordinate con tre valori e avevo necessità di un oggetto per memorizzarle
+
+\paragraph{Soluzione} Ho creato un'interfaccia generica che supporta qualsiasi tipo di tripletta di valori, poi implementata in una classe generica.
+Per poter sommare i valori ho poi creato una classe con metodi statici che fa la somma delle triplette.
+
+\subsection{Filippo Casadei}
+\subsubsection{Movimento e collisioni delle bolle}
+
+\paragraph{Problema} Le bolle normalmente sono identificate da un colore e una posizione, ma hanno bisogno di una velocità per potersi spostare all'interno della griglia di gioco.
+Perciò è necessaria un tipo di bolla che può avere una sua velocità.
+
+\paragraph{Soluzione} Per risolvere questo punto è stata modellata una MovingBubble, che estende una bolla normale, che però è caratterizzata da una velocità e da varie operazioni su di essa.
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/movingbubble.pdf}
+	\caption{UML della MovingBubble}
+\end{figure}
+
+\paragraph{Problema} L'applicazione si comporrà di una griglia di gioco, sulla quale saranno presenti a loro volta una griglia di bolle e la bolla che verrà sparata dal cannone,
+quest'ultima potrà muoversi liberamente finchè non verrà a contatto con le bolle già presenti, perciò bisogna controllare che gli spostamenti della bolla in
+movimento siano "legali" e che quando questa collida con la griglia di bolle si annetta ad essa.
+Inoltre la bolla dovrà poter rimbalzare sui muri laterali facendole cambiare direzione di movimento.
+
+\paragraph{Soluzione} L'entità che gestirà i movimenti della bolla sarà il MovementHandler, quest'ultimo avrà il compito di muovere la bolla solo in posizioni "legali" e nel caso stia per uscire dalla griglia
+gestisca il movimento della bolla riposizionandola coerentemente a seconda della sua velocità, facendola rimbalzare se necessario.
+Il MovementHandler deve sapere che bolla dovrà controllare, di base non c'è nessuna bolla da controllare.  
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/movementhandler.pdf}
+	\caption{UML del MovementHandler}
+\end{figure}
+
+\subsubsection{Gestione dei livelli}
+
+\paragraph{Problema} L'applicazione dovrà creare ogni volta un nuovo livello che il giocatore potrà giocare, questo livello deve poter essere modificabile in base al livello di sfida che vorrà affrontare
+il giocatore. 
+
+\paragraph{Soluzione} Il Level è stato modellato per contenere gli elementi fondamentali di una partita, ovvero è suo compito generare la nuova griglia e il cannone con cui il giocatore interagirà,
+inoltre contiene anche il valore numerico del punteggio attuale. Dato che implementa l'interfaccia Serializable è anche possibile salvare lo stato del livello in
+qualsiasi momento per poi riprendere da dove si era rimasti.
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/level.pdf}
+	\caption{UML del Level}
+\end{figure}
+
+\subsubsection{Rappresentazione grafica delle bolle e del campo di gioco}
+
+\paragraph{Problema} L'utente per interagire correttamente con l'applicazione necessita di avere una corretta rappresentazione grafica delle posizioni delle bolle e del cannone,
+questa dovrà inoltre esser aggiornata coerentemente durante lo svolgimento della partita.
+
+\paragraph{Soluzione} Per aggiornare continuamente l'intera griglia la view principale farà utilizzo del CanvasDrawer, il quale ha il compito di ridisegnare ad ogni tick 
+ogni elemento di gioco, per fare ciò delega il compito di disegnare le bolle, sia quelle della griglia sia quella in movimento, ad un BubbleDrawer, mentre il compito
+di disegnare il cannone alla giusta angolazione è delegato ad un CannonDrawer.
+
+\begin{figure}[H]
+	\centering{}
+	\includegraphics[width=.7\textwidth]{img/drawers.pdf}
+	\caption{UML del CanvasDrawer}
+\end{figure}
+
 \chapter{Sviluppo}
 \section{Testing automatizzato}
+
+Abbiamo usato JUnit 5 per fare test automatici delle classi.
 
 Il testing automatizzato è un requisito di qualunque progetto software che si rispetti, e consente di verificare che non vi siano regressioni nelle funzionalità a fronte di aggiornamenti.
 %
@@ -203,6 +292,29 @@ In questo progetto i miei compiti sono stati:
 	\item Caricamento degli assets (package bbblast.view.singleplayer.assetsloader)
 \end{itemize}
 
+\subsection{Emma Leonardi}
+
+In questo progetto i miei compiti sono stati:
+\begin{itemize}
+	\item Gestire il comportamento di Griglie di bolle (package bbblast.model BubblesGrid e BubblesGridImpl)
+	\item Bolle statiche (package package bbblast.model Bubble e BubbleImpl)
+	\item Comportamento del cannone (package bbblast.model Cannon e CannonImpl)
+	\item Grafica del cannone (package bblast.view.singleplayer CannonDrawerImpl e CannonDrawer)
+	\item Triplette di valori (package bbblast.utils Triplet, TripletImpl )
+	\item Somma di Triplette di valori interi (package bbblast.utils TripletIntegerUtility)
+\end{itemize}
+
+\subsection{Filippo Casadei}
+In questo progetto i miei compiti sono stati:
+\begin{itemize}
+	\item Bolle dinamiche (MovingBubble e MovingBubbleImpl, package bbblast.model)
+	\item Gestione del movimento e delle collisioni (MovementHandler e MovementHandlerImpl, package bbblast.model)
+	\item Divisione in punti (Position e PositionImpl, package bbblast.utils)
+	\item Grafica delle bolle (BubbleDrawer e BubbleDrawerImpl, package bbblast.view.singleplayer)
+	\item Disegnare la grafica di gioco (CanvasDrawer e CanvasDrawerImpl, package bbblast.view.singleplayer)
+	\item Creazione del livello di gioco (Level e LevelImpl, package bbblast.model.level)
+\end{itemize}
+
 \section{Note di sviluppo}
 
 \subsection{Nicolò Guerra}
@@ -215,24 +327,61 @@ In questo progetto i miei compiti sono stati:
 	\item Thread
 \end{itemize}
 
+\subsection{Emma Leonardi}
+\begin{itemize}
+	\item Stream
+	\item Progettazione di classi generiche
+	\item Lambda expressions
+	\item JavaFX
+\end{itemize}
+
+Per la gestione delle coordinate su tre assi ho usato lo pseudocodice di Amit Patel \url{https://www.redblobgames.com/grids/hexagons/} e ho usato sempre il suo codice per cercare gli esagoni vicini.
+
+\subsection{Filippo Casadei}
+\begin{itemize}
+	\item JavaFX
+	\item Optional
+\end{itemize}
+
 \chapter{Commenti finali}
 
 In quest'ultimo capitolo si tirano le somme del lavoro svolto e si delineano eventuali sviluppi
 futuri.
 
-\subsection{Nicolò Guerra}
-
 \section{Autovalutazione e lavori futuri}
+
+\subsection{Nicolò Guerra}
 
 Non sono soddisfatto del progetto che abbiamo svolto. Purtroppo abbiamo avuto diversi problemi già a partire dalla parte di design generale dell'applicazione, complice anche l'inesperienza essendo la prima
 volta che ognuno di noi portava avanti un progetto che tutto sommato comincia ad avere dimensioni importanti. Ci sono stati alcuni problemi anche nella coordinazione interna del team, e sicuramente questo
 non ha influito positivamente sul risultato finale. Probabilmente avremmo dovuto iniziare scegliendo un progetto diverso da sviluppare e una divisone di compiti diversa, cosa che purtroppo non potevamo sapere
 prima di iniziare il progetto. Avremmo dovuto inoltre soffermarci meglio sulle interazioni tra le diverse parti del software. Sono aspetti a cui starò molto più attento una prossima volta.
 
-\section{Difficoltà incontrate e commenti per i docenti}
+\subsection{Emma Leonardi}
 
+Sono soddisfatta del mio lavoro individuale, ma non del progetto in totale. Ci sono stati parecchi problemi sulle parti del codice in comune, 
+perchè ci sono stati dei problemi di comunicazione e incomprensioni, spesso dovute a una prima fase di design poco precisa. Questo mi ha rallentato nello sviluppo della mia parte di progetto e a tratti ha costretto a riscrivere parti di codice frutto di aspettative diverse di implementazione. 
+Non ha aiutato la coordinazione del progetto anche l'inesperienza, che ci ha fatto sottovalutare alcuni aspetti che si sono rivelati problemi implementativi. 
+In futuro cercherò di spiegarmi meglio sulle caratteristiche del software prodotto da me e comunicare meglio con i miei compagni di progetto. 
+
+\subsection{Filippo Casadei}
+Non sono soddisfatto di come è stato svolto il progetto. Sin dall'inizio della progettazione ci sono state numerose incomprensioni, che hanno portato a dover discutere più volte punti già trattati e capire come risolvere i problemi generati,
+rallentando di molto il lavoro di tutti i componenti. A causa di questi problemi, a cui si aggiunge anche l'inesperienza di lavorare in progetti più complessi con un team di sviluppo, la qualità del risultato finale è indubbiamente calato. 
+Sicuramente però è stata un'esperienza formativa considerando che da ogni sbaglio commesso si è potuto comprendere come sarebbe stato meglio agire, ad esempio una miglior comunicazione
+iniziale tra i membri definidendo più nello specifico gli aspetti dell'applicazione ed una miglior suddivisione dello sviluppo del software. 
+
+\section{Difficoltà incontrate e commenti per i docenti}
+\subsection{Nicolò Guerra}
 Sicuramente la caratteristica che ho apprezzato del corso è la disponibilità dei docenti, le correzioni in laboratorio allo svolgimento di ogni esercizio risultano molto utili per migliorare la tecnica.
 Sarebbe interessante approfondire meglio la parte di analisi di dominio di un problema e di design di una soluzione, al di la di quella che è la programmazione Java, che forse è più semplice da capire.
+
+\subsection{Emma Leonardi}
+Mi è piaciuta la struttura del corso, i laboratori e l'attenzione dei docenti verso gli studenti. 
+Ho trovato di difficile comprensione gli aspetti di Programmazione ad Oggetti avanzati, come Stream e Pattern e avrei voluto gli si fosse dedicato più tempo.
+
+\subsection{Filippo Casadei}
+Il corso è stato molto interessante, i docenti hanno avuto la capacità di motivare gli studenti allo studio della materia e i laboratori si son rivelati esser di grande aiuto per i temi trattati nelle lezioni teoriche.
+L'unico punto da me non ben compreso sono gli aspetti riguardanti i pattern, il loro utilizzo e come riconoscere la necessità di utilizzarli.
 
 \appendix
 \chapter{Guida utente}
@@ -269,6 +418,16 @@ elencando i permalink dei post sul forum dove è avvenuta la consegna.
 \begin{itemize}
 	\item Laboratorio 07: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=88829#p137443}
 	\item Laboratorio 08: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=89272#p138741}
+\end{itemize}
+
+\subsection{Emma Leonardi}
+\begin{itemize}
+	\item Laboratorio 05: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=87881#p135211}
+	\item Laboratorio 06: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=87880#p135213}
+	\item Laboratorio 07: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=88829#p136445}
+	\item Laboratorio 08: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=89272#p138799}
+	\item Laboratorio 09: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=90125#p138800}
+	\item Laboratorio 10: \url{https://virtuale.unibo.it/mod/forum/discuss.php?d=91128#p139973}
 \end{itemize}
 
 \bibliographystyle{alpha}
