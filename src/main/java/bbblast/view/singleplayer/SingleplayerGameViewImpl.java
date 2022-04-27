@@ -15,6 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * Implements {@link GameView}, this implementation is an {@link Updatable} and
+ * needs to be updated to show information about the game status.
+ */
 public class SingleplayerGameViewImpl implements GameView, Updatable {
 
     private static final double MINWIDTH = 500;
@@ -25,6 +29,10 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
     private final CanvasDrawer canvasDrawer;
     final Label scoreLabel;
 
+    /**
+     * 
+     * @param info the information about the grid this view will represent
+     */
     public SingleplayerGameViewImpl(final GridInfo info) {
         final BorderPane root = new BorderPane();
         this.bubbleCanvas = new BubbleCanvas(info.getPointsWidth(), info.getPointsHeight());
@@ -44,11 +52,11 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         final Label aim = new Label("Aiming at: ");
         leftBox.getChildren().add(aim);
         VBox.setVgrow(aim, Priority.ALWAYS);
-        
-        // Score label       
+
+        // Score label
         scoreLabel = new Label("Score: ");
         leftBox.getChildren().add(scoreLabel);
-        VBox.setVgrow(scoreLabel, Priority.ALWAYS); 
+        VBox.setVgrow(scoreLabel, Priority.ALWAYS);
 
         // Pause button
         final Button btnPause = new Button("Pause");
@@ -114,6 +122,9 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setController(final SingleplayerGameViewController controller) {
         this.controller = controller;
@@ -125,11 +136,14 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
-            this.drawCanvas();
-            this.scoreWriter();
-        
+        this.drawCanvas();
+        this.scoreWriter();
+
     }
 
     private void drawCanvas() {
@@ -141,13 +155,16 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
             });
         }
     }
-    
+
     private void scoreWriter() {
         Platform.runLater(() -> {
             scoreLabel.setText("Score: " + controller.getScore());
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Scene getScene() {
         return this.scene;
