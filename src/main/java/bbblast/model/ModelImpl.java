@@ -12,6 +12,7 @@ import bbblast.model.level.LevelImpl;
  */
 public class ModelImpl implements Model {
 
+    private static final double FILLHEIGHTPERCENT = 0.2;
     private MovementHandler mover;
     private Level gameLevel;
     private static final int BUBBLEVALUE = 100;
@@ -24,7 +25,11 @@ public class ModelImpl implements Model {
     @Override
     public void startNewGame(final GridInfo grid, final int fps) {
         this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
-        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid);
+        this.gameLevel.fillGameBubblesGrid(Math.toIntExact(Math.round(grid.getBubbleHeight()*FILLHEIGHTPERCENT)));
+        //TODO insert consumer
+        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid, a -> {
+            //TODO: Add handler for bubble deleting and score updating
+        });
     }
 
     /**
