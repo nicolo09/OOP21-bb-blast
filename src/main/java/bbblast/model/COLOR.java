@@ -10,12 +10,33 @@ import java.util.stream.Stream;
  */
 public enum COLOR {
 
+    /**
+     * Blue color.
+     */
     BLUE,
+    /**
+     * Green color.
+     */
     GREEN,
+    /**
+     * Orange color.
+     */
     ORANGE,
+    /**
+     * Purple color.
+     */
     PURPLE,
+    /**
+     * Red color.
+     */
     RED,
+    /**
+     * Yellow color.
+     */
     YELLOW,
+    /**
+     * Green color.
+     */
     GREY;
 
     static Collection<COLOR> allExceptGrey() {

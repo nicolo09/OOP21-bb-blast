@@ -1,7 +1,7 @@
 package bbblast.controller.gameover;
 
 /**
- * Represent an handler for GameOvers
+ * Represent an handler for GameOvers.
  */
 public interface GameOverHandler {
     /**

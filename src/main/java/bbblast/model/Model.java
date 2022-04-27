@@ -53,7 +53,8 @@ public interface Model extends Updatable {
 	/**
 	 * Set up this model for a new game.
 	 * 
-	 * @param grid
+	 * @param grid the new game grid
+	 * @param fps the FPS game is running at, will be used to calculate bubble's speed
 	 */
 	void startNewGame(GridInfo grid, int fps);
 

@@ -1,21 +1,34 @@
 package bbblast.controller.gameover;
 
 import bbblast.controller.Controller;
-import bbblast.controller.gameloop.Updatable;
 import bbblast.view.View;
 
-public abstract class ViewDelegateGameOverHandler implements GameOverHandler{
+/**
+ * 
+ * Abstract {@link GameOverHandler} that handles a {@link GameOver} by telling
+ * the view to show a game over screen and resetting the controller. Implement
+ * checkGameOver() to define when a gameOver occurs.
+ *
+ */
+public abstract class ViewDelegateGameOverHandler implements GameOverHandler {
 
-    protected final View gameView;
+    private final View gameView;
     private final Controller controller;
 
+    /**
+     * 
+     * @param gameView
+     * @param mainController
+     */
     public ViewDelegateGameOverHandler(final View gameView, final Controller mainController) {
         this.gameView = gameView;
         this.controller = mainController;
     }
-    
+
     /**
      * Implement this to define what a GameOver is.
+     * 
+     * @return true if a game over occurred
      */
     public abstract boolean checkGameOver();
 

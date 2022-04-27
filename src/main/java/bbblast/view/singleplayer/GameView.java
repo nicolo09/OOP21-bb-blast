@@ -16,15 +16,14 @@ public interface GameView {
     void pauseMusic();
 
     /**
-     * @param e the sound effect.
-     */
-    void playSoundEffect(Sound e);
-    
-    /**
      * Sets the controller for this view.
      * @param controller
      */
     void setController(SingleplayerGameViewController controller);
-    
+
+    /**
+     * 
+     * @return this view's scene
+     */
     Scene getScene();
 }
