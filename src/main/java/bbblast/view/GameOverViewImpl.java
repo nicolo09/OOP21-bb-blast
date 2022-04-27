@@ -8,8 +8,6 @@ import bbblast.model.GridInfo;
 import bbblast.view.singleplayer.BubbleCanvas;
 import bbblast.view.singleplayer.BubblesDrawer;
 import bbblast.view.singleplayer.BubblesDrawerImpl;
-import bbblast.view.singleplayer.CanvasDrawer;
-import bbblast.view.singleplayer.CanvasDrawerImpl;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -27,15 +25,18 @@ public class GameOverViewImpl implements GameOverView {
     private static final double MINHEIGHT = 0;
     private final View mainView;
     private GameOverViewController controller;
-    private Scene scene;
+    private final Scene scene;
 
     /**
      * 
      * @param mainView the main View instance
+     * @param bubbles the bubbles that were on the grid at the gameover
+     * @param grid the grid informations
      */
     public GameOverViewImpl(final View mainView, final Collection<Bubble> bubbles, final GridInfo grid) {
         this.mainView = mainView;
         final BorderPane root = new BorderPane();
+        // TODO: Make all grey bubbles canvas
         final BubbleCanvas bubbleCanvas = new BubbleCanvas(grid.getPointsWidth(), grid.getPointsHeight());
         root.setCenter(bubbleCanvas);
         final BubblesDrawer drawer = new BubblesDrawerImpl(bubbleCanvas, grid);
@@ -43,7 +44,8 @@ public class GameOverViewImpl implements GameOverView {
         this.scene = new Scene(root, MINWIDTH, MINHEIGHT);
 
         // Keep canvas' aspect ratio by binding its properties
-        bubbleCanvas.widthProperty().bind(root.heightProperty().divide(1.5));
+        bubbleCanvas.widthProperty()
+                .bind(root.heightProperty().multiply(grid.getPointsWidth() / grid.getPointsHeight()));
         bubbleCanvas.heightProperty().bind(root.heightProperty());
     }
 

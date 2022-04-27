@@ -106,7 +106,8 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
          */
 
         // Keep canvas' aspect ratio by binding its properties
-        bubbleCanvas.widthProperty().bind(root.heightProperty().divide(1.5));
+        bubbleCanvas.widthProperty()
+                .bind(root.heightProperty().multiply(info.getPointsWidth() / info.getPointsHeight()));
         bubbleCanvas.heightProperty().bind(root.heightProperty());
     }
 
