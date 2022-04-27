@@ -71,6 +71,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
         if (getClass() != obj.getClass()) {
             return false;
         }
+        @SuppressWarnings("unchecked")
         final TripletImpl<X, Y, Z> other = (TripletImpl<X, Y, Z>) obj;
         return Objects.equals(x, other.x) && Objects.equals(y, other.y) && Objects.equals(z, other.z);
     }

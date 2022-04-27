@@ -34,6 +34,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
     private final double xshift = 1.0 / 6.0;
     private final double yshift = -1.0 / 3.0;
     private final int maxBubbles;
+    private static final double RATIOBUBBLES = 3.0 / 5.0;
 
     /**
      * @param info the GridInfo that defines the dimentions of the grid. This
@@ -43,7 +44,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
         this.info = info;
         this.grid = new HashMap<>();
         this.size = this.info.getPointsHeight() / (2.0 * (((3.0 / 4.0) * (this.info.getBubbleHeight() - 1)) + 1));
-        this.maxBubbles = Math.toIntExact(Math.round(3.0 / 5.0 * this.info.getBubbleHeight()));
+        this.maxBubbles = Math.toIntExact(Math.round(RATIOBUBBLES * this.info.getBubbleHeight()));
     }
 
     /**

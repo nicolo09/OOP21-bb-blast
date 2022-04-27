@@ -15,11 +15,8 @@ import bbblast.utils.VectorConverterImpl;
  */
 public class CannonImpl implements Cannon, Serializable {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5046837992787988716L;
-	private int angle = START_ANGLE;
+    private static final long serialVersionUID = 5046837992787988716L;
+    private int angle = START_ANGLE;
     private MovingBubble loadedBubble;
     private final Position startingPosition;
     private final BubbleGenerator bbGenerator;
@@ -84,13 +81,11 @@ public class CannonImpl implements Cannon, Serializable {
     }
 
     /***
-     * {@inheritDoc}
+     * {@inheritDoc} This feature is optional.
      */
     @Override
     public void exchange() {
-        // TODO Optional feature
-        // TODO: Decide what to do, does the currently loaded bubble become the second
-        // one or is it stored in a Tetris-like reservoir
+
     }
 
     /***

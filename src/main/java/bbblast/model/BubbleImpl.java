@@ -12,11 +12,8 @@ import bbblast.utils.PositionImpl;
  */
 public class BubbleImpl implements Bubble, Serializable {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3225398734780099099L;
-	private final PositionImpl pos;
+    private static final long serialVersionUID = -3225398734780099099L;
+    private final PositionImpl pos;
     private final COLOR color;
 
     /**
