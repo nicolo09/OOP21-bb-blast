@@ -16,11 +16,6 @@ public interface GameView {
     void pauseMusic();
 
     /**
-     * @param e the sound effect.
-     */
-    void playSoundEffect(Sound e);
-    
-    /**
      * Sets the controller for this view.
      * @param controller
      */
