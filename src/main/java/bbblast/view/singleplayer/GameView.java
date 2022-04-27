@@ -20,6 +20,10 @@ public interface GameView {
      * @param controller
      */
     void setController(SingleplayerGameViewController controller);
-    
+
+    /**
+     * 
+     * @return this view's scene
+     */
     Scene getScene();
 }
