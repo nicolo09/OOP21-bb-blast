@@ -24,6 +24,7 @@ public class LevelImpl implements Level, Serializable {
     private static final long serialVersionUID = -868557846923024533L;
     private static final int INIT_SCORE = 0;
     private static final double CANNONVERTICALOFFSETPERCENT = 0.9;
+    private static final double SPEEDMULTIPLIER = 16;
     private int score;
     private final GridInfo infos;
     private final BubblesGrid gameGrid;
@@ -45,8 +46,8 @@ public class LevelImpl implements Level, Serializable {
         this.gameGrid = new BubblesGridImpl(infos);
         this.generator = generator;
         final var cannonPos = new PositionImpl(infos.getPointsWidth() / 2,
-                infos.getBubbleHeight() * CANNONVERTICALOFFSETPERCENT);
-        this.gameCannon = new CannonImpl(cannonPos, fps, Math.toIntExact(Math.round(2 * infos.getBubbleRadius())),
+                infos.getPointsHeight() * CANNONVERTICALOFFSETPERCENT);
+        this.gameCannon = new CannonImpl(cannonPos, fps, Math.toIntExact(Math.round(SPEEDMULTIPLIER * infos.getBubbleRadius())),
                 generator);
     }
 
