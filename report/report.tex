@@ -19,7 +19,7 @@ Filippo Casadei \and
 Lorenzo Tagliani}
 \date{\today}
 
-\begin{document}
+\begin{document} 
 
 \maketitle
 
@@ -198,12 +198,12 @@ Per poter sommare i valori ho poi creato una classe con metodi statici che fa la
 \subsection{Filippo Casadei}
 \subsubsection{Movimento e collisioni delle bolle}
 
-\paragraph{Problema} Le bolle normalmente sono identificate da un colore e una posizione, ma per potersi spostare hanno bisogno di una velocità per potersi spostare all'interno della griglia di gioco.
+\paragraph{Problema} Le bolle normalmente sono identificate da un colore e una posizione, ma hanno bisogno di una velocità per potersi spostare all'interno della griglia di gioco.
 Perciò è necessaria un tipo di bolla che può avere una sua velocità.
 
 \paragraph{Soluzione} Per risolvere questo punto è stata modellata una MovingBubble, che estende una bolla normale, che però è caratterizzata da una velocità e da varie operazioni su di essa.
 
-begin{figure}[H]
+\begin{figure}[H]
 	\centering{}
 	\includegraphics[width=.7\textwidth]{img/movingbubble.pdf}
 	\caption{UML della MovingBubble}
@@ -218,13 +218,13 @@ Inoltre la bolla dovrà poter rimbalzare sui muri laterali facendole cambiare di
 gestisca il movimento della bolla riposizionandola coerentemente a seconda della sua velocità, facendola rimbalzare se necessario.
 Il MovementHandler deve sapere che bolla dovrà controllare, di base non c'è nessuna bolla da controllare.  
 
-begin{figure}[H]
+\begin{figure}[H]
 	\centering{}
 	\includegraphics[width=.7\textwidth]{img/movementhandler.pdf}
 	\caption{UML del MovementHandler}
 \end{figure}
 
-\subsection{Gestione dei livelli}
+\subsubsection{Gestione dei livelli}
 
 \paragraph{Problema} L'applicazione dovrà creare ogni volta un nuovo livello che il giocatore potrà giocare, questo livello deve poter essere modificabile in base al livello di sfida che vorrà affrontare
 il giocatore. 
@@ -233,13 +233,13 @@ il giocatore.
 inoltre contiene anche il valore numerico del punteggio attuale. Dato che implementa l'interfaccia Serializable è anche possibile salvare lo stato del livello in
 qualsiasi momento per poi riprendere da dove si era rimasti.
 
-begin{figure}[H]
+\begin{figure}[H]
 	\centering{}
 	\includegraphics[width=.7\textwidth]{img/level.pdf}
 	\caption{UML del Level}
 \end{figure}
 
-\subsection{Raffigurazione grafica delle bolle e del campo di gioco}
+\subsubsection{Rappresentazione grafica delle bolle e del campo di gioco}
 
 \paragraph{Problema} L'utente per interagire correttamente con l'applicazione necessita di avere una corretta rappresentazione grafica delle posizioni delle bolle e del cannone,
 questa dovrà inoltre esser aggiornata coerentemente durante lo svolgimento della partita.
@@ -248,7 +248,7 @@ questa dovrà inoltre esser aggiornata coerentemente durante lo svolgimento dell
 ogni elemento di gioco, per fare ciò delega il compito di disegnare le bolle, sia quelle della griglia sia quella in movimento, ad un BubbleDrawer, mentre il compito
 di disegnare il cannone alla giusta angolazione è delegato ad un CannonDrawer.
 
-begin{figure}[H]
+\begin{figure}[H]
 	\centering{}
 	\includegraphics[width=.7\textwidth]{img/drawers.pdf}
 	\caption{UML del CanvasDrawer}
@@ -334,7 +334,14 @@ In questo progetto i miei compiti sono stati:
 	\item Lambda expressions
 	\item JavaFX
 \end{itemize}
+
 Per la gestione delle coordinate su tre assi ho usato lo pseudocodice di Amit Patel \url{https://www.redblobgames.com/grids/hexagons/} e ho usato sempre il suo codice per cercare gli esagoni vicini.
+
+\subsection{Filippo Casadei}
+\begin{itemize}
+	\item JavaFX
+	\item Optional
+\end{itemize}
 
 \chapter{Commenti finali}
 
@@ -359,8 +366,8 @@ In futuro cercherò di spiegarmi meglio sulle caratteristiche del software prodo
 
 \subsection{Filippo Casadei}
 Non sono soddisfatto di come è stato svolto il progetto. Sin dall'inizio della progettazione ci sono state numerose incomprensioni, che hanno portato a dover discutere più volte punti già trattati e capire come risolvere i problemi generati,
-rallentando di molto il lavoro di tutti i componenti. A causa di questi problemi a cui si aggiunge anche l'inesperienza di lavorare in progetti più complessi con un team di sviluppo il risultato finale non si può 
-assolutamente considerare un buon progetto. Sicuramente però è stata un'esperienza formativa considerando che da ogni sbaglio commesso si è potuto comprendere come sarebbe stato meglio agire, ad esempio una miglior comunicazione
+rallentando di molto il lavoro di tutti i componenti. A causa di questi problemi, a cui si aggiunge anche l'inesperienza di lavorare in progetti più complessi con un team di sviluppo, la qualità del risultato finale è indubbiamente calato. 
+Sicuramente però è stata un'esperienza formativa considerando che da ogni sbaglio commesso si è potuto comprendere come sarebbe stato meglio agire, ad esempio una miglior comunicazione
 iniziale tra i membri definidendo più nello specifico gli aspetti dell'applicazione ed una miglior suddivisione dello sviluppo del software. 
 
 \section{Difficoltà incontrate e commenti per i docenti}
@@ -373,7 +380,7 @@ Mi è piaciuta la struttura del corso, i laboratori e l'attenzione dei docenti v
 Ho trovato di difficile comprensione gli aspetti di Programmazione ad Oggetti avanzati, come Stream e Pattern e avrei voluto gli si fosse dedicato più tempo.
 
 \subsection{Filippo Casadei}
-Il corso è stato molto interessante e i docenti hanno avuto la capacità di motivare l'interesse verso la materia e i laboratori si son rivelati esser di grande aiuto per i temi trattati nelle lezioni teoriche.
+Il corso è stato molto interessante, i docenti hanno avuto la capacità di motivare gli studenti allo studio della materia e i laboratori si son rivelati esser di grande aiuto per i temi trattati nelle lezioni teoriche.
 L'unico punto da me non ben compreso sono gli aspetti riguardanti i pattern, il loro utilizzo e come riconoscere la necessità di utilizzarli.
 
 \appendix
