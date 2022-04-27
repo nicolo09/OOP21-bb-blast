@@ -45,8 +45,8 @@ public class BubblesDrawerImpl implements BubblesDrawer {
             // posX and posY are the coordinates which represents the top-left "corner" of the Bubble to draw
             final var posX = b.getCoords().getX() - infos.getBubbleRadius();
             final var posY = b.getCoords().getY() - 2 * infos.getBubbleRadius() / Math.sqrt(3);
-            gc.drawImage(getImg(b), posX * getRateoOnX(), posY * getRateoOnY(), infos.getBubbleRadius() * getRateoOnX(),
-                    infos.getBubbleRadius() * getRateoOnY());
+            gc.drawImage(getImg(b), posX * getRateoOnX(), posY * getRateoOnY(), 2 * infos.getBubbleRadius() * getRateoOnX(),
+                    2 * infos.getBubbleRadius() * getRateoOnY());
         }
     }
 

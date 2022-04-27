@@ -1,6 +1,7 @@
 package bbblast.model;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
@@ -14,19 +15,24 @@ public class MovementHandlerImpl implements MovementHandler {
 
     private final BubblesGrid grid;
     private final GridInfo infos;
+    private final Consumer<Bubble> consumer;
     private boolean isShotSet;
     private MovingBubble shot;
 
     /**
+     * 
      * Creates a new MovementHandler.
      * 
      * @param grid  the {@link BubblesGrid} where the shot will be eventually
      *              attached to
      * @param infos the {@link GridInfo} containing the informations about the grid
+     *
+     * @param consumer the {@link Consumer} to use when attaching a {@link Bubble}
      */
-    public MovementHandlerImpl(final BubblesGrid grid, final GridInfo infos) {
+    public MovementHandlerImpl(final BubblesGrid grid, final GridInfo infos,final Consumer<Bubble> consumer) {
         this.grid = grid;
         this.infos = infos;
+        this.consumer = consumer;
         this.isShotSet = false;
     }
 
@@ -40,8 +46,10 @@ public class MovementHandlerImpl implements MovementHandler {
             return false;
         }
         // if the Bubble is attachable it adds the shot to the grid and deletes it
-        if (grid.isBubbleAttachable(this.shot.getStationaryCopy())) {
-            grid.addBubble(shot.getStationaryCopy());
+        final var staticCopy = shot.getStationaryCopy();
+        if (grid.isBubbleAttachable(staticCopy)) {
+            grid.addBubble(staticCopy);
+            consumer.accept(staticCopy);
             this.shot = null;
             this.isShotSet = false;
             return false;

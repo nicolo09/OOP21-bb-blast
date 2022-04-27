@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,7 @@ public class MovementHandlerTest {
 
 	// generic test subjects
 	private final GridInfo infos = new RegularHexGridInfo(10, 10, 1);
+	private final Consumer<Bubble> consumer = (a -> {});
 	private final Bubble b1 = new BubbleImpl(new PositionImpl(0, 0), COLOR.RED);
 	private final Bubble b2 = new BubbleImpl(new PositionImpl(1, 0), COLOR.BLUE);
 	private final Bubble b3 = new BubbleImpl(new PositionImpl(2, 0), COLOR.GREEN);
@@ -23,7 +25,7 @@ public class MovementHandlerTest {
 	private final Bubble base = new BubbleImpl(
 			new PositionImpl(infos.getPointsWidth() / 2 + 0.5, infos.getPointsHeight()), COLOR.PURPLE);
 	private final BubblesGrid grid = new BubblesGridImpl(List.of(b1, b2, b3, b4), infos);
-	private final MovementHandler handler = new MovementHandlerImpl(grid, infos);
+	private final MovementHandler handler = new MovementHandlerImpl(grid, infos, consumer);
 
 	@Test
 	public void testMovementHandlerCorrectness() {
@@ -97,7 +99,7 @@ public class MovementHandlerTest {
 		test2.setSpeed(speed);
 		
 		final BubblesGrid genericGrid = new BubblesGridImpl(genericInfo);
-		final MovementHandler genericHandler = new MovementHandlerImpl(genericGrid, genericInfo);
+		final MovementHandler genericHandler = new MovementHandlerImpl(genericGrid, genericInfo, consumer);
 		genericHandler.setShot(test1);
 
 		while (genericHandler.handle());
