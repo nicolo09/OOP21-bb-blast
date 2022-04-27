@@ -6,7 +6,6 @@ import bbblast.view.singleplayer.assetsloader.ImageAssetsLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 
 /**
@@ -18,6 +17,9 @@ public class CannonDrawerImpl implements CannonDrawer {
     private final AssetsLoader<Image> loader;
     private static final String PATH = "Cannon.png";
     private final GraphicsContext gc;
+
+    private static final double CANNONPIVOTHEIGHT = 0.2909090909;
+    private static final double CANNONPROPORTION = 8;
 
     /**
      * @param parentCanvas the canvas where the cannon is drawn.
@@ -34,16 +36,21 @@ public class CannonDrawerImpl implements CannonDrawer {
      */
     @Override
     public void drawCannon(final int angle) {
+        final var bbCanvasW = this.canvas.getWidth();
+        final var bbCanvasH = this.canvas.getHeight();
+        final double cw = bbCanvasW / CANNONPROPORTION;
+        final double ch = bbCanvasH / CANNONPROPORTION;
         final Image c = loader.load(PATH);
-        final ImageView iv = new ImageView();
-        final double x = (canvas.getWidth() / 2.0) + c.getWidth() / 2.0;
-        final double y = (canvas.getHeight() * 4.0 / 5.0) + c.getHeight();
-        final Rotate rotate = new Rotate();
-        rotate.setPivotX(c.getWidth() / 2);
-        rotate.setPivotY(c.getHeight());
-        rotate.setAngle(angle);
-        iv.getTransforms().add(rotate);
-        gc.drawImage(iv.getImage(), x, y);
+        final double px = bbCanvasW / 2.0;
+        final double py = bbCanvasH - CANNONPIVOTHEIGHT * ch;
+        final double upperleftx = bbCanvasW / 2.0 - cw / 2.0;
+        final double upperlefty = bbCanvasH - ch;
+        gc.save();
+        final Rotate rotate = new Rotate(-angle+90, px, py);
+        this.gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), rotate.getTx(),
+                rotate.getTy());
+        gc.drawImage(c, upperleftx, upperlefty, cw, ch);
+        gc.restore();
 
     }
 
