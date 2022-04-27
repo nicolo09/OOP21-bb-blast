@@ -69,6 +69,9 @@ public class ModelImpl implements Model {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<Integer, Integer> getScores() {
         // TODO Auto-generated method stub
@@ -107,6 +110,9 @@ public class ModelImpl implements Model {
         return this.gameLevel;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
         this.gameLevel = null;
