@@ -23,6 +23,7 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
     private SingleplayerGameViewController controller;
     private final BubbleCanvas bubbleCanvas;
     private final CanvasDrawer canvasDrawer;
+    final Label scoreLabel;
 
     public SingleplayerGameViewImpl(final GridInfo info) {
         final BorderPane root = new BorderPane();
@@ -43,6 +44,11 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         final Label aim = new Label("Aiming at: ");
         leftBox.getChildren().add(aim);
         VBox.setVgrow(aim, Priority.ALWAYS);
+        
+        // Score label       
+        scoreLabel = new Label("Score: ");
+        leftBox.getChildren().add(scoreLabel);
+        VBox.setVgrow(scoreLabel, Priority.ALWAYS); 
 
         // Pause button
         final Button btnPause = new Button("Pause");
@@ -109,12 +115,6 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
     }
 
     @Override
-    public void playSoundEffect(final Sound e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void setController(final SingleplayerGameViewController controller) {
         this.controller = controller;
         bubbleCanvas.widthProperty().addListener((x, y, z) -> {
@@ -127,7 +127,9 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
 
     @Override
     public void update() {
-        this.drawCanvas();
+            this.drawCanvas();
+            this.scoreWriter();
+        
     }
 
     private void drawCanvas() {
@@ -138,6 +140,12 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
                 canvasDrawer.drawOnCanvas(controller.getBubbles(), controller.getCannonAngle());
             });
         }
+    }
+    
+    private void scoreWriter() {
+        Platform.runLater(() -> {
+            scoreLabel.setText("Score: " + controller.getScore());
+        });
     }
 
     @Override
