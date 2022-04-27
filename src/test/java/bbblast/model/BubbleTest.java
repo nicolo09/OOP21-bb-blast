@@ -8,8 +8,16 @@ import org.junit.jupiter.api.Test;
 import bbblast.utils.Position;
 import bbblast.utils.PositionImpl;
 
+/***
+ * 
+ * This class tests methods of {@link Bubble}.
+ */
 public class BubbleTest {
 
+    /***
+     * 
+     * This test checks equals and constructor for {@link Bubble}.
+     */
     @Test
     public void testBubbleEquals() {
         final Bubble b1 = new BubbleImpl(new PositionImpl(0, 0), COLOR.BLUE);
@@ -22,6 +30,10 @@ public class BubbleTest {
         assertEquals(b1, new BubbleImpl(b1), "Two bubbles with same positions and color are equals");
     }
 
+    /***
+     * 
+     * This test checks getter methods and toString for {@link Bubble}.
+     */
     @Test
     public void testBubblePersistence() {
 
@@ -36,7 +48,12 @@ public class BubbleTest {
                 "The bubble retains the correct value");
     }
 
+    /***
+     * 
+     * This test checks moveBy for {@link Bubble}.
+     */
     @Test
+    @SuppressWarnings("checkstyle:magicnumber")
     public void testBubbleMoveBy() {
         Position p = new PositionImpl(1, 2);
         final Bubble b = new BubbleImpl(p, COLOR.PURPLE);

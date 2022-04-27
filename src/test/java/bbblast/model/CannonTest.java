@@ -10,16 +10,29 @@ import org.junit.jupiter.api.Test;
 
 import bbblast.utils.PositionImpl;
 
+/***
+ * 
+ * This class tests methods of {@link Cannon}.
+ */
 public class CannonTest {
 
-    private final BubbleGenerator bbgen=new BubbleGeneratorImpl(List.of(COLOR.RED,COLOR.GREEN,COLOR.YELLOW,COLOR.BLUE));
-    
+    private final BubbleGenerator bbgen = new BubbleGeneratorImpl(
+            List.of(COLOR.RED, COLOR.GREEN, COLOR.YELLOW, COLOR.BLUE));
+
+    /***
+     * 
+     * This test checks constructor for {@link Cannon}.
+     */
     @Test
     public void testCannonPersistence() {
-        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60,bbgen);
+        final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);
         assertFalse(c.toString().equals(""), "Cannon has a toString");
     }
 
+    /***
+     * 
+     * This test checks getAngle and move for {@link Cannon}.
+     */
     @Test
     public void testCannonMove() {
         final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);
@@ -41,6 +54,10 @@ public class CannonTest {
         assertEquals(c.getAngle(), CannonImpl.START_ANGLE, "The angle is outside of the range, so it wasn't changed");
     }
 
+    /***
+     * 
+     * This test checks getCurrentlyLoadedBubble for {@link Cannon}.
+     */
     @Test
     public void testGetCurrentlyLoadedBubble() {
         final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);
@@ -50,6 +67,10 @@ public class CannonTest {
 
     }
 
+    /***
+     * 
+     * This test checks shoot for {@link Cannon}.
+     */
     @Test
     public void testCannonShoot() {
         final Cannon c = new CannonImpl(new PositionImpl(0, 0), 60, 60, bbgen);

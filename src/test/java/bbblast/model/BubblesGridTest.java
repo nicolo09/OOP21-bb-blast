@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import bbblast.utils.PositionImpl;
 
+/***
+ * 
+ * This class tests methods of {@link BubblesGrid}.
+ */
 public class BubblesGridTest {
 
     // Some test bubbles
@@ -22,8 +26,14 @@ public class BubblesGridTest {
     private final Bubble b5 = new BubbleImpl(new PositionImpl(1.5, 2.309), COLOR.BLUE);
     private final Bubble b6 = new BubbleImpl(new PositionImpl(2.5, 2.309), COLOR.PURPLE);
     private final GridInfo gridInfo = new RegularHexGridInfo(5, 10, 1);
+    private static final double DELTA = 0.0001;
 
+    /***
+     * 
+     * This test checks getBubbles, equals and constructor for {@link BubblesGrid}.
+     */
     @Test
+    @SuppressWarnings("checkstyle:magicnumber")
     public void testBubblesGridPersistance() {
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
         final BubblesGrid g2 = new BubblesGridImpl(List.of(), gridInfo);
@@ -41,12 +51,15 @@ public class BubblesGridTest {
         coll.add(b6);
         assertFalse(coll.equals(g3.getBubbles()),
                 "Changes in the collection don't impact the grid, unless via grid methods");
-        assertFalse(coll.equals(g4.getBubbles()),
-                "Changes in the collection don't impact the grid, unless via grid methods");
+        assertFalse(coll.equals(g4.getBubbles()), "Collection does't change");
         assertFalse(g1.equals(new BubblesGridImpl(new RegularHexGridInfo(10, 20, 1))),
                 "Two grids with different gridInfo are not equals");
     }
 
+    /***
+     * 
+     * This test checks toString for {@link BubblesGrid}.
+     */
     @Test
     public void testBubblesGridtoString() {
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
@@ -56,6 +69,10 @@ public class BubblesGridTest {
 
     }
 
+    /***
+     * 
+     * This test checks addBubble for {@link BubblesGrid}.
+     */
     @Test
     public void testBubblesGridAdd() {
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
@@ -82,6 +99,10 @@ public class BubblesGridTest {
                 "Changes in the collection don't impact the grid, unless via grid methods");
     }
 
+    /***
+     * 
+     * This test checks removeBubble for {@link BubblesGrid}.
+     */
     @Test
     public void testBubblesGridRemove() {
         final BubblesGrid g1 = new BubblesGridImpl(List.of(b1, b2, b3, b4), gridInfo);
@@ -101,10 +122,13 @@ public class BubblesGridTest {
         final BubblesGrid g2 = new BubblesGridImpl(list, gridInfo);
         assertEquals(g2.getBubbles().size(), 2, "The original grid");
         list.remove(b3);
-        assertEquals(g2.getBubbles().size(), 2,
-                "Changes in the collection don't impact the grid, unless via grid methods");
+        assertEquals(g2.getBubbles().size(), 2, "Collection doesn't change");
     }
 
+    /***
+     * 
+     * This test checks getLastRowY for {@link BubblesGrid}.
+     */
     @Test
     public void testBubblesGridLastRowY() {
         final BubblesGrid g1 = new BubblesGridImpl(List.of(b1, b3, b5), gridInfo);
@@ -115,11 +139,15 @@ public class BubblesGridTest {
         g1.removeBubble(b5.getCoords());
         final var b1Lowest = g1.getLastRowY();
         assertEquals(g1.getLastRowY(), b1Lowest, "New lowest bubble");
-        assertNotEquals(b1Lowest, b5Lowest, 0.0001, "The lowest bubble has changed");
+        assertNotEquals(b1Lowest, b5Lowest, DELTA, "The lowest bubble has changed");
         g1.removeBubble(b1.getCoords());
         assertEquals(g1.getLastRowY(), 0, "No bubbles are present, so the lowest is 0");
     }
 
+    /***
+     * 
+     * This test checks getSameColorNeighbors for {@link BubblesGrid}.
+     */
     @Test
     public void testBubblesSameColorNeighbors() {
         final Bubble b7 = new BubbleImpl(new PositionImpl(1, 1.433), COLOR.RED);
@@ -140,6 +168,10 @@ public class BubblesGridTest {
         assertEquals(g2.getSameColorNeighbors(b8).size(), 2, "Still neighbors after the removal of b7");
     }
 
+    /***
+     * 
+     * This test checks isBubbleAttachable for {@link BubblesGrid}.
+     */
     @Test
     public void testIsBubbleAttachable() {
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
@@ -160,6 +192,10 @@ public class BubblesGridTest {
 
     }
 
+    /***
+     * 
+     * This test checks checkForUnconnectedBubbles for {@link BubblesGrid}.
+     */
     @Test
     public void testCheckForUnconnectedBubbles() {
         final BubblesGrid g1 = new BubblesGridImpl(gridInfo);
@@ -180,7 +216,12 @@ public class BubblesGridTest {
 
     }
 
+    /***
+     * 
+     * This test checks moveBubblesDown for {@link BubblesGrid}.
+     */
     @Test
+    @SuppressWarnings("checkstyle:magicnumber")
     public void testMoveBubblesDown() {
         final BubblesGridImpl g1 = new BubblesGridImpl(gridInfo);
         assertTrue(g1.getBubbles().isEmpty(), "An empty grid");
@@ -198,6 +239,10 @@ public class BubblesGridTest {
 
     }
 
+    /***
+     * 
+     * This test checks removeBubblesCascading for {@link BubblesGrid}.
+     */
     @Test
     public void testRemoveBubblesCascading() {
         final BubblesGridImpl g1 = new BubblesGridImpl(gridInfo);
@@ -228,6 +273,10 @@ public class BubblesGridTest {
 
     }
 
+    /***
+     * 
+     * This test checks removeUnconnectedBubbles for {@link BubblesGrid}.
+     */
     @Test
     public void testRemoveUnconnectedBubbles() {
         final BubblesGridImpl g1 = new BubblesGridImpl(gridInfo);
@@ -257,6 +306,10 @@ public class BubblesGridTest {
 
     }
 
+    /***
+     * 
+     * This test checks endReached for {@link BubblesGrid}.
+     */
     @Test
     public void testEndReached() {
         final BubblesGridImpl g1 = new BubblesGridImpl(List.of(), gridInfo);
