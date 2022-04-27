@@ -24,7 +24,9 @@ public class ModelImpl implements Model {
         this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
         this.gameLevel.fillGameBubblesGrid(Math.toIntExact(Math.round(grid.getBubbleHeight()*FILLHEIGHTPERCENT)));
         //TODO insert consumer
-        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid, null);
+        this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid, a -> {
+            //TODO: Add handler for bubble deleting and score updating
+        });
     }
 
     /**
