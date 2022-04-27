@@ -64,9 +64,8 @@ public class JFXViewImpl implements View {
         this.updatable.add(gameView);
         final SingleplayerGameViewController gameViewController = new SingleplayerGameViewControllerImpl(controller);
         gameView.setController(gameViewController);
+        this.adjustStageAndSetScene(gameView.getScene());
         Platform.runLater(() -> {
-            // TODO Create singleplayer view
-            this.adjustStageAndSetScene(gameView.getScene());
             stage.show();
         });
     }
@@ -88,8 +87,8 @@ public class JFXViewImpl implements View {
         final OptionViewController optionViewController = new OptionViewControllerImpl(controller, this);
         final OptionView optionView = new OptionViewImpl(this, optionViewController);
         final Scene optionScene = optionView.getScene();
+        this.adjustStageAndSetScene(optionScene);
         Platform.runLater(() -> {
-            this.adjustStageAndSetScene(optionScene);
             stage.show();
         });
     }
@@ -99,12 +98,13 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void gameOver(final GameOver gameOverEvent) {
-        final GameOverView gameOverView = new GameOverViewImpl(this, this.controller.getBubbles(), this.controller.getGridInfo());
+        final GameOverView gameOverView = new GameOverViewImpl(this, this.controller.getBubbles(),
+                this.controller.getGridInfo());
         final GameOverViewController gameOverController = new GameOverViewControllerImpl(gameOverEvent.getScores(),
                 (score) -> this.controller.saveScore(score));
         gameOverView.setController(gameOverController);
+        this.adjustStageAndSetScene(gameOverView.getScene());
         Platform.runLater(() -> {
-            this.adjustStageAndSetScene(gameOverView.getScene());
             stage.show();
             gameOverView.showEndDialog();
         });
@@ -120,16 +120,22 @@ public class JFXViewImpl implements View {
 
     /**
      * Sets stage's minimum width and height to scene size and set scene as stage's
-     * scene.
+     * scene. It is executed in JavaFX thread with Platform.runLater
      * 
      * @param scene
      */
     private void adjustStageAndSetScene(final Scene scene) {
-        stage.setMinWidth(scene.getWidth());
-        stage.setWidth(scene.getWidth());
-        stage.setMinHeight(scene.getHeight());
-        stage.setHeight(scene.getHeight());
-        stage.setScene(scene);
+        Platform.runLater(() -> {
+            final var width = stage.getWidth();
+            final var height = stage.getHeight();
+            stage.setMinWidth(scene.getWidth());
+            // stage.setWidth(scene.getWidth());
+            stage.setMinHeight(scene.getHeight());
+            // stage.setHeight(scene.getHeight());
+            stage.setScene(scene);
+            stage.setWidth(scene.getWidth() < width ? width : scene.getWidth());
+            stage.setHeight(scene.getHeight() < height ? height : scene.getHeight());
+        });
     }
 
     /**
@@ -150,7 +156,9 @@ public class JFXViewImpl implements View {
         mainMenuView.setController(mainMenuController);
         final Scene mainMenuScene = mainMenuView.getScene();
         this.adjustStageAndSetScene(mainMenuScene);
-        stage.show();
+        Platform.runLater(() -> {
+            stage.show();            
+        });
     }
 
     /**
