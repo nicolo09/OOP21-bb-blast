@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
- * Implements a GameOver with scores and a timestamp
+ * Implements a GameOver with scores and a timestamp.
  */
 public class LastRowGameOverImpl implements GameOver {
 
