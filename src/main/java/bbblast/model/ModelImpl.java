@@ -118,7 +118,10 @@ public class ModelImpl implements Model {
         this.gameLevel = null;
         mover = null;
     }
-
+    /**
+     * Update the score counting deleted bubbles.
+     * @param bubble is the currently shooted bubble
+     */
     private void scoreUpdater(final Bubble bubble) {
         if (this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble).size() > MAXBUBBLE) {
             final Collection<Bubble> bubbleSaved = this.gameLevel.getGameBubblesGrid().getSameColorNeighbors(bubble);

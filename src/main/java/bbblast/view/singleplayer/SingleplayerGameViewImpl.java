@@ -27,7 +27,7 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
     private SingleplayerGameViewController controller;
     private final BubbleCanvas bubbleCanvas;
     private final CanvasDrawer canvasDrawer;
-    final Label scoreLabel;
+    private final Label scoreLabel;
 
     /**
      * 
@@ -74,7 +74,7 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         btnExit.setOnMouseClicked(e -> {
             controller.exit();
         });
-
+        
         this.scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(final KeyEvent event) {
@@ -156,7 +156,10 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
             });
         }
     }
-
+    
+    /**
+     * Write and update the score in real time
+     */
     private void scoreWriter() {
         Platform.runLater(() -> {
             scoreLabel.setText("Score: " + controller.getScore());

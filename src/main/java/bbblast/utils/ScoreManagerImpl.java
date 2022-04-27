@@ -7,22 +7,22 @@ import bbblast.utils.persister.Persister;
 
 /**
  * 
- * Implementation of Score manager
+ * Implementation of Score manager.
  *
  */
 
 public class ScoreManagerImpl implements ScoreManager {
 
     private final Persister<ScoreTable> f;
-    
     /**
-     * Create a persister of ScoreTable
+     * Create a persister of ScoreTable.
+     * @param f the persister score table
      */
     public ScoreManagerImpl(final Persister<ScoreTable> f) {
         this.f = f;
     }
     /**
-     * Save a score in a Score Table
+     * Save a score in a Score Table.
      * @param s the Score to save
      */
     @Override
@@ -36,7 +36,7 @@ public class ScoreManagerImpl implements ScoreManager {
         }
     }
     /**
-     * Load a score from a Score Table
+     * Load a score from a Score Table.
      * @return Collection of Scores
      */
     @Override
@@ -44,7 +44,7 @@ public class ScoreManagerImpl implements ScoreManager {
         return f.load().orElse(new ScoreTable()).getList();
     }
     /**
-     * Reset all the scores canceling the save file
+     * Reset all the scores canceling the save file.
      */
     @Override
     public void resetScores() {

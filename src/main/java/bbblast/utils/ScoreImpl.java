@@ -6,21 +6,19 @@ import java.util.Objects;
 
 /**
  * 
- * Score implementation
+ * Score implementation.
  *
  */
 public class ScoreImpl implements Score, Serializable {
-    
     /**
-     * Serialization of the class
+     * Serialization of the class.
      */
     private static final long serialVersionUID = -7586564633494845842L;
     private final String name;
-    private int score;
+    private final int score;
     private final LocalDate date;
-    
     /**
-     * Return the score of the actual player
+     * Return the score of the actual player.
      * @param name for the player's name
      * @param score for the player's score
      */
@@ -50,25 +48,35 @@ public class ScoreImpl implements Score, Serializable {
     public LocalDate getDate() {
         return this.date;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "ScoreImpl [name=" + name + ", score=" + score + ", date=" + date + "]";
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(date, name, score);
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final ScoreImpl other = (ScoreImpl) obj;
         return Objects.equals(date, other.date) && Objects.equals(name, other.name) && score == other.score;
     }
-    
 }

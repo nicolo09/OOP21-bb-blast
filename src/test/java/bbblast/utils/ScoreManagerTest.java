@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import bbblast.utils.persister.FilePersister;
-
+/**
+ * This class tests methods of {@link ScoreManager}.
+ */
 public class ScoreManagerTest {
 
     private static final String SEPARATOR = FileSystems.getDefault().getSeparator();
@@ -20,15 +22,21 @@ public class ScoreManagerTest {
             .of(System.getProperty("user.home") + SEPARATOR + ".bbblast-test" + SEPARATOR + "ScoreManagerTest.json");
 
     private final ScoreManager x = new ScoreManagerImpl(new FilePersister<ScoreTable>(PATH, ScoreTable.class));
+    /**
+     * This test control if the score list has been created.
+     */
+    @Test
+    public void testScoreManager() {
+
+        assertNotNull(x, "It was not created");
+        x.resetScores();
+    }
+    /**
+     * This test check if the list can be upgraded with different scores.
+     */
 
     @Test
-    public void TestScoreManager() {
-        // test 1
-        assertNotNull(x, "It was not created");
-
-        // test 2
-        x.resetScores();
-
+    public void testScoreUpgrade() {
         final ScoreImpl s1 = new ScoreImpl("nicolo", 2000);
         final ScoreImpl s2 = new ScoreImpl("emma", 1500);
         final ScoreImpl s3 = new ScoreImpl("casa", 4000);
@@ -40,8 +48,12 @@ public class ScoreManagerTest {
         x.save(s2);
         x.save(s3);
         assertEquals(new ArrayList<>(x.load()), y, "They are not the same");
-
-        // test 3
+    }
+    /**
+     * This test chek if the resetScore method work.
+     */
+    @Test
+    public void testScoreReset() {
         x.resetScores();
         assertEquals(x.load().size(), 0, "It hasn't been resetted");
     }

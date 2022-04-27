@@ -3,7 +3,7 @@ package bbblast.utils;
 import java.time.LocalDate;
 /**
  * 
- * The interface which models a Score
+ * The interface which models a Score.
  *
  */
 public interface Score {

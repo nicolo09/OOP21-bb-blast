@@ -6,27 +6,26 @@ import java.util.List;
 
 /**
  * 
- * Class that memorize score in a list
+ * Class that memorize score in a list.
  *
  */
 public class ScoreTable implements Serializable {
 
     /**
-     * Generated serial ID
+     * Generated serial ID.
      */
     private static final long serialVersionUID = 2214274898079476338L;
     private final List<Score> l;
 
     /**
-     * Create an empty list
+     * Create an empty list.
      */
     public ScoreTable() {
         this.l = new ArrayList<Score>();
     }
 
     /**
-     * Add a score to the list
-     * 
+     * Add a score to the list.
      * @param s
      */
     public void addScore(final Score s) {
@@ -34,9 +33,8 @@ public class ScoreTable implements Serializable {
     }
 
     /**
-     * Return the list
-     * 
-     * @return
+     * Return the list.
+     * @return the list of scores
      */
     public List<Score> getList() {
         return new ArrayList<Score>(l);
