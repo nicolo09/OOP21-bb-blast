@@ -21,10 +21,10 @@ import bbblast.utils.PositionImpl;
 public class BubblesGridImpl implements BubblesGrid, Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8547741440830310991L;
-	private final Map<Triplet<Integer, Integer, Integer>, Bubble> grid;
+     * 
+     */
+    private static final long serialVersionUID = 8547741440830310991L;
+    private final Map<Triplet<Integer, Integer, Integer>, Bubble> grid;
     private final List<Triplet<Integer, Integer, Integer>> directions = List.of(new TripletImpl<>(1, 0, -1),
             new TripletImpl<>(1, -1, 0), new TripletImpl<>(0, -1, 1), new TripletImpl<>(-1, 0, 1),
             new TripletImpl<>(-1, 1, 0), new TripletImpl<>(0, 1, -1));
@@ -33,7 +33,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
     private final double size;
     private final double xshift = 1.0 / 6.0;
     private final double yshift = -1.0 / 3.0;
-    private final int maxBubbles; 
+    private final int maxBubbles;
 
     /**
      * @param info the GridInfo that defines the dimentions of the grid. This
@@ -43,7 +43,7 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
         this.info = info;
         this.grid = new HashMap<>();
         this.size = this.info.getPointsHeight() / (2.0 * (((3.0 / 4.0) * (this.info.getBubbleHeight() - 1)) + 1));
-        this.maxBubbles=Math.toIntExact(Math.round(3.0/5.0*this.info.getBubbleHeight()));
+        this.maxBubbles = Math.toIntExact(Math.round(3.0 / 5.0 * this.info.getBubbleHeight()));
     }
 
     /**
@@ -135,9 +135,10 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
     public boolean isBubbleAttachable(final Bubble b) {
         if (!this.grid.containsKey(this.convertCoords(b.getCoords()))) {
             final var tripletB = this.convertCoords(b.getCoords());
+            final var posB = this.roundCoords(tripletB);
             // The bubble is inside the grid
             if (tripletB.getX() < this.info.getBubbleWidth() && tripletB.getY() < this.info.getBubbleHeight()
-                    && tripletB.getY() >= 1) {
+                    && posB.getX() > 0 && posB.getY() > 0 && tripletB.getY() >= 1) {
                 if (tripletB.getY() == 1) {
                     return true;
                 }
@@ -277,11 +278,11 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
      *         bubble
      */
     private Position roundCoords(final Triplet<Integer, Integer, Integer> triplet) {
-        final double x = ((triplet.getX()*1.0 + this.xshift) * Math.sqrt(3.0))
-                + ((triplet.getY()*1.0 + this.yshift) * (Math.sqrt(3.0) / 2.0));
-        final double y = ((triplet.getY()*1.0 + this.yshift) * (3.0 / 2.0));
+        final double x = ((triplet.getX() * 1.0 + this.xshift) * Math.sqrt(3.0))
+                + ((triplet.getY() * 1.0 + this.yshift) * (Math.sqrt(3.0) / 2.0));
+        final double y = ((triplet.getY() * 1.0 + this.yshift) * (3.0 / 2.0));
 
-        return new PositionImpl(x*this.size, y*this.size);
+        return new PositionImpl(x * this.size, y * this.size);
     }
 
     /**

@@ -155,6 +155,8 @@ public class BubblesGridTest {
         assertFalse(g1.isBubbleAttachable(bdx), "This bubble is out of bounds");
         final Bubble bdown = new BubbleImpl(new PositionImpl(0, gridInfo.getPointsHeight() + 0.1), COLOR.GREEN);
         assertFalse(g1.isBubbleAttachable(bdown), "This bubble is out of bounds");
+        final Bubble bsx = new BubbleImpl(new PositionImpl(0.57, 3), COLOR.GREEN);
+        assertFalse(g1.isBubbleAttachable(bsx), "This bubble is out of bounds");
 
     }
 
