@@ -12,6 +12,7 @@ import bbblast.model.level.LevelImpl;
  */
 public class ModelImpl implements Model {
 
+    private static final double FILLHEIGHTPERCENT = 0.2;
     private MovementHandler mover;
     private Level gameLevel;
 
@@ -21,6 +22,7 @@ public class ModelImpl implements Model {
     @Override
     public void startNewGame(final GridInfo grid, final int fps) {
         this.gameLevel = new LevelImpl(grid, new BubbleGeneratorImpl(COLOR.allExceptGrey()), fps);
+        this.gameLevel.fillGameBubblesGrid(Math.toIntExact(Math.round(grid.getBubbleHeight()*FILLHEIGHTPERCENT)));
         this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid);
     }
 
