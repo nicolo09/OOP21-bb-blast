@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
  */
 public class ImageAssetsLoader implements AssetsLoader<Image> {
 
+    /**
+     * Loads a JavaFX {@link Image}.
+     */
     @Override
     public Image load(final String assetName) {
         return new Image(assetName);
