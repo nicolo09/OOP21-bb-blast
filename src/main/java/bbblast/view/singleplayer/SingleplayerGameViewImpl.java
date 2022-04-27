@@ -15,6 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * Implements {@link GameView}, this implementation is an {@link Updatable} and
+ * needs to be updated to show information about the game status.
+ */
 public class SingleplayerGameViewImpl implements GameView, Updatable {
 
     private static final double MINWIDTH = 500;
@@ -24,6 +28,10 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
     private final BubbleCanvas bubbleCanvas;
     private final CanvasDrawer canvasDrawer;
 
+    /**
+     * 
+     * @param info the information about the grid this view will represent
+     */
     public SingleplayerGameViewImpl(final GridInfo info) {
         final BorderPane root = new BorderPane();
         this.bubbleCanvas = new BubbleCanvas(info.getPointsWidth(), info.getPointsHeight());
@@ -114,6 +122,9 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setController(final SingleplayerGameViewController controller) {
         this.controller = controller;
@@ -125,6 +136,9 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         this.drawCanvas();
@@ -140,6 +154,9 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Scene getScene() {
         return this.scene;
