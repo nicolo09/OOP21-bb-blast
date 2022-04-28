@@ -66,6 +66,16 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
             controller.pause();
         });
         leftBox.getChildren().add(btnPause);
+        
+        // Resume button
+        final Button btnResume = new Button("Resume");
+        btnResume.setMaxWidth(Double.MAX_VALUE);
+        BorderPane.setAlignment(btnResume, Pos.CENTER);
+        btnResume.setOnMouseClicked(e -> {
+            controller.resume();
+        });
+        leftBox.getChildren().add(btnResume);
+        
 
         // Exit button
         final Button btnExit = new Button("Exit");
