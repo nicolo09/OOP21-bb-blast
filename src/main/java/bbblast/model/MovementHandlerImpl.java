@@ -29,7 +29,7 @@ public class MovementHandlerImpl implements MovementHandler {
      *
      * @param consumer the {@link Consumer} to use when attaching a {@link Bubble}
      */
-    public MovementHandlerImpl(final BubblesGrid grid, final GridInfo infos,final Consumer<Bubble> consumer) {
+    public MovementHandlerImpl(final BubblesGrid grid, final GridInfo infos, final Consumer<Bubble> consumer) {
         this.grid = grid;
         this.infos = infos;
         this.consumer = consumer;

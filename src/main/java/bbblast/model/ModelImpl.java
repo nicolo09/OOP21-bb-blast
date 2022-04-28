@@ -17,6 +17,7 @@ public class ModelImpl implements Model {
     private Level gameLevel;
     private static final int BUBBLEVALUE = 100;
     private static final int MAXBUBBLE = 3;
+    private int counter;
 
     /**
      * {@inheritDoc}
@@ -28,6 +29,7 @@ public class ModelImpl implements Model {
         this.mover = new MovementHandlerImpl(this.gameLevel.getGameBubblesGrid(), grid, a -> {
             this.scoreUpdater(a);
         });
+        counter = 0;
     }
 
     /**
@@ -66,6 +68,11 @@ public class ModelImpl implements Model {
     public void shootCannon() {
         if (mover.getShot().isEmpty()) {
             mover.setShot(gameLevel.getGameCannon().shoot());
+            counter++;
+            if(this.counter == 3) {
+               counter = 0;
+               this.gameLevel.fillGameBubblesGrid(1);
+            }
         }
     }
 
