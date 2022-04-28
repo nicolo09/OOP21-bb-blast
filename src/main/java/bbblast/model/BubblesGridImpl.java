@@ -165,9 +165,9 @@ public class BubblesGridImpl implements BubblesGrid, Serializable {
         if (rows > 0) {
             final Map<Triplet<Integer, Integer, Integer>, Bubble> gridTemporary = new HashMap<>();
             for (final var entry : this.grid.entrySet()) {
-                final int x = Math.toIntExact(Math.round(-0.5 * rows)) + entry.getKey().getX();
-                final int y = Math.toIntExact(Math.round(1.0 * rows)) + entry.getKey().getY();
-                final Triplet<Integer, Integer, Integer> tri = new TripletImpl<Integer, Integer, Integer>(x, y, -x - y);
+                final int r = entry.getKey().getY() + rows;
+                final int q= rows%2==1? entry.getKey().getX()-rows/2- r%2 : entry.getKey().getX()-rows/2;
+                final Triplet<Integer, Integer, Integer> tri = new TripletImpl<Integer, Integer, Integer>(q, r, -q - r);
                 gridTemporary.put(tri, new BubbleImpl(roundCoords(tri), entry.getValue().getColor()));
             }
             this.grid.clear();
