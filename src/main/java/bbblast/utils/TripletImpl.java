@@ -31,35 +31,57 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
         this.z = z;
     }
 
+    /**
+     * @param t the triplet to clone. This constructor creates a new triplet with
+     *          the values provided.
+     */
     public TripletImpl(final Triplet<X, Y, Z> t) {
         this(t.getX(), t.getY(), t.getZ());
     }
 
+    /**
+     * {@inheritDoc}
+     * */
     @Override
     public X getX() {
         return this.x;
     }
 
+    /**
+     * {@inheritDoc}
+     * */
     @Override
     public Y getY() {
         return this.y;
     }
 
+    /**
+     * {@inheritDoc}
+     * */
     @Override
     public Z getZ() {
         return this.z;
     }
 
+    /**
+     * {@inheritDoc}
+     * */
     @Override
     public String toString() {
         return "TripletImpl [x=" + this.x + ", y=" + this.y + ", z=" + this.z + "]";
     }
 
+    /**
+     * {@inheritDoc}
+     * */
     @Override
     public int hashCode() {
         return Objects.hash(x, y, z);
     }
 
+    /**
+     * {@inheritDoc}
+     * */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
