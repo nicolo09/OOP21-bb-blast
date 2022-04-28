@@ -31,6 +31,7 @@ public class JFXViewImpl implements View {
     private Controller controller;
     private final Stage stage;
     private final List<Updatable> updatable = new ArrayList<>();
+    private final static String NAME = "BB-Blast";
 
     /**
      * 
@@ -41,6 +42,7 @@ public class JFXViewImpl implements View {
         stage.setOnCloseRequest(a -> {
             System.exit(0);
         });
+        stage.setTitle(NAME);
     }
 
     /**
