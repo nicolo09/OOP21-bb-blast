@@ -34,12 +34,13 @@ public interface View extends Updatable {
     void startMultiplayerGame();
 
     /**
-     * Shows an option menu
+     * Shows an option menu.
      */
     void startOptionsMenu();
 
     /**
      * Shows a game over screen.
+     * @param gameOverEvent the game over to show on screen
      */
     void gameOver(GameOver gameOverEvent);
 
@@ -49,7 +50,7 @@ public interface View extends Updatable {
     void show();
 
     /**
-     * Displays an error
+     * Displays an error.
      * 
      * @param error the error to display
      */

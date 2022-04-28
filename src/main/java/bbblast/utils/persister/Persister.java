@@ -5,17 +5,21 @@ import java.util.Optional;
 
 /**
  * Interface that represents an object that can save and load an object.
+ * @param <T> The type of data to persist
  */
-public interface Persister <T> {
+public interface Persister<T> {
 
     /**
      * loads an object.
-     * @return an optional containing the object if it has been loaded, {@link Optional.empty} otherwise
+     * 
+     * @return an optional containing the object if it has been loaded,
+     *         {@link Optional.empty} otherwise
      */
     Optional<T> load();
 
     /**
      * Saves an object.
+     * 
      * @param objectToSave the object to save
      * @throws IOException if an IO error occurs on saving
      */
@@ -23,6 +27,7 @@ public interface Persister <T> {
 
     /**
      * deletes the object persistance.
+     * 
      * @return true if successfully deleted
      */
     boolean reset();

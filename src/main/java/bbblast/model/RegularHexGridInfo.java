@@ -11,10 +11,10 @@ import java.util.Objects;
 public class RegularHexGridInfo implements GridInfo, Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7403615975326048978L;
-	private final int bubbleWidth;
+     * 
+     */
+    private static final long serialVersionUID = -7403615975326048978L;
+    private final int bubbleWidth;
     private final int bubbleHeight;
     private final double ratio;
 
@@ -64,11 +64,17 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
                 + 2 * (this.ratio / Math.sqrt(3));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(bubbleHeight, bubbleWidth, ratio);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -78,13 +84,16 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
             return false;
         }
         if (getClass() != obj.getClass()) {
-            return false;            
+            return false;
         }
         final RegularHexGridInfo other = (RegularHexGridInfo) obj;
         return this.bubbleHeight == other.bubbleHeight && this.bubbleWidth == other.bubbleWidth
                 && Double.compare(this.ratio, other.ratio) == 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "RegularHexGridInfo [bubbleWidth=" + this.bubbleWidth + ", bubbleHeight=" + this.bubbleHeight

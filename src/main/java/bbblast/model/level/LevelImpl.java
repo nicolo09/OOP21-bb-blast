@@ -23,7 +23,7 @@ public class LevelImpl implements Level, Serializable {
      */
     private static final long serialVersionUID = -868557846923024533L;
     private static final int INIT_SCORE = 0;
-    private static final double CANNONVERTICALOFFSETPERCENT = 0.9;
+    private static final double CANNONVERTICALOFFSETPERCENT = 0.97;
     private static final double SPEEDMULTIPLIER = 16;
     private int score;
     private final GridInfo infos;

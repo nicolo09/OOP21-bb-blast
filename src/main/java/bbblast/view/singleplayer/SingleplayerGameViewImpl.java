@@ -74,7 +74,7 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
         btnExit.setOnMouseClicked(e -> {
             controller.exit();
         });
-        
+
         this.scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(final KeyEvent event) {
@@ -156,9 +156,9 @@ public class SingleplayerGameViewImpl implements GameView, Updatable {
             });
         }
     }
-    
+
     /**
-     * Write and update the score in real time
+     * Write and update the score in real time.
      */
     private void scoreWriter() {
         Platform.runLater(() -> {
