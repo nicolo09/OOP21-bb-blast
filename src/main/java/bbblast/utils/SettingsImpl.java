@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Implementation of {@link Settings} that can be serialized ({@link Serializable})
+ * Implementation of {@link Settings} that can be serialized
+ * ({@link Serializable})
  */
-public class SettingsImpl implements Settings, Serializable{
+public class SettingsImpl implements Settings, Serializable {
 
     /**
      * 
@@ -15,17 +16,19 @@ public class SettingsImpl implements Settings, Serializable{
     private final int masterVolume;
     private final int musicVolume;
     private final int effectsVolume;
+
     /**
      * 
      * @param masterVolume
      * @param musicVolume
      * @param effectsVolume
      */
-    public SettingsImpl(final int masterVolume, final int musicVolume, final int effectsVolume){
+    public SettingsImpl(final int masterVolume, final int musicVolume, final int effectsVolume) {
         this.masterVolume = masterVolume;
         this.musicVolume = musicVolume;
         this.effectsVolume = effectsVolume;
     }
+
     /**
      * {@inheritDoc}
      */

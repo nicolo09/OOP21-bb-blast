@@ -64,11 +64,17 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
                 + 2 * (this.ratio / Math.sqrt(3));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(bubbleHeight, bubbleWidth, ratio);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -85,6 +91,9 @@ public class RegularHexGridInfo implements GridInfo, Serializable {
                 && Double.compare(this.ratio, other.ratio) == 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "RegularHexGridInfo [bubbleWidth=" + this.bubbleWidth + ", bubbleHeight=" + this.bubbleHeight
