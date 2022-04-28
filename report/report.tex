@@ -40,7 +40,7 @@ punteggio possibile. La partita è persa se le bolle arrivano in fondo allo sche
 	\item Il gioco dovrà generare una griglia di bolle colorate in maniera casuale.
 	\item Il cannone in basso dovrà permettere di sparare bolle generate casualmente, muovendosi angolarmente a destra e sinistra.
 	\item Le bolle sparate dal cannone potranno rimbalzare sui muri del campo di gioco se colpiti.
-	\item Le bolle dovranno scoppiare alla formazione di gruppi di almeno 3 bolle dello stesso colore adiacenti, facendo cadere eventuali altre bolle sottostanti senza ulteriori sostegni.
+	\item Le bolle dovranno scoppiare alla formazione di gruppi di almeno 4 bolle dello stesso colore adiacenti, facendo cadere eventuali altre bolle sottostanti senza ulteriori sostegni.
 	\item Il gioco dovrà dare una schermata di game over se le palline raggiungono il fondo dello schermo.
 	\item Il gioco dovrà gestire un punteggio.
 \end{itemize}
@@ -173,7 +173,7 @@ per essere aggiornati ad ogni ciclo.
 \begin{figure}[H]
 	\centering{}
 	\includegraphics[width=.7\textwidth]{img/bubble_grid.pdf}
-	\caption{UML del Gameloop}
+	\caption{UML del BubblesGrid}
 \end{figure}
 
 \paragraph{Problema} La griglia di Bolle deve essere indipendente dalla forma delle bolle
@@ -187,7 +187,7 @@ ma implementando l'interfaccia si possono creare griglie di qualsiasi forma di b
 \begin{figure}[H]
 	\centering{}
 	\includegraphics[width=.7\textwidth]{img/triplet.pdf}
-	\caption{UML del Gameloop}
+	\caption{UML del Triplet}
 \end{figure}
 
 \paragraph{Problema} Nella griglia ho usato coordinate con tre valori e avevo necessità di un oggetto per memorizzarle
@@ -327,11 +327,12 @@ In questo progetto i miei compiti sono stati:
 In questo progetto i miei compiti sono stati:
 \begin{itemize}
 	\item Gestire il comportamento di Griglie di bolle (package bbblast.model BubblesGrid e BubblesGridImpl)
-	\item Bolle statiche (package package bbblast.model Bubble e BubbleImpl)
+	\item Bolle statiche (package bbblast.model Bubble e BubbleImpl)
 	\item Comportamento del cannone (package bbblast.model Cannon e CannonImpl)
 	\item Grafica del cannone (package bblast.view.singleplayer CannonDrawerImpl e CannonDrawer)
 	\item Triplette di valori (package bbblast.utils Triplet, TripletImpl )
 	\item Somma di Triplette di valori interi (package bbblast.utils TripletIntegerUtility)
+	\item Conversione velocità vettoriale in componenti (package bbblast.utils VectorConverter e VectorConverterImpl)
 \end{itemize}
 
 \subsection{Filippo Casadei}
@@ -465,8 +466,8 @@ Il tasto exit fa uscire dall'applicazione.
 \end{figure}
 Il cannone, posto in basso e nel centro della schermata, si comanda con i tasti 'A' e 'D' che rispettivamente lo fanno girare verso destra e sinistra.
 La bolla viene fatta sparare con il tasto 'W'. La bolla una volta sparata viaggia in linea retta e rimbalza se colpisce le pareti del campo di gioco.
-Le bolle se quando si uniscono ad un gruppo di 4 o più bolle dello stesso colore, scoppiano aumentando il punteggio. 
-Il gioco finisce quando le bolle raggiungono i 3/5 dello schermo. A game over, viene presentata una schermata per salvare il punteggio.
+Le bolle si uniscono alla griglia e ci sono 4 o più bolle dello stesso colore, scoppiano aumentando il punteggio. Se si formano gruppi di bolle "volanti" ovvero senza nessuna bolla che li collega alla cima dello schermo, quando si elimina l'ultima bolla di sostegno anche le bolle volanti scoppiano.
+Il gioco finisce quando le bolle raggiungono i 4/5 dello schermo. A game over, viene presentata una schermata per salvare il punteggio.
 Si viene poi riportati nella schermata iniziale
 \begin{figure}[H]
 	\centering{}
