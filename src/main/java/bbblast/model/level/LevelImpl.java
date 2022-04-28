@@ -100,7 +100,9 @@ public class LevelImpl implements Level, Serializable {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < this.infos.getBubbleWidth(); j++) {
                 // NOTE: these coordinates are just an estimate of what they will be inside the BubblesGrid
-                final var centerX = j * 2 * infos.getBubbleRadius() + infos.getBubbleRadius(); // bubbles centers are distanced of two times the radius one from the another on x axis
+                final var centerX =  i % 2 == 0 
+                        ? j * 2 * infos.getBubbleRadius() + infos.getBubbleRadius() 
+                        : j * 2 * infos.getBubbleRadius() + 2 *infos.getBubbleRadius();
                 final var centerY = i * 2 * infos.getBubbleRadius() + infos.getBubbleRadius(); // bubbles centers are distanced of about two times the radius one from the another on y axis
                 this.gameGrid.addBubble(generator.generate(new PositionImpl(centerX, centerY)));
             }
