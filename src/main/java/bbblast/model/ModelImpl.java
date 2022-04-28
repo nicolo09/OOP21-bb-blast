@@ -71,7 +71,7 @@ public class ModelImpl implements Model {
         if (mover.getShot().isEmpty()) {
             mover.setShot(gameLevel.getGameCannon().shoot());
             counter++;
-            if(this.counter == FALL) {
+            if (this.counter == FALL) {
                counter = 0;
                this.gameLevel.fillGameBubblesGrid(NEWROWS);
             }
@@ -83,8 +83,7 @@ public class ModelImpl implements Model {
      */
     @Override
     public Map<Integer, Integer> getScores() {
-        // TODO Auto-generated method stub
-        return Map.of();
+        return Map.of(1, this.gameLevel.getCurrentScore());
     }
 
     /**
