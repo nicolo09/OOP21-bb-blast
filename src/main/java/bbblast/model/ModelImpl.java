@@ -17,7 +17,8 @@ public class ModelImpl implements Model {
     private Level gameLevel;
     private static final int BUBBLEVALUE = 100;
     private static final int MAXBUBBLE = 3;
-    private static final int FALL = 3;
+    private static final int FALL = 8;
+    private static final int NEWROWS = 2;
     private int counter;
 
     /**
@@ -72,7 +73,7 @@ public class ModelImpl implements Model {
             counter++;
             if(this.counter == FALL) {
                counter = 0;
-               this.gameLevel.fillGameBubblesGrid(1);
+               this.gameLevel.fillGameBubblesGrid(NEWROWS);
             }
         }
     }
