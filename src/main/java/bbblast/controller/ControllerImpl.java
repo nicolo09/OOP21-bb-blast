@@ -119,6 +119,14 @@ public class ControllerImpl implements Controller {
     public void pauseGame() {
         loop.pauseLoop();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void resumeGame() {
+        loop.resumeLoop();
+    }
 
     /**
      * {@inheritDoc}

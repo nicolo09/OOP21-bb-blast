@@ -58,6 +58,14 @@ public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewC
     public void pause() {
         controller.pauseGame();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void resume() {
+        controller.resumeGame();
+    }
 
     /**
      * {@inheritDoc}

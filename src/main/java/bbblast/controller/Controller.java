@@ -46,6 +46,11 @@ public interface Controller {
      * Pauses the game.
      */
     void pauseGame();
+    
+    /**
+     * Resumes the game.
+     */
+    void resumeGame();
 
     /**
      * 

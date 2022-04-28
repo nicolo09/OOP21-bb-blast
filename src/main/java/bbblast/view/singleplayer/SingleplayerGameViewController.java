@@ -35,6 +35,11 @@ public interface SingleplayerGameViewController {
      * pauses the game.
      */
     void pause();
+    
+    /**
+     * Resumes the game.
+     */
+    void resume();
 
     /**
      * exits the game.
