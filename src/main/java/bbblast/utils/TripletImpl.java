@@ -41,7 +41,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
 
     /**
      * {@inheritDoc}
-     * */
+     */
     @Override
     public X getX() {
         return this.x;
@@ -49,7 +49,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
 
     /**
      * {@inheritDoc}
-     * */
+     */
     @Override
     public Y getY() {
         return this.y;
@@ -57,7 +57,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
 
     /**
      * {@inheritDoc}
-     * */
+     */
     @Override
     public Z getZ() {
         return this.z;
@@ -65,7 +65,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
 
     /**
      * {@inheritDoc}
-     * */
+     */
     @Override
     public String toString() {
         return "TripletImpl [x=" + this.x + ", y=" + this.y + ", z=" + this.z + "]";
@@ -73,7 +73,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
 
     /**
      * {@inheritDoc}
-     * */
+     */
     @Override
     public int hashCode() {
         return Objects.hash(x, y, z);
@@ -81,7 +81,7 @@ public final class TripletImpl<X, Y, Z> implements Triplet<X, Y, Z>, Serializabl
 
     /**
      * {@inheritDoc}
-     * */
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

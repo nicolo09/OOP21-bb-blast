@@ -64,8 +64,8 @@ public interface BubblesGrid {
     Collection<Bubble> checkForUnconnectedBubbles();
 
     /**
-     * @param p the position of the bubble to delete. Removes all the bubbles that are
-     *            floating after deletion.
+     * @param p the position of the bubble to delete. Removes all the bubbles that
+     *          are floating after deletion.
      */
     void removeBubblesCascading(Position p);
 
