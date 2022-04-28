@@ -13,60 +13,61 @@ import bbblast.model.level.Level;
  */
 public interface Model extends Updatable {
 
-	/**
-	 * updates the game values.
-	 */
-	void update();
+    /**
+     * updates the game values.
+     */
+    void update();
 
-	/**
-	 * @return the collection of all {@link Bubble}s
-	 */
-	Collection<Bubble> getBubbles();
+    /**
+     * @return the collection of all {@link Bubble}s
+     */
+    Collection<Bubble> getBubbles();
 
-	/**
-	 * moves the {@link Cannon}.
-	 * 
-	 * @param angle
-	 */
-	void moveCannon(int angle);
+    /**
+     * moves the {@link Cannon}.
+     * 
+     * @param angle
+     */
+    void moveCannon(int angle);
 
-	/**
-	 * makes the {@link Cannon} shoot.
-	 */
-	void shootCannon();
+    /**
+     * makes the {@link Cannon} shoot.
+     */
+    void shootCannon();
 
-	/**
-	 * @return the angle of the {@link Cannon}
-	 */
-	int getCannonAngle();
+    /**
+     * @return the angle of the {@link Cannon}
+     */
+    int getCannonAngle();
 
-	/**
-	 * @return a map with player-score as entries
-	 */
-	Map<Integer, Integer> getScores();
+    /**
+     * @return a map with player-score as entries
+     */
+    Map<Integer, Integer> getScores();
 
-	/**
-	 * switches the {@link Bubble} inside the cannon.
-	 */
-	void switchBubble();
+    /**
+     * switches the {@link Bubble} inside the cannon.
+     */
+    void switchBubble();
 
-	/**
-	 * Set up this model for a new game.
-	 * 
-	 * @param grid the new game grid
-	 * @param fps the FPS game is running at, will be used to calculate bubble's speed
-	 */
-	void startNewGame(GridInfo grid, int fps);
+    /**
+     * Set up this model for a new game.
+     * 
+     * @param grid the new game grid
+     * @param fps  the FPS game is running at, will be used to calculate bubble's
+     *             speed
+     */
+    void startNewGame(GridInfo grid, int fps);
 
-	/**
-	 * @return true if {@link Bubble}s has reached last row
-	 */
-	boolean isLastRowReached();
+    /**
+     * @return true if {@link Bubble}s has reached last row
+     */
+    boolean isLastRowReached();
 
-	/**
-	 * @return the current {@link Level}
-	 */
-	Level getCurrentLevel();
+    /**
+     * @return the current {@link Level}
+     */
+    Level getCurrentLevel();
 
     /**
      * Reset the status of this model.

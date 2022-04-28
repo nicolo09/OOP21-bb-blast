@@ -7,10 +7,10 @@ import java.util.Objects;
 public class VectorConverterImpl implements VectorConverter, Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1680059491684009699L;
-	private int module;
+     * 
+     */
+    private static final long serialVersionUID = 1680059491684009699L;
+    private int module;
     private int angle;
     private final int fps;
 
@@ -45,8 +45,8 @@ public class VectorConverterImpl implements VectorConverter, Serializable {
     @Override
     public Position getComponents() {
         final double x = module * Math.cos(Math.toRadians(angle)) / fps;
-        final double y = - module * Math.sin(Math.toRadians(angle)) / fps;
-        
+        final double y = -module * Math.sin(Math.toRadians(angle)) / fps;
+
         return new PositionImpl(x, y);
     }
 

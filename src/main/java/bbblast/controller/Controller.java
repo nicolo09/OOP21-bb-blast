@@ -16,107 +16,107 @@ import bbblast.view.View;
  */
 public interface Controller {
 
-	/**
-	 * @param v The view associated with the controller.
-	 */
-	void setView(View v);
+    /**
+     * @param v The view associated with the controller.
+     */
+    void setView(View v);
 
-	/**
-	 * @param m The model associated with the controller.
-	 */
-	void setModel(Model m);
+    /**
+     * @param m The model associated with the controller.
+     */
+    void setModel(Model m);
 
-	/**
-	 * @return the settings of the game.
-	 */
-	Optional<Settings> loadSettings();
+    /**
+     * @return the settings of the game.
+     */
+    Optional<Settings> loadSettings();
 
-	/**
-	 * @param s the settings to save.
-	 * @return true if correctly written, false otherwise
-	 */
-	boolean writeSettings(Settings s);
+    /**
+     * @param s the settings to save.
+     * @return true if correctly written, false otherwise
+     */
+    boolean writeSettings(Settings s);
 
-	/**
-	 * Starts the SinglePlayer Game.
-	 */
-	void startSinglePlayerGame();
+    /**
+     * Starts the SinglePlayer Game.
+     */
+    void startSinglePlayerGame();
 
-	/**
-	 * Pauses the game.
-	 */
-	void pauseGame();
+    /**
+     * Pauses the game.
+     */
+    void pauseGame();
 
-	/**
-	 * 
-	 * @return the score
-	 */
-	int getScore();
+    /**
+     * 
+     * @return the score
+     */
+    int getScore();
 
-	/**
-	 * Saves a score in the leaderboard.
-	 * 
-	 * @param score the current game's score
-	 */
-	void saveScore(Score score);
+    /**
+     * Saves a score in the leaderboard.
+     * 
+     * @param score the current game's score
+     */
+    void saveScore(Score score);
 
-	/**
-	 * @return the collection of bubbles in the game.
-	 */
-	Collection<Bubble> getBubbles();
+    /**
+     * @return the collection of bubbles in the game.
+     */
+    Collection<Bubble> getBubbles();
 
-	/**
-	 * Moves the cannon.
-	 * 
-	 * @param angle the new {@link Cannon}'s angle
-	 */
-	void moveCannon(int angle);
+    /**
+     * Moves the cannon.
+     * 
+     * @param angle the new {@link Cannon}'s angle
+     */
+    void moveCannon(int angle);
 
-	/**
-	 * Shoots the cannon.
-	 */
-	void shootCannon();
-	
-	/**
-	 * @return the current {@link Cannon}'s angle
-	 */
-	int getCannonAngle();
+    /**
+     * Shoots the cannon.
+     */
+    void shootCannon();
 
-	/**
-	 * @return the FPS target game is running at.
-	 */
-	int getFPS();
+    /**
+     * @return the current {@link Cannon}'s angle
+     */
+    int getCannonAngle();
 
-	/**
-	 * Loads the collection of saved scores.
-	 * 
-	 * @return saved scores
-	 */
-	Collection<Score> loadScores();
+    /**
+     * @return the FPS target game is running at.
+     */
+    int getFPS();
 
-	/**
-	 * @return the {@link GridInfo} containing the current game's informations
-	 */
-	GridInfo getGridInfo();
+    /**
+     * Loads the collection of saved scores.
+     * 
+     * @return saved scores
+     */
+    Collection<Score> loadScores();
 
-	/**
-	 * Saves the {@link Level} status on a file.
-	 * 
-	 * @param lvl the current level
-	 * 
-	 * @return true if saved successfully, false otherwise
-	 */
-	boolean saveLevel(Level lvl);
+    /**
+     * @return the {@link GridInfo} containing the current game's informations
+     */
+    GridInfo getGridInfo();
 
-	/**
-	 * Loads from file the last saved {@link Level}, if there's any.
-	 * 
-	 * @return the last saved level, if there isn't any it returns an optional empty
-	 */
-	Optional<Level> loadLevel();
-	
-	/**
-	 * Resets the status of the application.
-	 */
-	void reset();
+    /**
+     * Saves the {@link Level} status on a file.
+     * 
+     * @param lvl the current level
+     * 
+     * @return true if saved successfully, false otherwise
+     */
+    boolean saveLevel(Level lvl);
+
+    /**
+     * Loads from file the last saved {@link Level}, if there's any.
+     * 
+     * @return the last saved level, if there isn't any it returns an optional empty
+     */
+    Optional<Level> loadLevel();
+
+    /**
+     * Resets the status of the application.
+     */
+    void reset();
 }
