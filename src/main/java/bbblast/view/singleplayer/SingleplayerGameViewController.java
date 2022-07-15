@@ -25,6 +25,11 @@ public interface SingleplayerGameViewController {
      * Tells the cannon to shoot.
      */
     void cannonShoot();
+    
+    /**
+     * Used to shoot with the cannons in multiplayer games
+     */
+    void multiCannonShoot();
 
     /**
      * @return the score.

@@ -9,7 +9,7 @@ import bbblast.model.Bubble;
  */
 public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewController {
 
-    private static final int ANGLETOMOVE = 2;
+    private static final int ANGLETOMOVE = 3;
     private final Controller controller;
     /**
      * 
@@ -41,6 +41,13 @@ public class SingleplayerGameViewControllerImpl implements SingleplayerGameViewC
     @Override
     public void cannonShoot() {
         controller.shootCannon();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void multiCannonShoot() {
+        controller.multiShootCannon();
     }
 
     /**

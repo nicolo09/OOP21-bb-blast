@@ -14,6 +14,7 @@ import bbblast.controller.gameover.LastRowGameOverHandlerPolling;
 import bbblast.model.Bubble;
 import bbblast.model.GridInfo;
 import bbblast.model.Model;
+import bbblast.model.ModelImpl;
 import bbblast.model.RegularHexGridInfo;
 import bbblast.model.level.Level;
 import bbblast.utils.Score;
@@ -23,6 +24,7 @@ import bbblast.utils.ScoreTable;
 import bbblast.utils.Settings;
 import bbblast.utils.persister.FilePersister;
 import bbblast.utils.persister.Persister;
+import bbblast.view.JFXViewImpl;
 import bbblast.view.View;
 
 /**
@@ -116,6 +118,40 @@ public class ControllerImpl implements Controller {
      * {@inheritDoc}
      */
     @Override
+    public void startMultiPlayerGameAs2() {
+        // Gameover Handler
+        final Updatable gameOverHandler = new LastRowGameOverHandlerPolling(this.mainModel, this.mainView, this);
+        // GameLoop setup
+        loop = new GameLoopImpl();
+        this.info = new RegularHexGridInfo(BUBBLEWIDTH, BUBBLEHEIGHT, BUBBLEPOINTWIDTH);
+        mainModel.startNewGame(this.info, loop.getFPS());
+        loop.registerUpdatable(mainModel);
+        loop.registerUpdatable(mainView);
+        loop.registerUpdatable(gameOverHandler);
+        loop.startLoop();
+        // Model setup
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Controller startMultiPlayerGameAs1(final View view) {
+        final Controller controller2 = new ControllerImpl();
+        controller2.setView(view);
+        final Model model2 = new ModelImpl();
+        this.mainModel.setOtherModel(model2);
+        model2.setOtherModel(this.mainModel);
+        controller2.setModel(model2);
+        controller2.startMultiPlayerGameAs2();
+        this.startMultiPlayerGameAs2();
+        return controller2;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void pauseGame() {
         loop.pauseLoop();
     }
@@ -150,6 +186,14 @@ public class ControllerImpl implements Controller {
     @Override
     public void shootCannon() {
         mainModel.shootCannon();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void multiShootCannon() {
+        mainModel.multiShootCannon();
     }
 
     /**
@@ -234,4 +278,6 @@ public class ControllerImpl implements Controller {
         this.info = null;
         this.mainModel.reset();
     }
+
+
 }

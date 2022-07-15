@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bbblast.controller.Controller;
+import bbblast.controller.ControllerImpl;
 import bbblast.controller.gameloop.Updatable;
 import bbblast.controller.gameover.GameOver;
+import bbblast.model.Model;
+import bbblast.model.ModelImpl;
 import bbblast.view.menu.MainMenuView;
 import bbblast.view.menu.MainMenuViewController;
 import bbblast.view.menu.MainMenuViewControllerImpl;
 import bbblast.view.menu.MainMenuViewImpl;
+import bbblast.view.multiplayer.MultiplayerGameViewImpl;
 import bbblast.view.options.OptionView;
 import bbblast.view.options.OptionViewController;
 import bbblast.view.options.OptionViewControllerImpl;
@@ -74,8 +78,16 @@ public class JFXViewImpl implements View {
      */
     @Override
     public void startMultiplayerGame() {
-        // TODO Implement multiplayer
-        this.showError("Not yet implemented");
+        final Controller controller2 = this.controller.startMultiPlayerGameAs1(this);
+        final MultiplayerGameViewImpl mGameView = new MultiplayerGameViewImpl(this.controller.getGridInfo());
+        this.updatable.add(mGameView);
+        final SingleplayerGameViewController gameViewController1 = new SingleplayerGameViewControllerImpl(controller);        
+        final SingleplayerGameViewController gameViewController2 = new SingleplayerGameViewControllerImpl(controller2);
+        mGameView.setControllers(gameViewController1, gameViewController2);
+        this.adjustStageAndSetScene(mGameView.getScene());
+        Platform.runLater(() -> {
+            stage.show();
+        });
     }
 
     /**

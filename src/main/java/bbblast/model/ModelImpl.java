@@ -16,10 +16,16 @@ public class ModelImpl implements Model {
     private MovementHandler mover;
     private Level gameLevel;
     private static final int BUBBLEVALUE = 100;
-    private static final int MAXBUBBLE = 3;
+    private static final int MAXBUBBLE = 2;
     private static final int FALL = 8;
+    private static final int MULTIFALL = 5;
+    private static final int MULTISCORE = 500;
     private static final int NEWROWS = 2;
+    private static final int MULTINEWROWS = 1;
     private int counter;
+    private int scoreCounter = 0;
+    private Model multiOtherModel;
+    
 
     /**
      * {@inheritDoc}
@@ -77,7 +83,41 @@ public class ModelImpl implements Model {
             }
         }
     }
-
+  
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void multiShootCannon() {
+        if (mover.getShot().isEmpty()) {
+            mover.setShot(gameLevel.getGameCannon().shoot());
+            counter++;
+            for (; this.gameLevel.getCurrentScore()/MULTISCORE > scoreCounter; scoreCounter++) {
+                counter++;
+            }
+            if (this.counter >= MULTIFALL) {
+               counter = 0;
+               this.multiOtherModel.rowsDown(MULTINEWROWS);
+            }
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void rowsDown(final int number) {
+        this.gameLevel.fillGameBubblesGrid(number);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final void setOtherModel(final Model model) {
+        this.multiOtherModel = model;
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -146,4 +186,7 @@ public class ModelImpl implements Model {
             }
         }
     }
+
+
+    
 }

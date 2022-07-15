@@ -34,6 +34,11 @@ public interface Model extends Updatable {
      * makes the {@link Cannon} shoot.
      */
     void shootCannon();
+    
+    /**
+     * shoot the cannon in multiplayer games
+     */
+    void multiShootCannon();
 
     /**
      * @return the angle of the {@link Cannon}
@@ -73,4 +78,16 @@ public interface Model extends Updatable {
      * Reset the status of this model.
      */
     void reset();
+
+    /**
+     * Create new rows on the screen
+     * @param number is the number of rows to create
+     */
+    void rowsDown(int number);
+
+    /**
+     * Set the other player model
+     * @param model is the other player model
+     */
+    void setOtherModel(Model model);
 }

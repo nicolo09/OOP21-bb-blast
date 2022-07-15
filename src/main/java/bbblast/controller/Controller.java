@@ -9,6 +9,7 @@ import bbblast.model.Model;
 import bbblast.model.level.Level;
 import bbblast.utils.Score;
 import bbblast.utils.Settings;
+import bbblast.view.JFXViewImpl;
 import bbblast.view.View;
 
 /***
@@ -41,7 +42,19 @@ public interface Controller {
      * Starts the SinglePlayer Game.
      */
     void startSinglePlayerGame();
-
+    
+    /**
+     * Starts multiplayer game as player 2
+     */
+    void startMultiPlayerGameAs2();
+    
+    /**
+     * Start multiplayer game as player 1
+     * @param view
+     * @return
+     */
+    Controller startMultiPlayerGameAs1(View view);
+    
     /**
      * Pauses the game.
      */
@@ -81,6 +94,11 @@ public interface Controller {
      * Shoots the cannon.
      */
     void shootCannon();
+    
+    /**
+     * Shoot the cannon in multiplayer games
+     */
+    void multiShootCannon();
 
     /**
      * @return the current {@link Cannon}'s angle
@@ -124,4 +142,5 @@ public interface Controller {
      * Resets the status of the application.
      */
     void reset();
+
 }
